@@ -1,0 +1,1 @@
+# Adfire: Accounting platform for achieving FIRE
