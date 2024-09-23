@@ -1,0 +1,4 @@
+date,category,amount,account,mask,type,subtype
+2024-08-06,FOOD_AND_DRINK_FAST_FOOD,10.39,Amex Green,01009,credit,credit card
+2024-08-04,FOOD_AND_DRINK_COFFEE,10.74,Chase Freedom Student,6946,credit,credit card
+2024-08-09,TRANSPORTATION_GAS,48.18,Prime Visa,8104,credit,credit card
