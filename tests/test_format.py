@@ -4,13 +4,12 @@ import pandas as pd
 import pytest
 
 from adfire.format import format_types
-from adfire.io import read_record
 
 
 class FormatCase:
     def __init__(self, dir):
         self.name = os.path.basename(dir)
-        self.input_record = read_record(os.path.join(dir, 'input.csv'))
+        self.input_record = pd.read_csv(os.path.join(dir, 'input.csv'), dtype=str)
 
         self.expected_exception = None
         expect_raise = os.path.join(dir, 'raise.txt')
