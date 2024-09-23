@@ -1,0 +1,9 @@
+column,dtype
+date,datetime64[ns]
+description,object
+category,object
+amount,float64
+account,object
+mask,object
+type,object
+subtype,object
