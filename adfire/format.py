@@ -19,7 +19,7 @@ def format_types(record: pd.DataFrame) -> pd.DataFrame:
 
 def sort_record(record: pd.DataFrame) -> pd.DataFrame:
     record['amount.asset'] = np.where(record['type'] == 'depository', record['amount'], -record['amount'])
-    return record.sort_values(by=['date', 'amount.asset'], ascending=[True, False])
+    return record.sort_values(by=['date', 'amount.asset'], ascending=[True, False], ignore_index=True)
 
 
 def format_record(record: pd.DataFrame) -> pd.DataFrame:
