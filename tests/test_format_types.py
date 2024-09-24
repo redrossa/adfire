@@ -6,7 +6,7 @@ import pytest
 from adfire.format import format_types
 
 
-class FormatCase:
+class FormatTypesCase:
     def __init__(self, dir):
         self.name = os.path.basename(dir)
         self.input_record = pd.read_csv(os.path.join(dir, 'input.csv'), dtype=str)
@@ -39,9 +39,9 @@ class FormatCase:
         return dirs
 
 
-@pytest.mark.parametrize('case_dir', FormatCase.find_cases(), ids=lambda dir: os.path.basename(dir))
+@pytest.mark.parametrize('case_dir', FormatTypesCase.find_cases(), ids=lambda dir: os.path.basename(dir))
 def test_format_types(case_dir):
-    case = FormatCase(case_dir)
+    case = FormatTypesCase(case_dir)
     if case.expected_exception:
         with pytest.raises(case.expected_exception):
             format_types(case.input_record)
