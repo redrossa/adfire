@@ -10,7 +10,10 @@ schema = pa.DataFrameSchema({
     'account': pa.Column(str),
     'mask': pa.Column(str),
     'type': pa.Column(str),
-    'subtype': pa.Column(str)
+    'subtype': pa.Column(str),
+    'balances.current': pa.Column(float),
+    'balances.available': pa.Column(float, nullable=True), # ideally nullable only if limit is null
+    'balances.limit': pa.Column(float, nullable=True),
 }, coerce=True)
 
 
