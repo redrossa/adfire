@@ -1,20 +1,21 @@
 import numpy as np
 import pandas as pd
+import pandera as pa
 
 
-SCHEMA = {
-    'date': 'datetime64[ns]',
-    'description': 'object',
-    'amount': 'float64',
-    'account': 'object',
-    'mask': 'object',
-    'type': 'object',
-    'subtype': 'object'
-}
+schema = pa.DataFrameSchema({
+    'date': pa.Column(pa.DateTime),
+    'description': pa.Column(str),
+    'amount': pa.Column(float),
+    'account': pa.Column(str),
+    'mask': pa.Column(str),
+    'type': pa.Column(str),
+    'subtype': pa.Column(str)
+}, coerce=True)
 
 
 def format_types(record: pd.DataFrame) -> pd.DataFrame:
-    return record.astype(SCHEMA)
+    return schema.validate(record)
 
 
 def sort_record(record: pd.DataFrame) -> pd.DataFrame:
