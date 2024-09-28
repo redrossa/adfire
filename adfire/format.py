@@ -11,7 +11,7 @@ schema = pa.DataFrameSchema({
     'mask': pa.Column(str),
     'type': pa.Column(str),
     'subtype': pa.Column(str),
-    'balances.current': pa.Column(float),
+    'balances.current': pa.Column(float, nullable=True),
     'balances.available': pa.Column(float, nullable=True), # ideally nullable only if limit is null
     'balances.limit': pa.Column(float, nullable=True),
 }, coerce=True)
@@ -26,7 +26,13 @@ def sort_record(record: pd.DataFrame) -> pd.DataFrame:
     return record.sort_values(by=['date', 'amount.asset'], ascending=[True, False], ignore_index=True)
 
 
+def fill_balances(record: pd.DataFrame) -> pd.DataFrame:
+    # TODO implement
+    return record
+
+
 def format_record(record: pd.DataFrame) -> pd.DataFrame:
     typed = format_types(record)
     sorted = sort_record(typed)
-    return sorted
+    filled = fill_balances(sorted)
+    return filled
