@@ -39,7 +39,6 @@ class Case:
 
     @classmethod
     def read_expected_record(cls, path) -> pd.DataFrame:
-        print(path)
         df = pd.read_csv(path, dtype=str)
         df = schema(df)
         return df
@@ -63,59 +62,58 @@ class Case:
                     raise ValueError
 
 
-pytestmark = pytest.mark.parametrize('case', Case.load_cases(), ids=lambda x: x.name)
+all_cases = Case.load_cases()
+
+
+@pytest.fixture(params=all_cases, ids=lambda x: x.name)
+def case(request):
+    return request.param
+
+
+@pytest.fixture(params=[x for x in all_cases if not x.error], ids=lambda x: x.name)
+def positive_case(request):
+    return request.param
+
+
+@pytest.fixture(params=[x for x in all_cases if x.error], ids=lambda x: x.name)
+def negative_case(request):
+    return request.param
 
 
 def test_format(case):
-    actual = format_record(case.input)
-    assert_frame_equal(actual, case.expected)
-
-
-def test_types(case):
     if case.error:
         with pytest.raises(case.error):
             format_record(case.input)
     else:
         actual = format_record(case.input)
-        schema.validate(actual)
+        assert_frame_equal(actual, case.expected)
 
 
-def test_date_is_ascending(case):
-    if case.error:
-        with pytest.raises(case.error):
-            format_record(case.input)
-    else:
-        actual = format_record(case.input)
-        computed = actual['date']
-        assert computed.is_monotonic_increasing
+def test_types(positive_case):
+    actual = format_record(positive_case.input)
+    schema.validate(actual)
 
 
-def test_amount_is_descending_for_equal_dates(case):
-    if case.error:
-        with pytest.raises(case.error):
-            format_record(case.input)
-    else:
-        actual = format_record(case.input)
-        actual['amount.asset'] = np.where(actual['type'] == 'depository', actual['amount'], -actual['amount'])
-        for date, group in actual.groupby('date'):
-            assert group['amount.asset'].is_monotonic_decreasing
+def test_date_is_ascending(positive_case):
+    actual = format_record(positive_case.input)
+    computed = actual['date']
+    assert computed.is_monotonic_increasing
 
 
-def test_all_current_balances_filled(case):
-    if case.error:
-        with pytest.raises(case.error):
-            format_record(case.input)
-    else:
-        actual = format_record(case.input)
-        computed = actual['balances.current']
-        assert computed.notna().all()
+def test_amount_is_descending_for_equal_dates(positive_case):
+    actual = format_record(positive_case.input)
+    actual['amount.asset'] = np.where(actual['type'] == 'depository', actual['amount'], -actual['amount'])
+    for date, group in actual.groupby('date'):
+        assert group['amount.asset'].is_monotonic_decreasing
 
 
-def test_available_balances_are_filled_if_limit_filled(case):
-    if case.error:
-        with pytest.raises(case.error):
-            format_record(case.input)
-    else:
-        actual = format_record(case.input)
-        computed = actual[['balances.available', 'balances.limit']]
-        assert computed.loc[computed['balances.limit'].notna(), 'balances.available'].notna().all()
+def test_all_current_balances_filled(positive_case):
+    actual = format_record(positive_case.input)
+    computed = actual['balances.current']
+    assert computed.notna().all()
+
+
+def test_available_balances_are_filled_if_limit_filled(positive_case):
+    actual = format_record(positive_case.input)
+    computed = actual[['balances.available', 'balances.limit']]
+    assert computed.loc[computed['balances.limit'].notna(), 'balances.available'].notna().all()
