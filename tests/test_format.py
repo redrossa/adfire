@@ -100,11 +100,28 @@ def test_amount_is_descending_for_equal_dates(positive_case):
 
 def test_all_current_balances_filled(positive_case):
     actual = format_record(positive_case.input)
-    computed = actual['balances.current']
-    assert computed.notna().all()
+    assert actual['balances.current'].notna().all()
 
 
 def test_available_balances_are_filled_if_limit_filled(positive_case):
     actual = format_record(positive_case.input)
-    computed = actual[['balances.available', 'balances.limit']]
-    assert computed.loc[computed['balances.limit'].notna(), 'balances.available'].notna().all()
+    assert actual.loc[actual['balances.limit'].notna(), 'balances.available'].notna().all()
+
+
+def test_row_wise_balances(positive_case):
+    actual = format_record(positive_case.input)
+    assert np.isclose(
+        actual['balances.current'] + actual['balances.available'],
+        actual['balances.limit'],
+        equal_nan=True
+    ).all()
+
+
+def test_col_wise_current_balances(positive_case):
+    actual = format_record(positive_case.input)
+    grouped = actual.groupby('account')
+    assert np.isclose(
+        grouped['balances.current'].shift(1, fill_value=0) + grouped['amount'].shift(0),
+        actual['balances.current'],
+        equal_nan=True
+    ).all()
