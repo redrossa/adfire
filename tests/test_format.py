@@ -8,22 +8,8 @@ import pytest
 from pandas._testing import assert_frame_equal
 from pandera.errors import SchemaError
 
-from adfire.format import format_record
+from adfire.format import format_record, schema
 from adfire.io import read_record
-
-schema = pa.DataFrameSchema({
-    'date': pa.Column(pa.DateTime),
-    'description': pa.Column(str),
-    'category': pa.Column(str),
-    'amount': pa.Column(float),
-    'account': pa.Column(str),
-    'mask': pa.Column(str),
-    'type': pa.Column(str),
-    'subtype': pa.Column(str),
-    'balances.current': pa.Column(float, nullable=True),
-    'balances.available': pa.Column(float, nullable=True),
-    'balances.limit': pa.Column(float, nullable=True),
-}, coerce=True, strict=True)
 
 
 class Case:
@@ -40,7 +26,7 @@ class Case:
     @classmethod
     def read_expected_record(cls, path) -> pd.DataFrame:
         df = pd.read_csv(path, dtype=str)
-        df = schema(df)
+        df = schema.validate(df)
         return df
 
     @classmethod
@@ -95,7 +81,8 @@ def test_format(case):
 
 def test_types(positive_case):
     actual = format_record(positive_case.input)
-    schema.validate(actual)
+    mock_schema = pa.DataFrameSchema(schema.columns, strict=True)
+    mock_schema.validate(actual)
 
 
 def test_date_is_ascending(positive_case):
