@@ -1,0 +1,6 @@
+{
+  "name": "Date Type Incorrect",
+  "description": "Date value is not date coercible",
+  "input": "input.csv",
+  "error": "SchemaError"
+}

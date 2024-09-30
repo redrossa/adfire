@@ -1,0 +1,6 @@
+{
+  "name": "Amount Column Missing",
+  "description": "Amount column is missing",
+  "input": "input.csv",
+  "error": "SchemaError"
+}

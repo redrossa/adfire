@@ -43,6 +43,14 @@ class Case:
         df = schema(df)
         return df
 
+    @classmethod
+    def match_error(cls, error_str):
+        match error_str:
+            case 'SchemaError':
+                return SchemaError
+            case _:
+                raise ValueError
+
     def __init__(self, path):
         with open(os.path.join(path, 'metadata.json'), 'r') as f:
             metadata = json.load(f)
@@ -54,12 +62,8 @@ class Case:
             self.expected = Case.read_expected_record(os.path.join(path, metadata['expected']))
             self.error = None
         else:
-            match metadata['error']:
-                case 'SchemaError':
-                    self.error = SchemaError
-                    self.expected = None
-                case _:
-                    raise ValueError
+            self.error = self.match_error(metadata['error'])
+            self.expected = None
 
 
 all_cases = Case.load_cases()
