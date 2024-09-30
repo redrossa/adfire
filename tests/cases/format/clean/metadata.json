@@ -1,0 +1,6 @@
+{
+  "name": "Clean",
+  "description": "Already valid and clean input that doesn't differ from output",
+  "input": "input.csv",
+  "expected": "expected.csv"
+}

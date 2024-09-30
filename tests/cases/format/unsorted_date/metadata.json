@@ -1,0 +1,6 @@
+{
+  "name": "Unsorted Date",
+  "description": "Clean but postings aren't sorted by date and balances aren't filled",
+  "input": "input.csv",
+  "expected": "expected.csv"
+}

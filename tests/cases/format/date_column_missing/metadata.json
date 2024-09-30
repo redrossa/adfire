@@ -1,0 +1,6 @@
+{
+  "name": "Date Column Missing",
+  "description": "Date column is missing",
+  "input": "input.csv",
+  "error": "SchemaError"
+}
