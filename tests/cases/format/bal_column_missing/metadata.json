@@ -1,0 +1,6 @@
+{
+  "name": "Balance Columns Missing",
+  "description": "Balance columns are missing",
+  "input": "input.csv",
+  "expected": "expected.csv"
+}

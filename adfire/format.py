@@ -15,7 +15,7 @@ schema = pa.DataFrameSchema({
     'balances.current': pa.Column(float, nullable=True),
     'balances.available': pa.Column(float, nullable=True), # ideally nullable only if limit is null
     'balances.limit': pa.Column(float, nullable=True),
-}, coerce=True, strict='filter')
+}, coerce=True, strict='filter', add_missing_columns=True)
 
 
 def _format_types(record: pd.DataFrame) -> pd.DataFrame:
