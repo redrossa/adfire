@@ -13,7 +13,7 @@ from adfire.io import read_record
 
 
 class Case:
-    cases_path = 'cases/format'
+    cases_path = os.path.join('cases', 'format')
 
     @classmethod
     def find_cases(cls):

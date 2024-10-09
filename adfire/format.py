@@ -5,7 +5,8 @@ import pandera as pa
 
 schema = pa.DataFrameSchema({
     'date': pa.Column(pa.DateTime),
-    'description': pa.Column(str),
+    'entity': pa.Column(str),
+    'description': pa.Column(str, nullable=True),
     'category': pa.Column(str),
     'amount': pa.Column(float),
     'account': pa.Column(str),
