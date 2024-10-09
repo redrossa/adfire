@@ -4,6 +4,7 @@ import pandera as pa
 
 
 schema = pa.DataFrameSchema({
+    'id.transaction': pa.Column(str, nullable=True),
     'date': pa.Column(pa.DateTime),
     'entity': pa.Column(str),
     'description': pa.Column(str, nullable=True),

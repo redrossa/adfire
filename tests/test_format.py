@@ -11,6 +11,9 @@ from pandera.errors import SchemaError
 from adfire.format import format_record, schema
 from adfire.io import read_record
 
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
+
 
 class Case:
     cases_path = os.path.join('cases', 'format')
@@ -25,8 +28,9 @@ class Case:
 
     @classmethod
     def read_expected_record(cls, path) -> pd.DataFrame:
+        expected_schema = pa.DataFrameSchema(schema.columns, coerce=True, strict=True)
         df = pd.read_csv(path, dtype=str)
-        df = schema.validate(df)
+        df = expected_schema.validate(df)
         return df
 
     @classmethod
