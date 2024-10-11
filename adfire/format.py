@@ -8,6 +8,7 @@ schema = pa.DataFrameSchema({
     'description': pa.Column(str),
     'category': pa.Column(str),
     'amount': pa.Column(float),
+    'status': pa.Column(str),
     'account': pa.Column(str),
     'mask': pa.Column(str),
     'type': pa.Column(str),
