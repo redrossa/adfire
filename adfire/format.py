@@ -20,13 +20,18 @@ schema = pa.DataFrameSchema({
 }, coerce=True, strict='filter', add_missing_columns=True)
 
 
+def add_col_worth(record: pd.DataFrame) -> pd.DataFrame:
+    record['worth'] = np.where(record['type'] == 'depository', record['amount'], -record['amount'])
+    return record
+
+
 def _format_types(record: pd.DataFrame) -> pd.DataFrame:
     return schema.validate(record)
 
 
 def _sort_record(record: pd.DataFrame) -> pd.DataFrame:
-    record['amount.asset'] = np.where(record['type'] == 'depository', record['amount'], -record['amount'])
-    return record.sort_values(by=['date', 'amount.asset'], ascending=[True, False], ignore_index=True)
+    record = add_col_worth(record)
+    return record.sort_values(by=['date', 'worth'], ascending=[True, False], ignore_index=True)
 
 
 def _fill_balances(record: pd.DataFrame) -> pd.DataFrame:

@@ -8,7 +8,7 @@ import pytest
 from pandas._testing import assert_frame_equal
 from pandera.errors import SchemaError
 
-from adfire.format import format_record, schema
+from adfire.format import format_record, schema, add_col_worth
 from adfire.io import read_record
 
 pd.set_option('display.max_columns', None)
@@ -97,9 +97,9 @@ def test_date_is_ascending(positive_case):
 
 def test_amount_is_descending_for_equal_dates(positive_case):
     actual = format_record(positive_case.input)
-    actual['amount.asset'] = np.where(actual['type'] == 'depository', actual['amount'], -actual['amount'])
+    actual = add_col_worth(actual)
     for date, group in actual.groupby('date'):
-        assert group['amount.asset'].is_monotonic_decreasing
+        assert group['worth'].is_monotonic_decreasing
 
 
 def test_all_current_balances_filled(positive_case):

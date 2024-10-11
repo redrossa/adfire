@@ -1,0 +1,6 @@
+{
+  "name": "Clean With Manual Transfers",
+  "description": "Clean with manually filled transfer IDs",
+  "input": "input.csv",
+  "expected": "expected.csv"
+}
