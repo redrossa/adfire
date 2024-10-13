@@ -29,13 +29,13 @@ def _sort_record(record: pd.DataFrame) -> pd.DataFrame:
 
 
 def _fill_current_balances(record: pd.DataFrame) -> pd.DataFrame:
-    # get computed current balances
+    # calculate current balances
     for account, group in record.groupby('account'):
         mask_posted = group['status'] == 'posted'
         posted_curr_bal = group[mask_posted]['amount'].cumsum()
-        group.loc[posted_curr_bal.index, 'balances.current'] = posted_curr_bal
-        group['balances.current'] = group['balances.current'].ffill().fillna(0)
-        record.loc[group['balances.current'].index, '_balances.current'] = group['balances.current']
+        group.loc[posted_curr_bal.index, '_balances.current'] = posted_curr_bal
+        group['_balances.current'] = group['_balances.current'].ffill().fillna(0)
+        record.loc[group['_balances.current'].index, '_balances.current'] = group['_balances.current']
 
     # verify input current balance match computed
     input_bal = record['balances.current']
@@ -52,14 +52,16 @@ def _fill_current_balances(record: pd.DataFrame) -> pd.DataFrame:
 
 
 def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
-    # get computed available balances
+    # calculate temporary cumsum of amounts
     record['_balances.cumsum'] = record.groupby('account')['amount'].cumsum()
 
+    # calculate available balances for credit types
     mask_is_credit = record['type'] == 'credit'
     credit_masked = record[mask_is_credit]
     record.loc[mask_is_credit, '_balances.available'] = (
         credit_masked['balances.limit'] - credit_masked['_balances.cumsum'])
 
+    # calculate available balances for depository types
     mask_is_depository = record['type'] == 'depository'
     depository_masked = record[mask_is_depository]
     record.loc[mask_is_depository, '_balances.available'] = depository_masked['_balances.cumsum']

@@ -34,6 +34,8 @@ class Case:
         match error_str:
             case 'SchemaError':
                 return SchemaError
+            case 'AssertionError':
+                return AssertionError
             case _:
                 raise ValueError
 
