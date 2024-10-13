@@ -1,6 +1,6 @@
 {
   "name": "Clean No Balances",
-  "description": "Clean but balances are not filled except limit",
+  "description": "Clean but balances are not filled",
   "input": "input.csv",
   "expected": "expected.csv"
 }

@@ -34,6 +34,8 @@ class Case:
         match error_str:
             case 'SchemaError':
                 return SchemaError
+            case 'AssertionError':
+                return AssertionError
             case _:
                 raise ValueError
 
@@ -108,20 +110,28 @@ def test_available_balances_are_filled_if_limit_filled(positive_case):
     assert actual.loc[actual['balances.limit'].notna(), 'balances.available'].notna().all()
 
 
-def test_row_wise_balances(positive_case):
+def test_limit_equals_current_plus_available(positive_case):
     actual = format_record(positive_case.input)
+    mask_has_limit = actual['balances.limit'].notna()
+    mask_has_available = actual['balances.available'].notna()
+    filtered = actual[mask_has_limit & mask_has_available]
+    filtered['_balances.cumsum'] = filtered.groupby('account')['amount'].cumsum()
     assert np.isclose(
-        actual['balances.current'] + actual['balances.available'],
-        actual['balances.limit'],
+        filtered['_balances.cumsum'] + filtered['balances.available'],
+        filtered['balances.limit'],
         equal_nan=True
     ).all()
 
 
-def test_col_wise_current_balances(positive_case):
+def test_current_is_posted_amount_cumsum(positive_case):
     actual = format_record(positive_case.input)
-    grouped = actual.groupby('account')
-    assert np.isclose(
-        grouped['balances.current'].shift(1, fill_value=0) + grouped['amount'].shift(0),
-        actual['balances.current'],
-        equal_nan=True
-    ).all()
+    for account, group in actual.groupby('account'):
+        mask_posted = group['status'] == 'posted'
+        posted_curr_bal = group[mask_posted]['amount'].cumsum()
+        group.loc[posted_curr_bal.index, 'balances.current'] = posted_curr_bal
+        group['balances.current'] = group['balances.current'].ffill().fillna(0)
+        assert np.isclose(
+            group['balances.current'],
+            actual.iloc[group.index]['balances.current'],
+            equal_nan=True
+        ).all()
