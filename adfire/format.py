@@ -10,6 +10,7 @@ schema = pa.DataFrameSchema({
     'description': pa.Column(str, nullable=True),
     'category': pa.Column(str),
     'amount': pa.Column(float),
+    'worth': pa.Column(float, nullable=True),
     'status': pa.Column(str),
     'account': pa.Column(str),
     'mask': pa.Column(str),
@@ -22,7 +23,7 @@ schema = pa.DataFrameSchema({
 
 
 def add_col_worth(record: pd.DataFrame) -> pd.DataFrame:
-    record['worth'] = np.where(record['type'] == 'depository', record['amount'], -record['amount'])
+    record['worth'] = np.where(record['type'] == 'credit', -record['amount'], record['amount'])
     return record
 
 
@@ -89,7 +90,8 @@ def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
 
 def format_record(record: pd.DataFrame) -> pd.DataFrame:
     typed = _format_types(record)
-    sorted = _sort_record(typed)
+    filled_worth = add_col_worth(typed)
+    sorted = _sort_record(filled_worth)
     filled_current = _fill_current_balances(sorted)
     filled_available = _fill_available_balances(filled_current)
     df = _format_types(filled_available)
