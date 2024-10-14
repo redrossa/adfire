@@ -1,13 +1,13 @@
-id.transaction,date,entity,description,category,amount,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
-,2024-08-04,85C Degrees,,FOOD_AND_DRINK_COFFEE,10.74,posted,Chase Freedom Student,6946,credit,credit card,10.74,689.26,700.0
-,2024-08-06,In-N-Out,,FOOD_AND_DRINK_FAST_FOOD,10.39,posted,Amex Green,1009,credit,credit card,10.39,,
-,2024-08-09,McDonald's,,FOOD_AND_DRINK_FAST_FOOD,10.56,pending,Prime Visa,8104,credit,credit card,,5989.44,6000.0
-,2024-08-09,HEB,,TRANSPORTATION_GAS,48.18,posted,Prime Visa,8104,credit,credit card,48.18,5941.26,6000.0
-,2024-08-10,United Airlines,,TRAVEL_FLIGHTS,202.44,posted,Amex Green,1009,credit,credit card,212.83,,
-,2024-08-11,Spirit Airlines,,TRAVEL_FLIGHTS,188.09,posted,Amex Green,1009,credit,credit card,400.92,,
-,2024-08-15,Uniqlo,,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,25.4,posted,Chase Freedom Student,6946,credit,credit card,36.14,663.86,700.0
-,2024-08-17,Constellation,,RENT_AND_UTILITIES_GAS_AND_ELECTRICITY,469.48,posted,Prime Visa,8104,credit,credit card,517.66,5471.78,6000.0
-,2024-08-22,Apple Store,,GENERAL_MERCHANDISE_ELECTRONICS,75.3,posted,Chase Freedom Student,6946,credit,credit card,111.44,588.56,700.0
-,2024-08-24,Steam,,ENTERTAINMENT_VIDEO_GAMES,25,pending,Chase Freedom Student,6946,credit,credit card,111.44,563.56,700.0
-,2024-08-25,Laura,,FOOD_AND_DRINK_FAST_FOOD,-4.37,posted,Venmo Personal,@redrossa,depository,p2p,-4.37,-4.37,
-,2024-08-25,Rae,,FOOD_AND_DRINK_FAST_FOOD,-8.76,pending,Venmo Personal,@redrossa,depository,p2p,-4.37,-13.13,
+id.transaction,date,description,entity,category,amount,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
+,2024-08-04,,85C Degrees,FOOD_AND_DRINK_COFFEE,10.74,posted,Chase Freedom Student,6946,credit,credit card,10.74,689.26,700.0
+,2024-08-06,,In-N-Out,FOOD_AND_DRINK_FAST_FOOD,10.39,posted,Amex Green,1009,credit,credit card,10.39,,
+,2024-08-09,,McDonald's,FOOD_AND_DRINK_FAST_FOOD,10.56,pending,Prime Visa,8104,credit,credit card,,5989.44,6000.0
+,2024-08-09,,HEB,TRANSPORTATION_GAS,48.18,posted,Prime Visa,8104,credit,credit card,48.18,5941.26,6000.0
+,2024-08-10,,United Airlines,TRAVEL_FLIGHTS,202.44,posted,Amex Green,1009,credit,credit card,212.83,,
+,2024-08-11,,Spirit Airlines,TRAVEL_FLIGHTS,188.09,posted,Amex Green,1009,credit,credit card,400.92,,
+,2024-08-15,,Uniqlo,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,25.4,posted,Chase Freedom Student,6946,credit,credit card,36.14,663.86,700.0
+,2024-08-17,,Constellation,RENT_AND_UTILITIES_GAS_AND_ELECTRICITY,469.48,posted,Prime Visa,8104,credit,credit card,517.66,5471.78,6000.0
+,2024-08-22,,Apple Store,GENERAL_MERCHANDISE_ELECTRONICS,75.3,posted,Chase Freedom Student,6946,credit,credit card,111.44,588.56,700.0
+,2024-08-24,,Steam,ENTERTAINMENT_VIDEO_GAMES,25.0,pending,Chase Freedom Student,6946,credit,credit card,111.44,563.56,700.0
+,2024-08-25,,Laura,FOOD_AND_DRINK_FAST_FOOD,-4.37,posted,Venmo Personal,@redrossa,depository,p2p,-4.37,-4.37,
+,2024-08-25,,Rae,FOOD_AND_DRINK_FAST_FOOD,-8.76,pending,Venmo Personal,@redrossa,depository,p2p,-4.37,-13.13,

@@ -1,9 +1,9 @@
-id.transaction,date,entity,description,category,amount,account,mask,type,subtype
-,2024-08-04,85C Degrees,,FOOD_AND_DRINK_COFFEE,10.74,Chase Freedom Student,6946,credit,credit card
-,2024-08-06,In-N-Out,,FOOD_AND_DRINK_FAST_FOOD,10.39,Amex Green,1009,credit,credit card
-,2024-08-09,HEB,,TRANSPORTATION_GAS,48.18,Prime Visa,8104,credit,credit card
-,2024-08-10,United Airlines,,TRAVEL_FLIGHTS,202.44,Amex Green,1009,credit,credit card
-,2024-08-11,Spirit Airlines,,TRAVEL_FLIGHTS,188.09,Amex Green,1009,credit,credit card
-,2024-08-15,Uniqlo,,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,25.4,Chase Freedom Student,6946,credit,credit card
-,2024-08-17,Constellation,,RENT_AND_UTILITIES_GAS_AND_ELECTRICITY,469.48,Prime Visa,8104,credit,credit card
-,2024-08-22,Apple Store,,GENERAL_MERCHANDISE_ELECTRONICS,75.3,Chase Freedom Student,6946,credit,credit card
+id.transaction,date,description,entity,category,amount,status,account,mask,type,subtype
+,2024-08-04,,85C Degrees,FOOD_AND_DRINK_COFFEE,10.74,posted,Chase Freedom Student,6946,credit,credit card
+,2024-08-06,,In-N-Out,FOOD_AND_DRINK_FAST_FOOD,10.39,posted,Amex Green,1009,credit,credit card
+,2024-08-09,,HEB,TRANSPORTATION_GAS,48.18,posted,Prime Visa,8104,credit,credit card
+,2024-08-10,,United Airlines,TRAVEL_FLIGHTS,202.44,posted,Amex Green,1009,credit,credit card
+,2024-08-11,,Spirit Airlines,TRAVEL_FLIGHTS,188.09,posted,Amex Green,1009,credit,credit card
+,2024-08-15,,Uniqlo,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,25.4,posted,Chase Freedom Student,6946,credit,credit card
+,2024-08-17,,Constellation,RENT_AND_UTILITIES_GAS_AND_ELECTRICITY,469.48,posted,Prime Visa,8104,credit,credit card
+,2024-08-22,,Apple Store,GENERAL_MERCHANDISE_ELECTRONICS,75.3,posted,Chase Freedom Student,6946,credit,credit card
