@@ -1,0 +1,6 @@
+{
+  "name": "Clean with Partial Balances",
+  "description": "Clean but balances are partially filled",
+  "input": "input.csv",
+  "expected": "expected.csv"
+}
