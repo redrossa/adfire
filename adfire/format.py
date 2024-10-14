@@ -88,11 +88,20 @@ def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
     return record
 
 
+def _verify_transactions_worth_sum(record: pd.DataFrame) -> pd.DataFrame:
+    worth_sums = record.groupby('id.transaction')['worth'].sum()
+    expected = worth_sums.copy()
+    worth_sums[:] = 0
+    assert_series_equal(worth_sums, expected)
+    return record
+
+
 def format_record(record: pd.DataFrame) -> pd.DataFrame:
     typed = _format_types(record)
     filled_worth = add_col_worth(typed)
     sorted = _sort_record(filled_worth)
     filled_current = _fill_current_balances(sorted)
     filled_available = _fill_available_balances(filled_current)
-    df = _format_types(filled_available)
+    verified_transactions = _verify_transactions_worth_sum(filled_available)
+    df = _format_types(verified_transactions)
     return df
