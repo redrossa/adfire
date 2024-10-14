@@ -5,5 +5,9 @@ id.transaction,date,description,entity,category,amount,status,account,mask,type,
 ,2024-08-10,,United Airlines,TRAVEL_FLIGHTS,202.44,posted,Amex Green,1009,credit,credit card,212.83,,
 ,2024-08-11,,Spirit Airlines,TRAVEL_FLIGHTS,188.09,posted,Amex Green,1009,credit,credit card,400.92,,
 ,2024-08-15,,Uniqlo,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,25.4,posted,Chase Freedom Student,6946,credit,credit card,36.14,663.86,700.0
+9f4622ee-26f3-4815-a6ac-05d5d4c700a1,2024-08-16,,Wealthfront Individual,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-36.14,posted,Chase Freedom Student,6946,credit,credit card,0.0,700.0,700.0
+17da0be7-5a10-431a-a6e2-d819109ce205,2024-08-17,,Wealthfront Individual,TRANSFER_OUT_WITHDRAWAL,-100.0,posted,Venmo Personal,@raksimuh,depository,p2p,-100.0,-100,
 ,2024-08-17,,Constellation,RENT_AND_UTILITIES_GAS_AND_ELECTRICITY,469.48,posted,Prime Visa,8104,credit,credit card,517.66,5482.34,6000.0
-,2024-08-22,,Apple Store,GENERAL_MERCHANDISE_ELECTRONICS,75.3,posted,Chase Freedom Student,6946,credit,credit card,111.44,588.56,700.0
+9f4622ee-26f3-4815-a6ac-05d5d4c700a1,2024-08-18,,Chase Freedom Student,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-36.14,posted,Wealthfront Individual,73,depository,checking,-36.14,,
+17da0be7-5a10-431a-a6e2-d819109ce205,2024-08-21,,Venmo Personal,TRANSFER_IN_DEPOSIT,100.0,posted,Wealthfront Individual,73,depository,checking,63.86,63.86,
+,2024-08-22,,Apple Store,GENERAL_MERCHANDISE_ELECTRONICS,75.3,posted,Chase Freedom Student,6946,credit,credit card,75.3,624.7,700.0

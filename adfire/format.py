@@ -4,10 +4,13 @@ import pandera as pa
 from pandas._testing import assert_series_equal
 
 schema = pa.DataFrameSchema({
+    'id.transaction': pa.Column(str, nullable=True),
     'date': pa.Column(pa.DateTime),
-    'description': pa.Column(str),
+    'entity': pa.Column(str),
+    'description': pa.Column(str, nullable=True),
     'category': pa.Column(str),
     'amount': pa.Column(float),
+    'worth': pa.Column(float, nullable=True),
     'status': pa.Column(str),
     'account': pa.Column(str),
     'mask': pa.Column(str),
@@ -19,13 +22,18 @@ schema = pa.DataFrameSchema({
 }, coerce=True, strict='filter', add_missing_columns=True)
 
 
+def add_col_worth(record: pd.DataFrame) -> pd.DataFrame:
+    record['worth'] = np.where(record['type'] == 'credit', -record['amount'], record['amount'])
+    return record
+
+
 def _format_types(record: pd.DataFrame) -> pd.DataFrame:
     return schema.validate(record)
 
 
 def _sort_record(record: pd.DataFrame) -> pd.DataFrame:
-    record['amount.asset'] = np.where(record['type'] == 'depository', record['amount'], -record['amount'])
-    return record.sort_values(by=['date', 'amount.asset'], ascending=[True, False], ignore_index=True)
+    record = add_col_worth(record)
+    return record.sort_values(by=['date', 'worth'], ascending=[True, False], ignore_index=True)
 
 
 def _fill_current_balances(record: pd.DataFrame) -> pd.DataFrame:
@@ -80,10 +88,20 @@ def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
     return record
 
 
+def _verify_transactions_worth_sum(record: pd.DataFrame) -> pd.DataFrame:
+    worth_sums = record.groupby('id.transaction')['worth'].sum()
+    expected = worth_sums.copy()
+    worth_sums[:] = 0
+    assert_series_equal(worth_sums, expected)
+    return record
+
+
 def format_record(record: pd.DataFrame) -> pd.DataFrame:
     typed = _format_types(record)
-    sorted = _sort_record(typed)
+    filled_worth = add_col_worth(typed)
+    sorted = _sort_record(filled_worth)
     filled_current = _fill_current_balances(sorted)
     filled_available = _fill_available_balances(filled_current)
-    df = _format_types(filled_available)
+    verified_transactions = _verify_transactions_worth_sum(filled_available)
+    df = _format_types(verified_transactions)
     return df

@@ -2,5 +2,5 @@
   "name": "Description Column Missing",
   "description": "Description column is missing",
   "input": "input.csv",
-  "error": "SchemaError"
+  "expected": "expected.csv"
 }

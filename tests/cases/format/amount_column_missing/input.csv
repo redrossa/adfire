@@ -1,9 +1,9 @@
-date,description,category,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
-2024-08-04,85C Degrees,FOOD_AND_DRINK_COFFEE,posted,Chase Freedom Student,6946,credit,credit card,10.74,689.26,700.0
-2024-08-06,In-N-Out,FOOD_AND_DRINK_FAST_FOOD,posted,Amex Green,1009,credit,credit card,10.39,,
-2024-08-09,HEB,TRANSPORTATION_GAS,posted,Prime Visa,8104,credit,credit card,48.18,5951.82,6000.0
-2024-08-10,United Airlines,TRAVEL_FLIGHTS,posted,Amex Green,1009,credit,credit card,212.83,,
-2024-08-11,Spirit Airlines,TRAVEL_FLIGHTS,posted,Amex Green,1009,credit,credit card,400.92,,
-2024-08-15,Uniqlo,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,posted,Chase Freedom Student,6946,credit,credit card,36.14,663.86,700.0
-2024-08-17,Constellation,RENT_AND_UTILITIES_GAS_AND_ELECTRICITY,posted,Prime Visa,8104,credit,credit card,517.66,5482.34,6000.0
-2024-08-22,Apple Store,GENERAL_MERCHANDISE_ELECTRONICS,posted,Chase Freedom Student,6946,credit,credit card,111.44,588.56,700.0
+id.transaction,date,description,entity,category,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
+,2024-08-04,,85C Degrees,FOOD_AND_DRINK_COFFEE,posted,Chase Freedom Student,6946,credit,credit card,10.74,689.26,700.0
+,2024-08-06,,In-N-Out,FOOD_AND_DRINK_FAST_FOOD,posted,Amex Green,1009,credit,credit card,10.39,,
+,2024-08-09,,HEB,TRANSPORTATION_GAS,posted,Prime Visa,8104,credit,credit card,48.18,5951.82,6000.0
+,2024-08-10,,United Airlines,TRAVEL_FLIGHTS,posted,Amex Green,1009,credit,credit card,212.83,,
+,2024-08-11,,Spirit Airlines,TRAVEL_FLIGHTS,posted,Amex Green,1009,credit,credit card,400.92,,
+,2024-08-15,,Uniqlo,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,posted,Chase Freedom Student,6946,credit,credit card,36.14,663.86,700.0
+,2024-08-17,,Constellation,RENT_AND_UTILITIES_GAS_AND_ELECTRICITY,posted,Prime Visa,8104,credit,credit card,517.66,5482.34,6000.0
+,2024-08-22,,Apple Store,GENERAL_MERCHANDISE_ELECTRONICS,posted,Chase Freedom Student,6946,credit,credit card,111.44,588.56,700.0

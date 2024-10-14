@@ -1,0 +1,6 @@
+{
+  "name": "Transaction ID column missing",
+  "description": "Transaction ID column is missing",
+  "input": "input.csv",
+  "expected": "expected.csv"
+}

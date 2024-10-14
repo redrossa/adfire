@@ -1,0 +1,6 @@
+{
+  "name": "Clean With Incorrect Manual Transfers",
+  "description": "Clean with manually filled transfer IDs but incorrect",
+  "input": "input.csv",
+  "error": "AssertionError"
+}
