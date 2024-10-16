@@ -128,14 +128,12 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     mask_ids_overridden = record['id.transaction'].isna()
     record.loc[mask_ids_overridden, 'id.transaction'] = transaction_ids['id.transaction']
 
-    return record
-
-
-def _verify_transactions_worth_sum(record: pd.DataFrame) -> pd.DataFrame:
+    # verify transactions worth sum to 0
     worth_sums = record.groupby('id.transaction')['worth'].sum()
     expected = worth_sums.copy()
     worth_sums[:] = 0
     assert_series_equal(worth_sums, expected)
+
     return record
 
 
@@ -147,6 +145,5 @@ def format_record(record: pd.DataFrame) -> pd.DataFrame:
         .pipe(_fill_current_balances)
         .pipe(_fill_available_balances)
         .pipe(_identify_transfers)
-        .pipe(_verify_transactions_worth_sum)
         .pipe(_format_types)
     )
