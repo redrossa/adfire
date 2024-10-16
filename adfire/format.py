@@ -1,3 +1,5 @@
+import uuid
+
 import numpy as np
 import pandas as pd
 import pandera as pa
@@ -88,20 +90,60 @@ def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
     return record
 
 
-def _verify_transactions_worth_sum(record: pd.DataFrame) -> pd.DataFrame:
+def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
+    # add helper columns
+    mask_entity_is_in_account = record['entity'].isin(record['account'])
+    potential_transfers = record[mask_entity_is_in_account]
+    potential_transfers['_worth.absolute'] = potential_transfers['worth'].abs()
+    potential_transfers['_from'] = np.where(potential_transfers['worth'] < 0, potential_transfers['account'], potential_transfers['entity'])
+    potential_transfers['_to'] = np.where(potential_transfers['worth'] < 0, potential_transfers['entity'], potential_transfers['account'])
+    potential_transfers['_is_source'] = potential_transfers['worth'] < 0
+    potential_transfers['_id'] = potential_transfers.index
+
+    # merge the dataframe with itself to pair rows
+    paired = potential_transfers.merge(
+        potential_transfers,
+        how='inner',
+        on=['_worth.absolute', '_from', '_to'],
+        suffixes=('_open', '_close')
+    )
+
+    # filter unwanted
+    mask_self_match = paired['_id_open'] == paired['_id_close']
+    mask_reverse = paired['_id_open'] > paired['_id_close']
+    mask_equal_source = paired['_is_source_open'] == paired['_is_source_close']
+    mask_within_a_week = (paired['date_close'] - paired['date_open']) < pd.Timedelta(days=7)
+    paired = paired[~mask_self_match & ~mask_reverse & ~mask_equal_source & mask_within_a_week]
+    paired = paired.drop_duplicates(subset=['_id_open'])
+    paired = paired.drop_duplicates(subset=['_id_close'])
+
+    # create unique transaction IDs for the paired transfers
+    paired['id.transaction'] = [str(uuid.uuid4()) for _ in range(len(paired.index))]
+
+    # transform shape
+    transaction_ids = pd.melt(paired, id_vars=['id.transaction'], value_vars=['_id_open', '_id_close'], var_name='source', value_name='index')
+    transaction_ids = transaction_ids.set_index('index')
+
+    # assign transaction IDs to original record if nan
+    mask_ids_overridden = record['id.transaction'].isna()
+    record.loc[mask_ids_overridden, 'id.transaction'] = transaction_ids['id.transaction']
+
+    # verify transactions worth sum to 0
     worth_sums = record.groupby('id.transaction')['worth'].sum()
     expected = worth_sums.copy()
     worth_sums[:] = 0
     assert_series_equal(worth_sums, expected)
+
     return record
 
 
 def format_record(record: pd.DataFrame) -> pd.DataFrame:
-    typed = _format_types(record)
-    filled_worth = add_col_worth(typed)
-    sorted = _sort_record(filled_worth)
-    filled_current = _fill_current_balances(sorted)
-    filled_available = _fill_available_balances(filled_current)
-    verified_transactions = _verify_transactions_worth_sum(filled_available)
-    df = _format_types(verified_transactions)
-    return df
+    return (
+        record.pipe(_format_types)
+        .pipe(add_col_worth)
+        .pipe(_sort_record)
+        .pipe(_fill_current_balances)
+        .pipe(_fill_available_balances)
+        .pipe(_identify_transfers)
+        .pipe(_format_types)
+    )
