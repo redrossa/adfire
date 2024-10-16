@@ -1,5 +1,6 @@
 import json
 import os
+import uuid
 
 import numpy as np
 import pandas as pd
@@ -10,6 +11,7 @@ from pandera.errors import SchemaError
 
 from adfire.format import format_record, schema, add_col_worth
 from adfire.io import read_record
+
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
@@ -27,9 +29,11 @@ class Case:
         return [Case(x) for x in Case.find_cases()]
 
     @classmethod
-    def read_expected_record(cls, path) -> pd.DataFrame:
-        expected_schema = pa.DataFrameSchema(schema.columns, coerce=True, strict=True)
+    def read_expected_record(cls, path, mocks=None) -> pd.DataFrame:
         df = pd.read_csv(path, dtype=str)
+        if mocks:
+            df = df.replace(mocks)
+        expected_schema = pa.DataFrameSchema(schema.columns, coerce=True, strict=True)
         df = expected_schema.validate(df)
         return df
 
@@ -50,12 +54,17 @@ class Case:
         self.name = metadata['name']
         self.description = metadata['description']
         self.input = read_record(os.path.join(path, metadata['input']))
+
+        self.mocks = None
+        if 'mocks' in metadata:
+            self.mocks = metadata['mocks']
+
+        self.expected = None
+        self.error = None
         if 'expected' in metadata:
-            self.expected = Case.read_expected_record(os.path.join(path, metadata['expected']))
-            self.error = None
+            self.expected = Case.read_expected_record(os.path.join(path, metadata['expected']), self.mocks)
         else:
             self.error = self.match_error(metadata['error'])
-            self.expected = None
 
 
 all_cases = Case.load_cases()
@@ -76,7 +85,16 @@ def negative_case(request):
     return request.param
 
 
-def test_format(case):
+def test_format(case, monkeypatch):
+    if case.mocks:
+        call_num = 0
+        def mock_uuid():
+            nonlocal call_num
+            mock = uuid.UUID(list(case.mocks.values())[call_num], version=4)
+            call_num += 1
+            return mock
+        monkeypatch.setattr(uuid, 'uuid4', mock_uuid)
+
     if case.error:
         with pytest.raises(case.error):
             format_record(case.input)
@@ -139,3 +157,9 @@ def test_current_is_posted_amount_cumsum(positive_case):
             actual.iloc[group.index]['balances.current'],
             equal_nan=True
         ).all()
+
+
+def test_transaction_entries_worth_sum_zero(positive_case):
+    actual = format_record(positive_case.input)
+    sums = actual.groupby('id.transaction')['worth'].sum()
+    assert (sums == 0).all()
