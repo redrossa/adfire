@@ -47,23 +47,45 @@ def _fill_current_balances(record: pd.DataFrame) -> pd.DataFrame:
         group['_balances.current'] = group['_balances.current'].ffill().fillna(0)
         record.loc[group['_balances.current'].index, '_balances.current'] = group['_balances.current']
 
-    # verify input current balance match computed
-    input_bal = record['balances.current']
-    mask_filled = input_bal.notnull()
-    filled_input_bal = input_bal[mask_filled]
-    filled_computed_bal = record.loc[mask_filled, '_balances.current']
-    assert_series_equal(filled_computed_bal, filled_input_bal, check_names=False)
+    # manage offsets per account
+    df = record[['account', 'balances.current', '_balances.current']]
+    for account, group in df.groupby('account'):
+        mask_balance_filled = group['balances.current'].notna()
+        filled_input_bal = group.loc[mask_balance_filled, 'balances.current']
+        filled_computed_bal = group.loc[mask_balance_filled, '_balances.current']
+        computed_offsets = (filled_input_bal - filled_computed_bal).round(2)
 
-    # replace input current balance column with computed
-    record['balances.current'] = record['_balances.current']
+        if not computed_offsets.empty:
+            # verify all offsets are equal
+            offset = computed_offsets.iloc[0]
+            expected_offsets = pd.Series(
+                data=offset,
+                index=computed_offsets.index,
+                dtype=computed_offsets.dtype
+            )
+            assert_series_equal(computed_offsets, expected_offsets, check_names=False)
+
+            # offset computed bal
+            group['_balances.current'] = group['_balances.current'] + offset
+
+        # verify input balance match computed
+        filled_offset_computed_bal = group.loc[mask_balance_filled, '_balances.current']
+        assert_series_equal(filled_offset_computed_bal, filled_input_bal, check_names=False)
+
+        # replace input current balance column with computed
+        record.loc[group['_balances.current'].index, 'balances.current'] = group['_balances.current']
+
+    # remove temporary column
     record = record.drop('_balances.current', axis=1)
 
     return record
 
 
 def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
+    grouped_by_account = record.groupby('account')
+
     # calculate temporary cumsum of amounts
-    record['_balances.cumsum'] = record.groupby('account')['amount'].cumsum()
+    record['_balances.cumsum'] = grouped_by_account['amount'].cumsum()
 
     # calculate available balances for credit types
     mask_is_credit = record['type'] == 'credit'
@@ -75,6 +97,16 @@ def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
     mask_is_depository = record['type'] == 'depository'
     depository_masked = record[mask_is_depository]
     record.loc[mask_is_depository, '_balances.available'] = depository_masked['_balances.cumsum']
+
+    # calculate offsets for each account. IMPORTANT: assumes current balances are correctly filled
+    first_entries = grouped_by_account.first()
+    mask_is_posted = first_entries['status'] == 'posted'
+    offsets = first_entries['balances.current'] - np.where(mask_is_posted, first_entries['amount'], 0)
+    offsets.name = '_balances.offset'
+    record = record.join(offsets, on='account')
+
+    # apply offsets to available balances
+    record['_balances.available'] = record['_balances.available'] - record['_balances.offset']
 
     # verify input available balance match computed
     input_bal = record['balances.available']
