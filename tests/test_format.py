@@ -132,17 +132,22 @@ def test_available_balances_are_filled_if_limit_filled(positive_case):
     assert actual.loc[actual['balances.limit'].notna(), 'balances.available'].notna().all()
 
 
-def test_limit_equals_current_plus_available(positive_case):
+def test_limit_equals_cumsum_plus_available(positive_case):
     actual = format_record(positive_case.input)
     mask_has_limit = actual['balances.limit'].notna()
     mask_has_available = actual['balances.available'].notna()
     filtered = actual[mask_has_limit & mask_has_available]
     filtered['_balances.cumsum'] = filtered.groupby('account')['amount'].cumsum()
-    assert np.isclose(
-        filtered['_balances.cumsum'] + filtered['balances.available'],
+    first_entries = filtered.groupby('account').first()
+    mask_is_posted = first_entries['status'] == 'posted'
+    offsets = first_entries['balances.current'] - np.where(mask_is_posted, first_entries['amount'], 0)
+    offsets.name = '_balances.offset'
+    filtered = filtered.join(offsets, on='account')
+    assert_series_equal(
+        filtered['_balances.cumsum'] + filtered['_balances.offset'] + filtered['balances.available'],
         filtered['balances.limit'],
-        equal_nan=True
-    ).all()
+        check_names=False,
+    )
 
 
 def test_current_is_posted_amount_cumsum(positive_case):

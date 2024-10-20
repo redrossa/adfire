@@ -82,8 +82,10 @@ def _fill_current_balances(record: pd.DataFrame) -> pd.DataFrame:
 
 
 def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
+    grouped_by_account = record.groupby('account')
+
     # calculate temporary cumsum of amounts
-    record['_balances.cumsum'] = record.groupby('account')['amount'].cumsum()
+    record['_balances.cumsum'] = grouped_by_account['amount'].cumsum()
 
     # calculate available balances for credit types
     mask_is_credit = record['type'] == 'credit'
@@ -95,6 +97,16 @@ def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
     mask_is_depository = record['type'] == 'depository'
     depository_masked = record[mask_is_depository]
     record.loc[mask_is_depository, '_balances.available'] = depository_masked['_balances.cumsum']
+
+    # calculate offsets for each account. IMPORTANT: assumes current balances are correctly filled
+    first_entries = grouped_by_account.first()
+    mask_is_posted = first_entries['status'] == 'posted'
+    offsets = first_entries['balances.current'] - np.where(mask_is_posted, first_entries['amount'], 0)
+    offsets.name = '_balances.offset'
+    record = record.join(offsets, on='account')
+
+    # apply offsets to available balances
+    record['_balances.available'] = record['_balances.available'] - record['_balances.offset']
 
     # verify input available balance match computed
     input_bal = record['balances.available']
