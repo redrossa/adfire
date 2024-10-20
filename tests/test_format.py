@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pandera as pa
 import pytest
-from pandas._testing import assert_frame_equal
+from pandas._testing import assert_frame_equal, assert_series_equal
 from pandera.errors import SchemaError
 
 from adfire.format import format_record, schema, add_col_worth
@@ -152,11 +152,13 @@ def test_current_is_posted_amount_cumsum(positive_case):
         posted_curr_bal = group[mask_posted]['amount'].cumsum()
         group.loc[posted_curr_bal.index, 'balances.current'] = posted_curr_bal
         group['balances.current'] = group['balances.current'].ffill().fillna(0)
-        assert np.isclose(
+        offset = actual.iloc[group.index][mask_posted]['balances.current'].iloc[0] - group[mask_posted]['balances.current'].iloc[0]
+        group.loc[mask_posted, 'balances.current'] = group.loc[mask_posted, 'balances.current'] + offset
+        assert_series_equal(
             group['balances.current'],
             actual.iloc[group.index]['balances.current'],
-            equal_nan=True
-        ).all()
+            check_names=False
+        )
 
 
 def test_transaction_entries_worth_sum_zero(positive_case):

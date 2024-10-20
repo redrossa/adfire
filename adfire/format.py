@@ -47,15 +47,35 @@ def _fill_current_balances(record: pd.DataFrame) -> pd.DataFrame:
         group['_balances.current'] = group['_balances.current'].ffill().fillna(0)
         record.loc[group['_balances.current'].index, '_balances.current'] = group['_balances.current']
 
-    # verify input current balance match computed
-    input_bal = record['balances.current']
-    mask_filled = input_bal.notnull()
-    filled_input_bal = input_bal[mask_filled]
-    filled_computed_bal = record.loc[mask_filled, '_balances.current']
-    assert_series_equal(filled_computed_bal, filled_input_bal, check_names=False)
+    # manage offsets per account
+    df = record[['account', 'balances.current', '_balances.current']]
+    for account, group in df.groupby('account'):
+        mask_balance_filled = group['balances.current'].notna()
+        filled_input_bal = group.loc[mask_balance_filled, 'balances.current']
+        filled_computed_bal = group.loc[mask_balance_filled, '_balances.current']
+        computed_offsets = (filled_input_bal - filled_computed_bal).round(2)
 
-    # replace input current balance column with computed
-    record['balances.current'] = record['_balances.current']
+        if not computed_offsets.empty:
+            # verify all offsets are equal
+            offset = computed_offsets.iloc[0]
+            expected_offsets = pd.Series(
+                data=offset,
+                index=computed_offsets.index,
+                dtype=computed_offsets.dtype
+            )
+            assert_series_equal(computed_offsets, expected_offsets, check_names=False)
+
+            # offset computed bal
+            group['_balances.current'] = group['_balances.current'] + offset
+
+        # verify input balance match computed
+        filled_offset_computed_bal = group.loc[mask_balance_filled, '_balances.current']
+        assert_series_equal(filled_offset_computed_bal, filled_input_bal, check_names=False)
+
+        # replace input current balance column with computed
+        record.loc[group['_balances.current'].index, 'balances.current'] = group['_balances.current']
+
+    # remove temporary column
     record = record.drop('_balances.current', axis=1)
 
     return record
