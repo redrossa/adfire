@@ -166,6 +166,10 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     worth_sums[:] = 0
     assert_series_equal(worth_sums, expected)
 
+    # fill in the rest of the transaction IDs (non-transfers)
+    mask_is_nan = record['id.transaction'].isna()
+    record.loc[mask_is_nan, 'id.transaction'] = [str(uuid.uuid4()) for _ in range(mask_is_nan.sum())]
+
     return record
 
 
