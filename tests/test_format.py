@@ -1,6 +1,5 @@
 import json
 import os
-import uuid
 
 import numpy as np
 import pandas as pd
@@ -11,7 +10,6 @@ from pandera.errors import SchemaError
 
 from adfire.format import format_record, schema, add_col_worth
 from adfire.io import read_record
-
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
