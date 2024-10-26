@@ -2,9 +2,5 @@
   "name": "Clean With Auto Transfers",
   "description": "Clean with no manually filled transfer IDs",
   "input": "input.csv",
-  "expected": "expected.csv",
-  "mocks": {
-    "$A": "9f4622ee-26f3-4815-a6ac-05d5d4c700a1",
-    "$B": "17da0be7-5a10-431a-a6e2-d819109ce205"
-  }
+  "expected": "expected.csv"
 }
