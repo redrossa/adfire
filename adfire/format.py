@@ -160,8 +160,10 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     mask_ids_overridden = record['id.transaction'].isna()
     record.loc[mask_ids_overridden, 'id.transaction'] = transaction_ids['id.transaction']
 
-    # verify transactions worth sum to 0
-    worth_sums = record.groupby('id.transaction')['worth'].sum()
+    # verify transactions worth sum to 0 for transfers
+    counts = record['id.transaction'].value_counts()
+    mask_is_multileg = record['id.transaction'].isin(counts[counts > 1].index)
+    worth_sums = record[mask_is_multileg].groupby('id.transaction')['worth'].sum()
     expected = worth_sums.copy()
     worth_sums[:] = 0
     assert_series_equal(worth_sums, expected)
