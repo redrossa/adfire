@@ -1,6 +1,5 @@
 import json
 import os
-import uuid
 
 import numpy as np
 import pandas as pd
@@ -11,7 +10,6 @@ from pandera.errors import SchemaError
 
 from adfire.format import format_record, schema, add_col_worth
 from adfire.io import read_record
-
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
@@ -29,10 +27,8 @@ class Case:
         return [Case(x) for x in Case.find_cases()]
 
     @classmethod
-    def read_expected_record(cls, path, mocks=None) -> pd.DataFrame:
+    def read_expected_record(cls, path) -> pd.DataFrame:
         df = pd.read_csv(path, dtype=str)
-        if mocks:
-            df = df.replace(mocks)
         expected_schema = pa.DataFrameSchema(schema.columns, coerce=True, strict=True)
         df = expected_schema.validate(df)
         return df
@@ -55,14 +51,10 @@ class Case:
         self.description = metadata['description']
         self.input = read_record(os.path.join(path, metadata['input']))
 
-        self.mocks = None
-        if 'mocks' in metadata:
-            self.mocks = metadata['mocks']
-
         self.expected = None
         self.error = None
         if 'expected' in metadata:
-            self.expected = Case.read_expected_record(os.path.join(path, metadata['expected']), self.mocks)
+            self.expected = Case.read_expected_record(os.path.join(path, metadata['expected']))
         else:
             self.error = self.match_error(metadata['error'])
 
@@ -86,21 +78,14 @@ def negative_case(request):
 
 
 def test_format(case, monkeypatch):
-    if case.mocks:
-        call_num = 0
-        def mock_uuid():
-            nonlocal call_num
-            mock = uuid.UUID(list(case.mocks.values())[call_num], version=4)
-            call_num += 1
-            return mock
-        monkeypatch.setattr(uuid, 'uuid4', mock_uuid)
-
     if case.error:
         with pytest.raises(case.error):
             format_record(case.input)
     else:
-        actual = format_record(case.input)
-        assert_frame_equal(actual, case.expected)
+        # test id.transaction separately
+        actual = format_record(case.input).drop('id.transaction', axis=1)
+        expected = case.expected.drop('id.transaction', axis=1)
+        assert_frame_equal(actual, expected)
 
 
 def test_types(positive_case):
@@ -166,7 +151,19 @@ def test_current_is_posted_amount_cumsum(positive_case):
         )
 
 
-def test_transaction_entries_worth_sum_zero(positive_case):
+def test_transfer_entries_worth_sum_zero(positive_case):
     actual = format_record(positive_case.input)
-    sums = actual.groupby('id.transaction')['worth'].sum()
+    grouped = actual.groupby('id.transaction')
+    sizes = grouped.size()
+    mask_is_transfer = sizes[sizes > 1]
+    filtered = actual[actual['id.transaction'].isin(mask_is_transfer)]
+    sums = filtered['worth'].sum()
     assert (sums == 0).all()
+
+
+def test_entries_paired_as_transfer(positive_case):
+    actual = format_record(positive_case.input)
+    joined = actual.join(positive_case.expected, how='inner', lsuffix='_actual', rsuffix='_expected')
+    filtered = joined[joined['id.transaction_expected'].notna()]
+    unique = filtered.groupby('id.transaction_expected')['id.transaction_actual'].nunique()
+    assert (unique == 1).all()
