@@ -1,0 +1,6 @@
+{
+  "name": "Incorrect Offset Partial Balances",
+  "description": "Entered balance that results to incorrect offset that are partially filled",
+  "input": "input.csv",
+  "error": "AssertionError"
+}

@@ -1,6 +1,0 @@
-{
-  "name": "Clean with Partial Balances Incorrect",
-  "description": "Clean with partial balances but there is an incorrect entered balance",
-  "input": "input.csv",
-  "error": "AssertionError"
-}

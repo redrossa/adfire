@@ -1,6 +1,0 @@
-{
-  "name": "Clean with Incorrect Offset Partial Balances",
-  "description": "Clean but balances are partially filled with incorrect offset",
-  "input": "input.csv",
-  "error": "AssertionError"
-}
