@@ -185,3 +185,30 @@ def format_record(record: pd.DataFrame) -> pd.DataFrame:
         .pipe(_identify_transfers)
         .pipe(_format_types)
     )
+
+
+def hash_record(record: pd.DataFrame) -> pd.Series:
+    filtered = record[[
+        'id.transaction',
+        'date',
+        'entity',
+        'amount',
+        'worth',
+        'status',
+        'account',
+        'mask',
+        'type',
+        'subtype',
+        'balances.current',
+        'balances.available',
+        'balances.limit',
+    ]]
+    mask_is_posted = filtered['status'] == 'posted'
+    filtered = filtered[mask_is_posted]
+    filtered = filtered.set_index('id.transaction')
+    hashed = pd.util.hash_pandas_object(filtered)
+    return hashed
+
+
+def is_checksum_subset(a: pd.Series, b: pd.Series) -> bool:
+    return np.isin(b, a).all()
