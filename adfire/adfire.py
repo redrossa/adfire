@@ -1,3 +1,4 @@
+from adfire.errors import ChecksumError
 from adfire.format import format_record, hash_record, is_checksum_subset
 from adfire.io import read_record, write_record, read_checksum, write_checksum
 
@@ -11,7 +12,10 @@ class Adfire:
         self.checksum = hash_record(self.record)
         if checksum_path:
             input_checksum = read_checksum(checksum_path)
-            assert is_checksum_subset(input_checksum, self.checksum), 'Record failed integrity check'
+            try:
+                assert is_checksum_subset(input_checksum, self.checksum), 'Record failed integrity check'
+            except AssertionError as e:
+                raise ChecksumError(e)
 
     def format(self, path = None, checksum_path = None):
         self.record = self.record.round(2)
