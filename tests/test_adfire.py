@@ -7,6 +7,7 @@ import pandas as pd
 import pytest
 
 from adfire.adfire import Adfire
+from adfire.errors import ChecksumError
 from tests.utils import open_or_none
 
 pd.set_option('display.max_columns', None)
@@ -56,6 +57,6 @@ def test_init(positive_case):
 
 
 def test_init_fails(negative_case):
-    with pytest.raises(AssertionError):
+    with pytest.raises(ChecksumError) as e:
         Adfire(negative_case.input_path, negative_case.checksum_path)
 

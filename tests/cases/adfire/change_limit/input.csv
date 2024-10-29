@@ -6,8 +6,8 @@ id.transaction,date,description,entity,category,amount,status,account,mask,type,
 5,2024-08-11,,Spirit Airlines,TRAVEL_FLIGHTS,188.09,posted,Amex Green,1009,credit,credit card,400.92,,
 6,2024-08-15,,Uniqlo,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,25.4,posted,Chase Freedom Student,6946,credit,credit card,36.14,663.86,700.0
 $A,2024-08-16,,Wealthfront Individual,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-36.14,posted,Chase Freedom Student,6946,credit,credit card,0.0,700.0,700.0
-$B,2024-08-17,,Wealthfront Individual,TRANSFER_OUT_WITHDRAWAL,-100.0,posted,Venmo Personal,@raksimuh,depository,p2p,-200.0,0,
+$B,2024-08-17,,Wealthfront Individual,TRANSFER_OUT_WITHDRAWAL,-100.0,posted,Venmo Personal,@raksimuh,depository,p2p,-100.0,-100,
 9,2024-08-17,,Constellation,RENT_AND_UTILITIES_GAS_AND_ELECTRICITY,469.48,posted,Prime Visa,8104,credit,credit card,517.66,5482.34,6000.0
 $A,2024-08-18,,Chase Freedom Student,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-36.14,posted,Wealthfront Individual,73,depository,checking,-36.14,,
-11,2024-08-18,,Wealthfront Individual,TRANSFER_OUT_WITHDRAWAL,-100.0,posted,Venmo Personal,@raksimuh,depository,p2p,-300,-100,
+11,2024-08-18,,Wealthfront Individual,TRANSFER_OUT_WITHDRAWAL,-100.0,posted,Venmo Personal,@raksimuh,depository,p2p,-200.0,-200,1000
 $B,2024-08-21,,Venmo Personal,TRANSFER_IN_DEPOSIT,100.0,posted,Wealthfront Individual,73,depository,checking,63.86,63.86,
