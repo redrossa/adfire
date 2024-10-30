@@ -211,4 +211,4 @@ def hash_record(record: pd.DataFrame) -> pd.Series:
 
 
 def is_checksum_subset(a: pd.Series, b: pd.Series) -> bool:
-    return np.isin(b, a).all()
+    return np.isin(a, b).all()
