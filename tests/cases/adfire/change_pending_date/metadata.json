@@ -1,0 +1,5 @@
+{
+  "name": "Change Pending Date",
+  "description": "Changes date of pending entry",
+  "fails": false
+}
