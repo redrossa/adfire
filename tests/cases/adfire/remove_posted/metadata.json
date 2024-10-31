@@ -1,0 +1,5 @@
+{
+  "name": "Remove Posted",
+  "description": "Clean input with balances partially filled, but a posted entry is removed",
+  "fails": true
+}
