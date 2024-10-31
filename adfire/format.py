@@ -199,7 +199,6 @@ def hash_record(record: pd.DataFrame) -> pd.Series:
         'mask',
         'type',
         'subtype',
-        'balances.current',
         'balances.limit',
     ]]
     mask_is_posted = filtered['status'] == 'posted'
