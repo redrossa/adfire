@@ -1,0 +1,5 @@
+{
+  "name": "Add Posted Entry Middle",
+  "description": "Uses no change's checksum and adds posted entry in the middle of the record",
+  "fails": false
+}
