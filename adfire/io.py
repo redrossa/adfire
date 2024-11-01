@@ -7,7 +7,7 @@ def read_record(path) -> pd.DataFrame:
 
 
 def write_record(df, path):
-    df.to_csv(path)
+    df.to_csv(path, index=False)
 
 
 def read_checksum(path) -> pd.Series:

@@ -1,5 +1,5 @@
 {
-  "name": "No Change",
+  "name": "No Change with Checksum",
   "description": "Clean input representing unchanged record of the checksum",
   "fails": false
 }

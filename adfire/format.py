@@ -175,7 +175,7 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     return record
 
 
-def format_record(record: pd.DataFrame) -> pd.DataFrame:
+def format_record(record: pd.DataFrame, decimals = 2) -> pd.DataFrame:
     return (
         record.pipe(_format_types)
         .pipe(add_col_worth)
@@ -184,6 +184,7 @@ def format_record(record: pd.DataFrame) -> pd.DataFrame:
         .pipe(_fill_available_balances)
         .pipe(_identify_transfers)
         .pipe(_format_types)
+        .round(decimals)
     )
 
 

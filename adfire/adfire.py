@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from adfire.errors import ChecksumError
 from adfire.format import format_record, hash_record, is_checksum_subset
 from adfire.io import read_record, write_record, read_checksum, write_checksum
@@ -17,7 +19,8 @@ class Adfire:
             except AssertionError as e:
                 raise ChecksumError(e)
 
-    def format(self, path = None, checksum_path = None):
-        self.record = self.record.round(2)
-        write_record(self.record, self.path if not path else path)
-        write_checksum(self.checksum, self.checksum_path if not checksum_path else checksum_path)
+    def format(self, out_path):
+        file_path = Path(out_path)
+        checksum_path = file_path.with_suffix('.pkl')
+        write_record(self.record, out_path)
+        write_checksum(self.checksum, checksum_path)

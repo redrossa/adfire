@@ -4,6 +4,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pandas as pd
+from pandas import testing as tm
 import pytest
 
 from adfire.adfire import Adfire
@@ -28,10 +29,18 @@ class Case:
     def __init__(self, path):
         self.path = path
         self.input_path = path/'input.csv'
-        self.checksum_path = path/'checksum.pkl'
+
+        checksum_path = path/'checksum.pkl'
+        self.checksum_path = checksum_path if checksum_path.is_file() else None
 
         with open_or_none(path/'metadata.json', 'r') as (f, err):
             self.metadata = json.load(f, object_hook=lambda d: SimpleNamespace(**d)) if not err else None
+
+        with open_or_none(path/'output.csv', 'r') as (f, err):
+            self.expected_output = None if err else pd.read_csv(f)
+
+        with open_or_none(path/'output.pkl', 'rb') as (f, err):
+            self.expected_checksum = None if err else pd.read_pickle(f)
 
 
 all_cases = Case.load_cases()
@@ -60,3 +69,13 @@ def test_init_fails(negative_case):
     with pytest.raises(ChecksumError) as e:
         Adfire(negative_case.input_path, negative_case.checksum_path)
 
+
+def test_format(positive_case, tmp_path):
+    adfire = Adfire(positive_case.input_path, positive_case.checksum_path)
+    out_path = tmp_path/'output.csv'
+    adfire.format(out_path)
+    actual_output = pd.read_csv(out_path)
+    tm.assert_frame_equal(actual_output, positive_case.expected_output)
+    out_pkl_path = tmp_path/'output.pkl'
+    actual_checksum = pd.read_pickle(out_pkl_path)
+    tm.assert_series_equal(actual_checksum, positive_case.expected_checksum)
