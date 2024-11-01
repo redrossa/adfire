@@ -1,0 +1,5 @@
+{
+  "name": "Change Balances",
+  "description": "Same checksum as no change's but the record modified posted balances under the allowed assumption that the offset is changed too",
+  "fails": false
+}

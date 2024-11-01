@@ -1,6 +1,0 @@
-{
-  "name": "Clean With Incorrect Manual Transfers",
-  "description": "Clean with manually filled transfer IDs but a transaction worth doesn't equate to 0",
-  "input": "input.csv",
-  "error": "AssertionError"
-}

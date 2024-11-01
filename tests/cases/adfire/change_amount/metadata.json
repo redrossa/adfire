@@ -1,0 +1,5 @@
+{
+  "name": "Change Amount",
+  "description": "Same checksum as no change's but the record modified posted amount",
+  "fails": true
+}
