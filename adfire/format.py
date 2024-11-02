@@ -145,7 +145,8 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     mask_reverse = paired['_id_open'] > paired['_id_close']
     mask_equal_source = paired['_is_source_open'] == paired['_is_source_close']
     mask_within_a_week = (paired['date_close'] - paired['date_open']) < pd.Timedelta(days=7)
-    paired = paired[~mask_self_match & ~mask_reverse & ~mask_equal_source & mask_within_a_week]
+    mask_zero_sum_worth = paired['worth_open'] + paired['worth_close'] == 0
+    paired = paired[~mask_self_match & ~mask_reverse & ~mask_equal_source & mask_within_a_week & mask_zero_sum_worth]
     paired = paired.drop_duplicates(subset=['_id_open'])
     paired = paired.drop_duplicates(subset=['_id_close'])
 
@@ -155,24 +156,31 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     # transform shape
     transaction_ids = pd.melt(paired, id_vars=['id.transaction'], value_vars=['_id_open', '_id_close'], var_name='source', value_name='index')
     transaction_ids = transaction_ids.set_index('index')
+    transaction_ids = record.join(transaction_ids, lsuffix='_manual', rsuffix='_format')
+    mask_is_na = transaction_ids['id.transaction_format'].isna()
+    transaction_ids.loc[mask_is_na, 'id.transaction_format'] = [str(uuid.uuid4()) for _ in range(mask_is_na.sum())]
 
-    # assign transaction IDs to original record if nan
-    mask_ids_overridden = record['id.transaction'].isna()
-    record.loc[mask_ids_overridden, 'id.transaction'] = transaction_ids['id.transaction']
+    # fill NaN IDs
+    transaction_ids['id'] = transaction_ids.index
+    assigned = transaction_ids.merge(transaction_ids, on='id.transaction_format', how='left')
+    assigned_no_dupes = assigned.drop_duplicates('id_x', keep=False)
+    assigned_dupes_no_self = assigned[assigned['id_x'] != assigned['id_y']]
+    assigned = pd.concat([assigned_no_dupes, assigned_dupes_no_self]).sort_values('id_x', ignore_index=True)
+    assigned['id.transaction'] = assigned[['id.transaction_manual_x', 'id.transaction_manual_y', 'id.transaction_format']].bfill(axis=1).iloc[:, 0]
 
-    # verify transactions worth sum to 0 for transfers
-    counts = record['id.transaction'].value_counts()
-    mask_is_multileg = record['id.transaction'].isin(counts[counts > 1].index)
-    worth_sums = record[mask_is_multileg].groupby('id.transaction')['worth'].sum()
-    expected = worth_sums.copy()
-    worth_sums[:] = 0
-    assert_series_equal(worth_sums, expected)
+    # verify that the pattern of manual IDs match computed
+    unique_pairs = assigned.groupby(['id.transaction', 'id.transaction_format']).size()
+    counts = unique_pairs.groupby('id.transaction').size()
+    assert (counts == 1).all(), "Manual ID pattern doesn't match computed"
 
-    # fill in the rest of the transaction IDs (non-transfers)
-    mask_is_nan = record['id.transaction'].isna()
-    record.loc[mask_is_nan, 'id.transaction'] = [str(uuid.uuid4()) for _ in range(mask_is_nan.sum())]
+    # assign IDs to record
+    record['id.transaction'] = assigned['id.transaction']
 
     return record
+
+
+def compile_records(records: list[pd.DataFrame]) -> pd.DataFrame:
+    return pd.concat(records, ignore_index=True)
 
 
 def format_record(record: pd.DataFrame, decimals = 2) -> pd.DataFrame:

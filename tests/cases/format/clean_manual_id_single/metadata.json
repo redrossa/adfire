@@ -1,0 +1,6 @@
+{
+  "name": "Clean With Manual ID Single",
+  "description": "Clean with manually filled transaction ID on a single entry purchase",
+  "input": "input.csv",
+  "expected": "expected.csv"
+}

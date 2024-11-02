@@ -1,0 +1,6 @@
+{
+  "name": "Manual Transfers Incorrect Dates",
+  "description": "Manually filled transfer IDs transaction have dates too far from each other",
+  "input": "input.csv",
+  "error": "AssertionError"
+}
