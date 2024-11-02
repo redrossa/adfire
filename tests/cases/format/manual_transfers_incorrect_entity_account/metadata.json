@@ -1,0 +1,6 @@
+{
+  "name": "Manual Transfers Incorrect Entity Account",
+  "description": "Manually filled transfer IDs transaction don't have matching entities and accounts",
+  "input": "input.csv",
+  "error": "AssertionError"
+}

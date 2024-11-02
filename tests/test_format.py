@@ -1,5 +1,6 @@
 import json
 import os
+import uuid
 
 import numpy as np
 import pandas as pd
@@ -167,3 +168,19 @@ def test_entries_paired_as_transfer(positive_case):
     filtered = joined[joined['id.transaction_expected'].notna()]
     unique = filtered.groupby('id.transaction_expected')['id.transaction_actual'].nunique()
     assert (unique == 1).all()
+
+
+def test_id_pattern(positive_case):
+    actual = format_record(positive_case.input)
+    actual['id.transaction_expected'] = positive_case.expected['id.transaction']
+    mask_is_nan = actual['id.transaction_expected'].isna()
+    actual.loc[mask_is_nan, 'id.transaction_expected'] = [str(uuid.uuid4()) for _ in range(mask_is_nan.sum())]
+    unique_pairs = actual.groupby(['id.transaction_expected', 'id.transaction']).size()
+    counts = unique_pairs.groupby('id.transaction_expected').size()
+    assert (counts == 1).all()
+
+
+def test_manual_id(positive_case):
+    actual = format_record(positive_case.input)
+    mask_actual_not_na = positive_case.input['id.transaction'].notna()
+    assert_series_equal(actual.loc[mask_actual_not_na, 'id.transaction'], positive_case.expected.loc[mask_actual_not_na, 'id.transaction'])

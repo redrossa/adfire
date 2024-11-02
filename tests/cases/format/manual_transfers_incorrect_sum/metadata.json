@@ -1,5 +1,5 @@
 {
-  "name": "Incorrect Manual Transfers",
+  "name": "Manual Transfers Incorrect Sum",
   "description": "Manually filled transfer IDs transaction worth doesn't sum to 0",
   "input": "input.csv",
   "error": "AssertionError"

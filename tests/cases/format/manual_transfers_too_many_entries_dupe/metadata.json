@@ -1,0 +1,6 @@
+{
+  "name": "Manual Transfers Too Many Entries Dupe",
+  "description": "Manually filled transfer IDs transaction have too many entries with duplicate",
+  "input": "input.csv",
+  "error": "AssertionError"
+}
