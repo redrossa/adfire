@@ -1,0 +1,6 @@
+{
+  "name": "Clean With Manual Transfers Single First",
+  "description": "Clean with manually filled transaction ID only on a single entry (first) of a transfer",
+  "input": "input.csv",
+  "expected": "expected.csv"
+}
