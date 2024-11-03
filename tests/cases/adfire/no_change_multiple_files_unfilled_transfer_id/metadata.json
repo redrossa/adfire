@@ -1,0 +1,12 @@
+{
+  "name": "No Change Multiple Files Unfilled Transfer ID",
+  "description": "Clean input representing unchanged record of the checksum, but entries are separated into multiple files and an entry that is supposed to pair with another has unfilled ID",
+  "fails": false,
+  "inputs": [
+    "amex green.csv",
+    "chase freedom student.csv",
+    "prime visa.csv",
+    "venmo personal.csv",
+    "wealthfront individual.csv"
+  ]
+}
