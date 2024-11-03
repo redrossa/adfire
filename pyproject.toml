@@ -1,0 +1,20 @@
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'adfire'
+version = '0.1.0'
+description = 'Accounting platform for achieving FIRE'
+readme = 'README.md'
+requires-python = '>=3.8'
+keywords = ['finance', 'accounting', 'personal finance']
+authors = [
+  {name = 'Redrossa' }
+]
+
+[project.urls]
+'Homepage' = 'https://github.com/redrossa/adfire'
+
+[project.scripts]
+adfire = 'adfire.__main__:main'

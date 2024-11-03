@@ -1,17 +1,34 @@
 import argparse
+import importlib
 
 from adfire.adfire import Adfire
 
 
 def main():
     parser = argparse.ArgumentParser(description='Adfire CLI')
-    parser.add_argument('paths', nargs='+', help='list of input record paths, space separated')
-    parser.add_argument('-k', '--checksum_path', help='the input checksum file')
-    parser.add_argument('-o', '--out', help='the formatted record output path')
+    parser.add_argument(
+        'paths',
+        nargs='+',
+        help='list of input record files, space separated'
+    )
+    parser.add_argument(
+        '-c', '--checksum',
+        help='input checksum file'
+    )
+    parser.add_argument(
+        '-o', '--out',
+        help='output record files',
+        required=True
+    )
+    parser.add_argument(
+        '--version',
+        action='version',
+        version=f'%(prog)s {importlib.metadata.version("adfire")}',
+    )
 
     args = parser.parse_args()
 
-    adfire = Adfire(*args.paths, checksum_path=args.checksum_path)
+    adfire = Adfire(*args.paths, checksum_path=args.checksum)
     adfire.format(args.out)
 
 

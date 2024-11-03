@@ -7,7 +7,7 @@ import pandas as pd
 from pandas import testing as tm
 import pytest
 
-from adfire.adfire import Adfire
+from adfire import Adfire
 from adfire.errors import ChecksumError
 from tests.utils import open_or_none
 
