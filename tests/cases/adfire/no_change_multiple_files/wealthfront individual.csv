@@ -1,0 +1,3 @@
+id.transaction,date,description,entity,category,amount,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
+$A,2024-08-18,,Chase Freedom Student,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-36.14,posted,Wealthfront Individual,73,depository,checking,-36.14,,
+$B,2024-08-21,,Venmo Personal,TRANSFER_IN_DEPOSIT,100.0,posted,Wealthfront Individual,73,depository,checking,63.86,63.86,

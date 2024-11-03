@@ -1,0 +1,3 @@
+id.transaction,date,description,entity,category,amount,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
+$B,2024-08-17,,Wealthfront Individual,TRANSFER_OUT_WITHDRAWAL,-100.0,posted,Venmo Personal,@raksimuh,depository,p2p,-100.0,-100.0,
+11,2024-08-18,,Wealthfront Individual,TRANSFER_OUT_WITHDRAWAL,-100.0,posted,Venmo Personal,@raksimuh,depository,p2p,-200.0,-200.0,

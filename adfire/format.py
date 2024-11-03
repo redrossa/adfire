@@ -125,7 +125,7 @@ def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
 def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     # add helper columns
     mask_entity_is_in_account = record['entity'].isin(record['account'])
-    potential_transfers = record[mask_entity_is_in_account]
+    potential_transfers = record[mask_entity_is_in_account].copy()
     potential_transfers['_worth.absolute'] = potential_transfers['worth'].abs()
     potential_transfers['_from'] = np.where(potential_transfers['worth'] < 0, potential_transfers['account'], potential_transfers['entity'])
     potential_transfers['_to'] = np.where(potential_transfers['worth'] < 0, potential_transfers['entity'], potential_transfers['account'])
@@ -166,6 +166,13 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     assigned_no_dupes = assigned.drop_duplicates('id_x', keep=False)
     assigned_dupes_no_self = assigned[assigned['id_x'] != assigned['id_y']]
     assigned = pd.concat([assigned_no_dupes, assigned_dupes_no_self]).sort_values('id_x', ignore_index=True)
+
+    # verify that manual IDs don't conflict computed pairs
+    mask_x_notna = assigned['id.transaction_manual_x'].notna()
+    mask_y_notna = assigned['id.transaction_manual_y'].notna()
+    filled = assigned[mask_x_notna & mask_y_notna]
+    assert (filled['id.transaction_manual_x'] == filled['id.transaction_manual_y']).all(), "Manual IDs conflict with computed"
+
     assigned['id.transaction'] = assigned[['id.transaction_manual_x', 'id.transaction_manual_y', 'id.transaction_format']].bfill(axis=1).iloc[:, 0]
 
     # verify that the pattern of manual IDs match computed
@@ -173,7 +180,7 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     counts = unique_pairs.groupby('id.transaction').size()
     assert (counts == 1).all(), "Manual ID pattern doesn't match computed"
 
-    # assign IDs to record
+    # finally, assign IDs to record
     record['id.transaction'] = assigned['id.transaction']
 
     return record

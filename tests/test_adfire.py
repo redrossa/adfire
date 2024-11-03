@@ -28,13 +28,15 @@ class Case:
 
     def __init__(self, path):
         self.path = path
-        self.input_path = path/'input.csv'
 
         checksum_path = path/'checksum.pkl'
         self.checksum_path = checksum_path if checksum_path.is_file() else None
 
         with open_or_none(path/'metadata.json', 'r') as (f, err):
             self.metadata = json.load(f, object_hook=lambda d: SimpleNamespace(**d)) if not err else None
+
+        input_path = path/'input.csv'
+        self.input_paths = [input_path] if input_path.is_file() else [path/x for x in self.metadata.inputs]
 
         with open_or_none(path/'output.csv', 'r') as (f, err):
             self.expected_output = None if err else pd.read_csv(f)
@@ -62,16 +64,16 @@ def negative_case(request):
 
 
 def test_init(positive_case):
-    Adfire(positive_case.input_path, positive_case.checksum_path)
+    Adfire(*positive_case.input_paths, checksum_path=positive_case.checksum_path)
 
 
 def test_init_fails(negative_case):
-    with pytest.raises(ChecksumError) as e:
-        Adfire(negative_case.input_path, negative_case.checksum_path)
+    with pytest.raises(ChecksumError):
+        Adfire(*negative_case.input_paths, checksum_path=negative_case.checksum_path)
 
 
 def test_format(positive_case, tmp_path):
-    adfire = Adfire(positive_case.input_path, positive_case.checksum_path)
+    adfire = Adfire(*positive_case.input_paths, checksum_path=positive_case.checksum_path)
     out_path = tmp_path/'output.csv'
     adfire.format(out_path)
     actual_output = pd.read_csv(out_path)
