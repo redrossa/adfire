@@ -125,7 +125,7 @@ def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
 def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     # add helper columns
     mask_entity_is_in_account = record['entity'].isin(record['account'])
-    potential_transfers = record[mask_entity_is_in_account]
+    potential_transfers = record[mask_entity_is_in_account].copy()
     potential_transfers['_worth.absolute'] = potential_transfers['worth'].abs()
     potential_transfers['_from'] = np.where(potential_transfers['worth'] < 0, potential_transfers['account'], potential_transfers['entity'])
     potential_transfers['_to'] = np.where(potential_transfers['worth'] < 0, potential_transfers['entity'], potential_transfers['account'])
