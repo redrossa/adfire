@@ -158,6 +158,7 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     transaction_ids = transaction_ids.set_index('index')
     transaction_ids = record.join(transaction_ids, lsuffix='_manual', rsuffix='_format')
     mask_is_na = transaction_ids['id.transaction_format'].isna()
+    transaction_ids['id.transaction_format'] = transaction_ids['id.transaction_format'].astype(str)
     transaction_ids.loc[mask_is_na, 'id.transaction_format'] = [str(uuid.uuid4()) for _ in range(mask_is_na.sum())]
 
     # fill NaN IDs
