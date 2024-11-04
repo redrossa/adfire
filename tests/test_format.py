@@ -1,6 +1,7 @@
 import json
 import os
 import uuid
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -17,7 +18,7 @@ pd.set_option('display.width', None)
 
 
 class Case:
-    cases_path = os.path.join('cases', 'format')
+    cases_path = Path(__file__).parent/'cases/format'
 
     @classmethod
     def find_cases(cls):
@@ -122,7 +123,7 @@ def test_limit_equals_cumsum_plus_available(positive_case):
     actual = format_record(positive_case.input)
     mask_has_limit = actual['balances.limit'].notna()
     mask_has_available = actual['balances.available'].notna()
-    filtered = actual[mask_has_limit & mask_has_available]
+    filtered = actual[mask_has_limit & mask_has_available].copy()
     filtered['_balances.cumsum'] = filtered.groupby('account')['amount'].cumsum()
     first_entries = filtered.groupby('account').first()
     mask_is_posted = first_entries['status'] == 'posted'

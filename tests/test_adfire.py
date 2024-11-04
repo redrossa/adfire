@@ -16,7 +16,7 @@ pd.set_option('display.width', None)
 
 
 class Case:
-    cases_path = Path('cases/adfire')
+    cases_path = Path(__file__).parent/'cases/adfire'
 
     @classmethod
     def find_cases(cls):
