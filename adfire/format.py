@@ -223,7 +223,3 @@ def hash_record(record: pd.DataFrame) -> pd.Series:
     filtered = filtered.set_index('id.transaction')
     hashed = pd.util.hash_pandas_object(filtered)
     return hashed
-
-
-def is_checksum_subset(a: pd.Series, b: pd.Series) -> bool:
-    return np.isin(a, b).all()

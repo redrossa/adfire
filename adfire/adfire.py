@@ -1,8 +1,9 @@
 from pathlib import Path
 
 from adfire.errors import ChecksumError
-from adfire.format import format_record, hash_record, is_checksum_subset, compile_records
+from adfire.format import format_record, hash_record, compile_records
 from adfire.io import read_record, write_record, read_checksum, write_checksum
+from adfire.utils import is_checksum_subset
 
 
 class Adfire:
