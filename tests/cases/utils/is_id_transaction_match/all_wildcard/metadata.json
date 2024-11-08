@@ -1,0 +1,5 @@
+{
+  "name": "All Wildcard",
+  "description": "All values in both series are NaNs",
+  "fails": false
+}

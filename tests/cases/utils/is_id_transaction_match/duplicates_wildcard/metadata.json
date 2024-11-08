@@ -1,0 +1,5 @@
+{
+  "name": "Duplicates Wildcard",
+  "description": "Contains a duplicated value and the correspondent as wildcard",
+  "fails": false
+}

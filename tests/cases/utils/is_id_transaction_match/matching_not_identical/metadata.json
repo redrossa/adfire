@@ -1,0 +1,5 @@
+{
+  "name": "Matching not Identical",
+  "description": "Matches pattern but not identical values",
+  "fails": false
+}
