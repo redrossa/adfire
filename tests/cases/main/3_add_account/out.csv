@@ -1,0 +1,37 @@
+id.transaction,date,description,entity,category,amount,worth,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
+db426a35-f499-43b8-a590-60a541ea78e9,2024-10-02,,Costco Gas,TRANSPORTATION_GAS,40.44,-40.44,posted,Prime Visa,8104,credit,credit card,2306.49,3693.51,6000.0
+c98f8fba-ad5a-4555-b6b7-1b9445a50384,2024-10-03,,Wealthfront Individual,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-902.94,902.94,posted,Prime Visa,8104,credit,credit card,1403.55,4596.45,6000.0
+a0cae364-031a-40ea-ac76-c8009031dd22,2024-10-06,,Bucee's,TRANSPORTATION_GAS,37.25,-37.25,posted,Prime Visa,8104,credit,credit card,1440.8,4559.2,6000.0
+13fdb525-fc37-413a-b45d-0cf54038b321,2024-10-09,Creatine,Amazon,MEDICAL_PHARMACIES_AND_SUPPLEMENTS,21.98,-21.98,posted,Prime Visa,8104,credit,credit card,1462.78,4537.22,6000.0
+8227a44c-166c-47e4-be2f-295a15d71b61,2024-10-09,TI-Nspire,Amazon,GENERAL_MERCHANDISE_ELECTRONICS,70.27,-70.27,posted,Prime Visa,8104,credit,credit card,1533.05,4466.95,6000.0
+32205e20-7b88-48f0-9499-0a69a89f677e,2024-10-10,,85 Bakery,FOOD_AND_DRINK_COFFEE,14.4,-14.4,posted,Chase Freedom Unlimited,6946,credit,credit card,76.81,1323.19,1400.0
+a0de0539-f938-4862-b7e1-a75848fbdf74,2024-10-13,Health,Amazon,MEDICAL_PHARMACIES_AND_SUPPLEMENTS,18.86,-18.86,posted,Prime Visa,8104,credit,credit card,1551.91,4448.09,6000.0
+3b200290-2970-494c-89f4-27dc562f261e,2024-10-14,Gallon Caps,Amazon,GENERAL_MERCHANDISE_ONLINE_MARKETPLACES,12.98,-12.98,posted,Prime Visa,8104,credit,credit card,1564.89,4435.11,6000.0
+37d49e83-4af6-464b-87dd-a7c5367ed558,2024-10-14,Body Wash,Amazon,PERSONAL_CARE_HAIR_AND_BEAUTY,15.12,-15.12,posted,Prime Visa,8104,credit,credit card,1580.01,4419.99,6000.0
+3efa8761-3ac7-4cc1-b4bf-5d2d6754dd6b,2024-10-15,,ChatGPT,GENERAL_SERVICES_OTHER_GENERAL_SERVICES,21.28,-21.28,posted,Chase Freedom Unlimited,6946,credit,credit card,98.09,1301.91,1400.0
+61f4050e-5ed8-46ac-bfee-7fdd0f7c3ace,2024-10-15,,Costco Gas,TRANSPORTATION_GAS,37.6,-37.6,posted,Prime Visa,8104,credit,credit card,1617.61,4382.39,6000.0
+414d7091-c570-4aef-8a2d-9f49d6c6639b,2024-10-16,iCloud,Apple,GENERAL_SERVICES_OTHER_GENERAL_SERVICES,9.99,-9.99,posted,Chase Freedom Unlimited,6946,credit,credit card,108.08,1291.92,1400.0
+591c9ddc-f2b5-40e2-be3c-d0888bc2dece,2024-10-17,iPhone Case,Amazon,GENERAL_MERCHANDISE_ONLINE_MARKETPLACES,66.0,-66.0,posted,Prime Visa,8104,credit,credit card,1683.61,4316.39,6000.0
+5cd90924-0b46-4198-9b1b-522353566336,2024-10-18,,Chase,BANK_FEES_OTHER_BANK_FEES,-69.54,69.54,posted,Prime Visa,8104,credit,credit card,1614.07,4385.93,6000.0
+0787906b-6cbf-47c0-a2b0-187a072e0582,2024-10-18,Water,City of Sugar Land,RENT_AND_UTILITIES_WATER,123.95,-123.95,posted,Prime Visa,8104,credit,credit card,1738.02,4261.98,6000.0
+deceb9ef-d966-4728-81b3-6a80787df3da,2024-10-20,Toothpaste,Amazon,PERSONAL_CARE_HAIR_AND_BEAUTY,1.97,-1.97,posted,Prime Visa,8104,credit,credit card,1739.99,4260.01,6000.0
+ca25442c-3efa-4a0b-a077-6a8e76378a49,2024-10-20,Knee Braces,Amazon,MEDICAL_OTHER_MEDICAL,26.99,-26.99,posted,Prime Visa,8104,credit,credit card,1766.98,4233.02,6000.0
+0111ade5-eae8-43b3-98c9-a15f1005e974,2024-10-21,iPhone Case,Amazon,GENERAL_MERCHANDISE_ONLINE_MARKETPLACES,-24.31,24.31,posted,Prime Visa,8104,credit,credit card,1742.67,4257.33,6000.0
+3c6320a9-6b80-4a93-973f-c24fa0e43894,2024-10-21,USB-C Cables,Amazon,GENERAL_MERCHANDISE_ELECTRONICS,8.27,-8.27,posted,Prime Visa,8104,credit,credit card,1750.94,4249.06,6000.0
+5c04cfae-ebb8-42de-a645-ab37a0b82da3,2024-10-21,,Whole Foods,FOOD_AND_DRINK_GROCERIES,22.5,-22.5,posted,Prime Visa,8104,credit,credit card,1773.44,4226.56,6000.0
+21edc46c-1d84-4a1a-8d4c-95579ebe8641,2024-10-22,,Kroger,FOOD_AND_DRINK_GROCERIES,11.49,-11.49,posted,Prime Visa,8104,credit,credit card,1784.93,4215.07,6000.0
+136ed620-620a-4bc2-8c74-dff291103950,2024-10-24,,Spotify,ENTERTAINMENT_MUSIC_AND_AUDIO,6.48,-6.48,posted,Chase Freedom Unlimited,6946,credit,credit card,114.56,1285.44,1400.0
+c3a835c8-aacf-4e5d-b460-05137bdb4bde,2024-10-25,Pool Chlorine,Amazon,HOME_IMPROVEMENT_REPAIR_AND_MAINTENANCE,43.29,-43.29,posted,Prime Visa,8104,credit,credit card,1828.22,4171.78,6000.0
+0f26a296-0a8e-44c6-ae43-67bbfa22bafb,2024-10-25,Jerseys,Amazon,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,81.17,-81.17,posted,Prime Visa,8104,credit,credit card,1909.39,4090.61,6000.0
+8ccd99ce-9168-4b3e-8bfc-5c27ec0e364d,2024-10-25,Pool Chlorine,Amazon,HOME_IMPROVEMENT_REPAIR_AND_MAINTENANCE,110.4,-110.4,posted,Prime Visa,8104,credit,credit card,2019.79,3980.21,6000.0
+70ca41cc-18bf-4131-a7d1-2dea4f4cdce1,2024-10-26,Pool Ramp,Amazon,HOME_IMPROVEMENT_REPAIR_AND_MAINTENANCE,11.9,-11.9,posted,Prime Visa,8104,credit,credit card,2031.69,3968.31,6000.0
+14422960-8048-479f-8b29-9eaf274f3ac8,2024-10-27,,Costco Gas,TRANSPORTATION_GAS,35.29,-35.29,posted,Prime Visa,8104,credit,credit card,2066.98,3933.02,6000.0
+4a7c3b95-bdb3-431c-9f28-409380f1e976,2024-10-28,,Wealthfront Individual,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-62.41,62.41,posted,Chase Freedom Unlimited,6946,credit,credit card,52.15,1347.85,1400.0
+d3c78742-7271-443a-a149-7dddc673172e,2024-10-28,Pre-Workout,Amazon,MEDICAL_PHARMACIES_AND_SUPPLEMENTS,30.82,-30.82,posted,Prime Visa,8104,credit,credit card,2097.8,3902.2,6000.0
+22e34ca1-19f2-4e39-a02b-111e93d8571f,2024-10-29,Thermometer,Amazon,GENERAL_MERCHANDISE_ELECTRONICS,21.64,-21.64,posted,Prime Visa,8104,credit,credit card,2119.44,3880.56,6000.0
+ebd30137-3ad6-45c6-b331-bf70875252d5,2024-11-01,Knee Braces,Amazon,MEDICAL_OTHER_MEDICAL,-26.99,26.99,posted,Prime Visa,8104,credit,credit card,2092.45,3907.55,6000.0
+67756e9a-1093-49eb-9b70-ee2b59dda5e4,2024-11-01,Jersey,Amazon,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,-21.64,21.64,posted,Prime Visa,8104,credit,credit card,2070.81,3929.19,6000.0
+4467bf90-1a90-4883-a9d4-fb14fdcdcc21,2024-11-03,,Wealthfront Individual,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-1261.07,1261.07,posted,Prime Visa,8104,credit,credit card,809.74,5190.26,6000.0
+0c8fd3f5-af09-4c63-8529-098fbbcda062,2024-11-06,Nadin Minecraft Realms,Apple,ENTERTAINMENT_VIDEO_GAMES,8.65,-8.65,posted,Chase Freedom Unlimited,6946,credit,credit card,60.8,1339.2,1400.0
+799da875-1e31-4de9-9b93-c6999b854c69,2024-11-07,,Costco Gas,TRANSPORTATION_GAS,37.96,-37.96,posted,Prime Visa,8104,credit,credit card,847.7,5152.3,6000.0
+63438ecd-3562-4c9a-84bf-b47407c272d4,2024-11-08,TI-Nspire,Amazon,GENERAL_MERCHANDISE_ELECTRONICS,56.33,-56.33,pending,Prime Visa,8104,credit,credit card,847.7,5095.97,6000.0

@@ -1,0 +1,6 @@
+{
+  "name": "3. Add Account",
+  "description": "Adds a new account",
+  "args": "adfire -o out.csv 'chase freedom unlimited.csv' 'prime visa.csv'",
+  "fails": false
+}
