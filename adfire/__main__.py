@@ -4,7 +4,7 @@ import importlib
 from adfire.adfire import Adfire
 
 
-def main():
+def parse_args(args: list[str] | None = None):
     parser = argparse.ArgumentParser(description='Adfire CLI')
     parser.add_argument(
         'paths',
@@ -26,8 +26,11 @@ def main():
         version=f'%(prog)s {importlib.metadata.version("adfire")}',
     )
 
-    args = parser.parse_args()
+    return parser.parse_args(args)
 
+
+def main(args: list[str] | None = None):
+    args = parse_args(args)
     adfire = Adfire(*args.paths, checksum_path=args.checksum)
     adfire.format(args.out)
 

@@ -1,0 +1,7 @@
+id.transaction,date,description,entity,category,amount,worth,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
+c16634fa-7091-4890-9dfe-bc04b7df47a5,2024-10-10,,85 Bakery,FOOD_AND_DRINK_COFFEE,14.4,-14.4,posted,Chase Freedom Unlimited,6946,credit,credit card,14.4,1385.6,1400.0
+f24acbfa-e260-4e82-860c-1acdc83cbf77,2024-10-15,,ChatGPT,GENERAL_SERVICES_OTHER_GENERAL_SERVICES,21.28,-21.28,posted,Chase Freedom Unlimited,6946,credit,credit card,35.68,1364.32,1400.0
+75dedb02-afd5-4d4e-9777-63900add9a25,2024-10-16,iCloud,Apple,GENERAL_SERVICES_OTHER_GENERAL_SERVICES,9.99,-9.99,posted,Chase Freedom Unlimited,6946,credit,credit card,45.67,1354.33,1400.0
+2f62914d-693f-4daa-b107-8cf294a7581a,2024-10-24,,Spotify,ENTERTAINMENT_MUSIC_AND_AUDIO,6.48,-6.48,posted,Chase Freedom Unlimited,6946,credit,credit card,52.15,1347.85,1400.0
+d1e92239-1246-42ea-a4ea-001fcd003b91,2024-10-28,,Wealthfront Individual,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-62.41,62.41,posted,Chase Freedom Unlimited,6946,credit,credit card,-10.26,1410.26,1400.0
+4bf716b3-5294-40fb-b8b8-230e44a96840,2024-11-06,Nadin Minecraft Realms,Apple,ENTERTAINMENT_VIDEO_GAMES,8.65,-8.65,posted,Chase Freedom Unlimited,6946,credit,credit card,-1.61,1401.61,1400.0
