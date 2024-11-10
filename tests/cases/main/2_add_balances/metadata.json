@@ -1,0 +1,6 @@
+{
+  "name": "2. Add Balances",
+  "description": "Adds latest balances",
+  "args": "adfire -o out.csv 'chase freedom unlimited.csv'",
+  "fails": false
+}

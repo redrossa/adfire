@@ -1,5 +1,5 @@
 {
-  "name": "New",
+  "name": "1. New",
   "description": "Starting a new portfolio with one account, no entered balances, and no checksums",
   "args": "adfire -o out.csv 'chase freedom unlimited.csv'",
   "fails": false
