@@ -1,4 +1,4 @@
-import uuid
+from collections.abc import Callable
 
 import numpy as np
 import pandas as pd
@@ -21,6 +21,8 @@ schema = pa.DataFrameSchema({
     'balances.current': pa.Column(float, nullable=True),
     'balances.available': pa.Column(float, nullable=True), # ideally nullable only if limit is null
     'balances.limit': pa.Column(float, nullable=True),
+    'source': pa.Column(str, nullable=True),
+    'hash': pa.Column(str, nullable=True),
 }, coerce=True, strict='filter', add_missing_columns=True)
 
 
@@ -122,7 +124,7 @@ def _fill_available_balances(record: pd.DataFrame) -> pd.DataFrame:
     return record
 
 
-def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
+def _identify_transfers(record: pd.DataFrame, generate_id: Callable) -> pd.DataFrame:
     # add helper columns
     mask_entity_is_in_account = record['entity'].isin(record['account'])
     potential_transfers = record[mask_entity_is_in_account].copy()
@@ -151,7 +153,7 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     paired = paired.drop_duplicates(subset=['_id_close'])
 
     # create unique transaction IDs for the paired transfers
-    paired['id.transaction'] = [str(uuid.uuid4()) for _ in range(len(paired.index))]
+    paired['id.transaction'] = [generate_id() for _ in range(len(paired.index))]
 
     # transform shape
     transaction_ids = pd.melt(paired, id_vars=['id.transaction'], value_vars=['_id_open', '_id_close'], var_name='source', value_name='index')
@@ -159,7 +161,7 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     transaction_ids = record.join(transaction_ids, lsuffix='_manual', rsuffix='_format')
     mask_is_na = transaction_ids['id.transaction_format'].isna()
     transaction_ids['id.transaction_format'] = transaction_ids['id.transaction_format'].astype(str)
-    transaction_ids.loc[mask_is_na, 'id.transaction_format'] = [str(uuid.uuid4()) for _ in range(mask_is_na.sum())]
+    transaction_ids.loc[mask_is_na, 'id.transaction_format'] = [generate_id() for _ in range(mask_is_na.sum())]
 
     # fill NaN IDs
     transaction_ids['id'] = transaction_ids.index
@@ -187,24 +189,7 @@ def _identify_transfers(record: pd.DataFrame) -> pd.DataFrame:
     return record
 
 
-def compile_records(records: list[pd.DataFrame]) -> pd.DataFrame:
-    return pd.concat(records, ignore_index=True)
-
-
-def format_record(record: pd.DataFrame, decimals = 2) -> pd.DataFrame:
-    return (
-        record.pipe(_format_types)
-        .pipe(add_col_worth)
-        .pipe(_sort_record)
-        .pipe(_fill_current_balances)
-        .pipe(_fill_available_balances)
-        .pipe(_identify_transfers)
-        .pipe(_format_types)
-        .round(decimals)
-    )
-
-
-def hash_record(record: pd.DataFrame) -> pd.Series:
+def _hash_record(record: pd.DataFrame) -> pd.DataFrame:
     filtered = record[[
         'id.transaction',
         'date',
@@ -221,5 +206,26 @@ def hash_record(record: pd.DataFrame) -> pd.Series:
     mask_is_posted = filtered['status'] == 'posted'
     filtered = filtered[mask_is_posted]
     filtered = filtered.set_index('id.transaction')
-    hashed = pd.util.hash_pandas_object(filtered)
-    return hashed
+    record = record.set_index('id.transaction')
+    new_hash = pd.util.hash_pandas_object(filtered).astype(str)
+    old_hash = record['hash'].dropna()
+    hash_valid = np.isin(old_hash, new_hash).all()
+    if not hash_valid:
+        raise ValueError('Integrity check failed')
+    record['hash'] = new_hash
+    record = record.reset_index()
+    return record
+
+
+def format_record(record: pd.DataFrame, generate_id: Callable, decimals = 2) -> pd.DataFrame:
+    return (
+        record.pipe(_format_types)
+        .pipe(add_col_worth)
+        .pipe(_sort_record)
+        .pipe(_fill_current_balances)
+        .pipe(_fill_available_balances)
+        .pipe(_identify_transfers, generate_id=generate_id)
+        .pipe(_hash_record)
+        .pipe(_format_types)
+        .round(decimals)
+    )

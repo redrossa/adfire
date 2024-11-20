@@ -12,15 +12,6 @@ def parse_args(args: list[str] | None = None):
         help='list of input record files, space separated'
     )
     parser.add_argument(
-        '-c', '--checksum',
-        help='input checksum file'
-    )
-    parser.add_argument(
-        '-o', '--out',
-        help='output record files',
-        required=True
-    )
-    parser.add_argument(
         '--version',
         action='version',
         version=f'%(prog)s {importlib.metadata.version("adfire")}',
@@ -31,8 +22,8 @@ def parse_args(args: list[str] | None = None):
 
 def main(args: list[str] | None = None):
     args = parse_args(args)
-    adfire = Adfire(*args.paths, checksum_path=args.checksum)
-    adfire.format(args.out)
+    adfire = Adfire(*args.paths)
+    adfire.format()
 
 
 if __name__ == '__main__':
