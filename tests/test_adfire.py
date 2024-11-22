@@ -1,51 +1,24 @@
-import json
 import os
+import shutil
 from pathlib import Path
-from types import SimpleNamespace
 
 import pandas as pd
-from pandas import testing as tm
 import pytest
 
 from adfire import Adfire
-from adfire.errors import ChecksumError
-from tests.utils import open_or_none
+from adfire.format import schema
+from adfire.io import read_record
+from utils import BaseCase, assert_record_equal, assert_record_format
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
 
 
-class Case:
-    cases_path = Path(__file__).parent/'cases/adfire'
-
-    @classmethod
-    def find_cases(cls):
-        return [cls.cases_path/x for x in os.listdir(cls.cases_path) if os.path.isfile(cls.cases_path/x/'metadata.json')]
-
-    @classmethod
-    def load_cases(cls):
-        return [Case(x) for x in cls.find_cases()]
-
-    def __init__(self, path):
-        self.path = path
-
-        checksum_path = path/'checksum.pkl'
-        self.checksum_path = checksum_path if checksum_path.is_file() else None
-
-        with open_or_none(path/'metadata.json', 'r') as (f, err):
-            self.metadata = json.load(f, object_hook=lambda d: SimpleNamespace(**d)) if not err else None
-
-        input_path = path/'input.csv'
-        self.input_paths = [input_path] if input_path.is_file() else [path/x for x in self.metadata.inputs]
-
-        with open_or_none(path/'output.csv', 'r') as (f, err):
-            self.expected_output = None if err else pd.read_csv(f)
-
-        with open_or_none(path/'output.pkl', 'rb') as (f, err):
-            self.expected_checksum = None if err else pd.read_pickle(f)
+class Case(BaseCase):
+    pass
 
 
-all_cases = Case.load_cases()
+all_cases = Case.load_cases(Path(__file__).parent/'cases/adfire')
 
 
 @pytest.fixture(params=all_cases, ids=lambda x: x.metadata.name)
@@ -63,21 +36,35 @@ def negative_case(request):
     return request.param
 
 
-def test_init(positive_case):
-    Adfire(*positive_case.input_paths, checksum_path=positive_case.checksum_path)
+def test_init(positive_case, tmp_path):
+    test_path = tmp_path / f'{positive_case.metadata.name}'
+    shutil.copytree(positive_case.path, test_path)
+    os.chdir(test_path)
+
+    Adfire(*(test_path/x for x in positive_case.metadata.inputs))
 
 
-def test_init_fails(negative_case):
-    with pytest.raises(ChecksumError):
-        Adfire(*negative_case.input_paths, checksum_path=negative_case.checksum_path)
+def test_init_fails(negative_case, tmp_path):
+    test_path = tmp_path / f'{negative_case.metadata.name}'
+    shutil.copytree(negative_case.path, test_path)
+    os.chdir(test_path)
+
+    with pytest.raises(Exception, match=negative_case.metadata.fails):
+        Adfire(*(test_path/x for x in negative_case.metadata.inputs))
 
 
 def test_format(positive_case, tmp_path):
-    adfire = Adfire(*positive_case.input_paths, checksum_path=positive_case.checksum_path)
-    out_path = tmp_path/'output.csv'
-    adfire.format(out_path)
-    actual_output = pd.read_csv(out_path)
-    tm.assert_frame_equal(actual_output, positive_case.expected_output)
-    out_pkl_path = tmp_path/'output.pkl'
-    actual_checksum = pd.read_pickle(out_pkl_path)
-    tm.assert_series_equal(actual_checksum, positive_case.expected_checksum)
+    test_path = tmp_path / f'{positive_case.metadata.name}'
+    shutil.copytree(positive_case.path, test_path)
+    os.chdir(test_path)
+
+    adfire = Adfire(*(test_path / x for x in positive_case.metadata.inputs))
+    adfire.format()
+
+    actual = [schema(read_record(test_path/x)) for x in positive_case.metadata.inputs]
+    expected = [schema(read_record(Path(test_path/x).with_suffix('.out.csv'))) for x in positive_case.metadata.inputs]
+
+    for (a, e) in zip(actual, expected):
+        assert_record_format(a)
+        assert_record_format(e)
+        assert_record_equal(a, e)
