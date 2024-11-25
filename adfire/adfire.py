@@ -9,7 +9,11 @@ from adfire.io import read_record, write_record
 
 class Adfire:
     def __init__(self, *paths: str, generate_id: Callable = lambda: str(uuid.uuid4())):
-        records = [read_record(p) for p in paths]
+        records = []
+        for path in paths:
+            df = read_record(path)
+            df['source'] = path
+            records.append(df)
         compiled = pd.concat(records, ignore_index=True)
         self.formatted = format_record(compiled, generate_id)
 

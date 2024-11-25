@@ -1,0 +1,10 @@
+{
+  "name": "Add Account",
+  "description": "Add a separate file recording another account",
+  "extends": "New with Balances",
+  "fails": false,
+  "inputs": [
+    "chase freedom unlimited.csv",
+    "prime visa.csv"
+  ]
+}

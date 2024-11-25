@@ -1,0 +1,31 @@
+date,description,entity,category,amount,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
+2024-10-02,,Costco Gas,TRANSPORTATION_GAS,40.44,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-03,,Wealthfront Individual,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-902.94,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-06,,Bucee's,TRANSPORTATION_GAS,37.25,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-09,TI-Nspire,Amazon,GENERAL_MERCHANDISE_ELECTRONICS,70.27,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-09,Creatine,Amazon,MEDICAL_PHARMACIES_AND_SUPPLEMENTS,21.98,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-13,Health,Amazon,MEDICAL_PHARMACIES_AND_SUPPLEMENTS,18.86,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-14,Body Wash,Amazon,PERSONAL_CARE_HAIR_AND_BEAUTY,15.12,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-14,Gallon Caps,Amazon,GENERAL_MERCHANDISE_ONLINE_MARKETPLACES,12.98,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-15,,Costco Gas,TRANSPORTATION_GAS,37.60,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-17,iPhone Case,Amazon,GENERAL_MERCHANDISE_ONLINE_MARKETPLACES,66.00,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-18,,Chase,BANK_FEES_OTHER_BANK_FEES,-69.54,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-18,Water,City of Sugar Land,RENT_AND_UTILITIES_WATER,123.95,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-20,Toothpaste,Amazon,PERSONAL_CARE_HAIR_AND_BEAUTY,1.97,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-20,Knee Braces,Amazon,MEDICAL_OTHER_MEDICAL,26.99,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-21,USB-C Cables,Amazon,GENERAL_MERCHANDISE_ELECTRONICS,8.27,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-21,,Whole Foods,FOOD_AND_DRINK_GROCERIES,22.50,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-21,iPhone Case,Amazon,GENERAL_MERCHANDISE_ONLINE_MARKETPLACES,-24.31,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-22,,Kroger,FOOD_AND_DRINK_GROCERIES,11.49,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-25,Pool Chlorine,Amazon,HOME_IMPROVEMENT_REPAIR_AND_MAINTENANCE,110.40,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-25,Pool Chlorine,Amazon,HOME_IMPROVEMENT_REPAIR_AND_MAINTENANCE,43.29,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-25,Jerseys,Amazon,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,81.17,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-26,Pool Ramp,Amazon,HOME_IMPROVEMENT_REPAIR_AND_MAINTENANCE,11.90,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-27,,Costco Gas,TRANSPORTATION_GAS,35.29,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-28,Pre-Workout,Amazon,MEDICAL_PHARMACIES_AND_SUPPLEMENTS,30.82,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-10-29,Thermometer,Amazon,GENERAL_MERCHANDISE_ELECTRONICS,21.64,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-11-01,Jersey,Amazon,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,-21.64,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-11-01,Knee Braces,Amazon,MEDICAL_OTHER_MEDICAL,-26.99,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-11-03,,Wealthfront Individual,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,-1261.07,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-11-07,,Costco Gas,TRANSPORTATION_GAS,37.96,posted,Prime Visa,8104,credit,credit card,,,6000
+2024-11-08,TI-Nspire,Amazon,GENERAL_MERCHANDISE_ELECTRONICS,56.33,pending,Prime Visa,8104,credit,credit card,847.70,5095.97,6000

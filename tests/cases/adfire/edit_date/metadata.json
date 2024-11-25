@@ -1,0 +1,10 @@
+{
+  "name": "Edit date",
+  "description": "Editing date, which is a fixed value of an entry's hash, is forbidden",
+  "extends": "Add Account",
+  "fails": "Integrity check failed",
+  "inputs": [
+    "chase freedom unlimited.csv",
+    "prime visa.csv"
+  ]
+}

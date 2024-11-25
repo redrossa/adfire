@@ -26,17 +26,16 @@ schema = pa.DataFrameSchema({
 }, coerce=True, strict='filter', add_missing_columns=True)
 
 
-def add_col_worth(record: pd.DataFrame) -> pd.DataFrame:
-    record['worth'] = np.where(record['type'] == 'credit', -record['amount'], record['amount'])
-    return record
-
-
 def _format_types(record: pd.DataFrame) -> pd.DataFrame:
     return schema.validate(record)
 
 
+def _add_col_worth(record: pd.DataFrame) -> pd.DataFrame:
+    record['worth'] = np.where(record['type'] == 'credit', -record['amount'], record['amount'])
+    return record
+
+
 def _sort_record(record: pd.DataFrame) -> pd.DataFrame:
-    record = add_col_worth(record)
     return record.sort_values(by=['date', 'worth'], ascending=[True, False], ignore_index=True)
 
 
@@ -131,7 +130,7 @@ def _identify_transfers(record: pd.DataFrame, generate_id: Callable) -> pd.DataF
     potential_transfers['_worth.absolute'] = potential_transfers['worth'].abs()
     potential_transfers['_from'] = np.where(potential_transfers['worth'] < 0, potential_transfers['account'], potential_transfers['entity'])
     potential_transfers['_to'] = np.where(potential_transfers['worth'] < 0, potential_transfers['entity'], potential_transfers['account'])
-    potential_transfers['_is_source'] = potential_transfers['worth'] < 0
+    potential_transfers['_is_debit'] = potential_transfers['worth'] < 0
     potential_transfers['_id'] = potential_transfers.index
 
     # merge the dataframe with itself to pair rows
@@ -145,10 +144,10 @@ def _identify_transfers(record: pd.DataFrame, generate_id: Callable) -> pd.DataF
     # filter unwanted
     mask_self_match = paired['_id_open'] == paired['_id_close']
     mask_reverse = paired['_id_open'] > paired['_id_close']
-    mask_equal_source = paired['_is_source_open'] == paired['_is_source_close']
+    mask_is_debit = paired['_is_debit_open'] == paired['_is_debit_close']
     mask_within_a_week = (paired['date_close'] - paired['date_open']) < pd.Timedelta(days=7)
     mask_zero_sum_worth = paired['worth_open'] + paired['worth_close'] == 0
-    paired = paired[~mask_self_match & ~mask_reverse & ~mask_equal_source & mask_within_a_week & mask_zero_sum_worth]
+    paired = paired[~mask_self_match & ~mask_reverse & ~mask_is_debit & mask_within_a_week & mask_zero_sum_worth]
     paired = paired.drop_duplicates(subset=['_id_open'])
     paired = paired.drop_duplicates(subset=['_id_close'])
 
@@ -156,7 +155,7 @@ def _identify_transfers(record: pd.DataFrame, generate_id: Callable) -> pd.DataF
     paired['id.transaction'] = [generate_id() for _ in range(len(paired.index))]
 
     # transform shape
-    transaction_ids = pd.melt(paired, id_vars=['id.transaction'], value_vars=['_id_open', '_id_close'], var_name='source', value_name='index')
+    transaction_ids = pd.melt(paired, id_vars=['id.transaction'], value_vars=['_id_open', '_id_close'], value_name='index')
     transaction_ids = transaction_ids.set_index('index')
     transaction_ids = record.join(transaction_ids, lsuffix='_manual', rsuffix='_format')
     mask_is_na = transaction_ids['id.transaction_format'].isna()
@@ -209,9 +208,12 @@ def _hash_record(record: pd.DataFrame) -> pd.DataFrame:
     record = record.set_index('id.transaction')
     new_hash = pd.util.hash_pandas_object(filtered).astype(str)
     old_hash = record['hash'].dropna()
+
+    # validate integrity by comparing new and old hashes
     hash_valid = np.isin(old_hash, new_hash).all()
     if not hash_valid:
         raise ValueError('Integrity check failed')
+
     record['hash'] = new_hash
     record = record.reset_index()
     return record
@@ -220,7 +222,7 @@ def _hash_record(record: pd.DataFrame) -> pd.DataFrame:
 def format_record(record: pd.DataFrame, generate_id: Callable, decimals = 2) -> pd.DataFrame:
     return (
         record.pipe(_format_types)
-        .pipe(add_col_worth)
+        .pipe(_add_col_worth)
         .pipe(_sort_record)
         .pipe(_fill_current_balances)
         .pipe(_fill_available_balances)

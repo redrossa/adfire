@@ -3,7 +3,6 @@ import pandas as pd
 
 def read_record(path) -> pd.DataFrame:
     df = pd.read_csv(path, dtype=str)
-    df['source'] = path
     return df
 
 

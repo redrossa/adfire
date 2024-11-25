@@ -1,0 +1,8 @@
+{
+  "name": "New with Balances",
+  "description": "Starting a new portfolio with one account and entered balances",
+  "fails": false,
+  "inputs": [
+    "chase freedom unlimited.csv"
+  ]
+}

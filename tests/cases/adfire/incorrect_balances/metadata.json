@@ -1,0 +1,9 @@
+{
+  "name": "Incorrect Balances",
+  "description": "Starting a new portfolio with one account and incorrectly entered balances",
+  "extends": "New with Balances",
+  "fails": "Series are different",
+  "inputs": [
+    "chase freedom unlimited.csv"
+  ]
+}

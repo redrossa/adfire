@@ -9,5 +9,6 @@ def is_id_transaction_match(a: pd.Series, b: pd.Series) -> bool:
         df.groupby(['b', 'a']).size().groupby('b').size()
     ]) == 1).all()
 
+
 def is_checksum_subset(a: pd.Series, b: pd.Series) -> bool:
     return np.isin(a, b).all()
