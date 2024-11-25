@@ -5,10 +5,10 @@ import pytest
 
 from adfire.io import read_checksum, read_record
 from adfire.utils import is_checksum_subset, is_id_transaction_match
-from utils import BaseCase, open_or_none
+from utils import Case, open_or_none
 
 
-class IsIdTransactionMatchCase(BaseCase):
+class IsIdTransactionMatchCase(Case):
     def __init__(self, path):
         super().__init__(path)
 
@@ -31,7 +31,7 @@ def test_is_id_transaction_match(is_id_transaction_match_case):
     assert is_id_transaction_match(is_id_transaction_match_case.a, is_id_transaction_match_case.b) != is_id_transaction_match_case.metadata.fails
 
 
-class IsChecksumSubsetCase(BaseCase):
+class IsChecksumSubsetCase(Case):
     def __init__(self, path):
         super().__init__(path)
 

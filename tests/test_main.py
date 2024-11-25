@@ -6,11 +6,10 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
-from pandas import testing as tm
 
 from adfire.__main__ import main, parse_args
-from adfire.format import _format_types, hash_record
-from adfire.io import read_record, read_checksum
+from adfire.format import _format_types
+from adfire.io import read_record
 from utils import open_or_none, assert_record_equal
 
 
@@ -33,7 +32,7 @@ class Case:
             self.metadata = json.load(f, object_hook=lambda d: SimpleNamespace(**d)) if not err else None
 
         with open_or_none(path / 'out.csv', 'r') as (f, err):
-            self.out_record = _format_types(read_record(f)) if not err else None
+            self.out_record = _format_types(read_record(f.name)) if not err else None
 
 
 all_cases = Case.load_cases()
@@ -62,10 +61,6 @@ def test_positive(positive_case, tmp_path):
     parsed = parse_args(args)
     main(args)
 
-    actual_record = _format_types(read_record(parsed.out))
-    assert_record_equal(actual_record, positive_case.out_record)
-
-    checksum_path = Path(parsed.out).with_suffix('.pkl')
-    actual_checksum = read_checksum(checksum_path)
-    expected_checksum = hash_record(actual_record)
-    tm.assert_series_equal(actual_checksum, expected_checksum)
+    for path in parsed.paths:
+        actual_record = _format_types(read_record(path))
+        assert_record_equal(actual_record, positive_case.out_record)
