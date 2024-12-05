@@ -1,35 +1,37 @@
 import argparse
 import importlib
 
-from adfire.adfire import Adfire
+from adfire.portfolio import Portfolio
 
 
 def main():
     parser = argparse.ArgumentParser(description='Adfire CLI')
     parser.add_argument(
-        'paths',
-        nargs='+',
-        help='list of input record files, space separated'
+        'mode',
+        help='command modes',
+        choices=['init', 'lint', 'format']
     )
     parser.add_argument(
-        '-c', '--checksum',
-        help='input checksum file'
+        'path',
+        help='portfolio path, default to current directory',
+        default='.',
+        nargs='?'
     )
     parser.add_argument(
-        '-o', '--out',
-        help='output record files',
-        required=True
-    )
-    parser.add_argument(
-        '--version',
+        '-v', '--version',
         action='version',
-        version=f'%(prog)s {importlib.metadata.version("adfire")}',
+        version=f'%(prog)s {importlib.metadata.version("adfire")}'
     )
 
     args = parser.parse_args()
 
-    adfire = Adfire(*args.paths, checksum_path=args.checksum)
-    adfire.format(args.out)
+    portfolio = Portfolio(args.path)
+    if args.mode == 'init':
+        portfolio.create()
+    if args.mode == 'lint':
+        portfolio.lint()
+    elif args.mode == 'format':
+        portfolio.format()
 
 
 if __name__ == '__main__':
