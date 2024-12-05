@@ -37,13 +37,12 @@ class Case:
 
     @classmethod
     def match_error(cls, error_str):
-        match error_str:
-            case 'SchemaError':
-                return SchemaError
-            case 'AssertionError':
-                return AssertionError
-            case _:
-                raise ValueError
+        if error_str == 'SchemaError':
+            return SchemaError
+        elif error_str == 'AssertionError':
+            return AssertionError
+        else:
+            raise ValueError
 
     def __init__(self, path):
         with open(os.path.join(path, 'metadata.json'), 'r') as f:
