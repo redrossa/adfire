@@ -1,6 +1,7 @@
 import os
 import shutil
 import sys
+from pathlib import Path
 
 import pytest
 
@@ -38,4 +39,11 @@ class TestModes:
         sys.argv = ['adfire', 'init', str(tmp_path)]
         with pytest.raises(FileExistsError, match='portfolio.json already exists'):
             main()
+
+    def test_init_default_path(self, tmp_path, sample_path):
+        os.chdir(tmp_path)
+
+        sys.argv = ['adfire', 'init']
+        main()
+        assert dir_is_equal(sample_path, Path.cwd())
 
