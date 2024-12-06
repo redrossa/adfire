@@ -1,8 +1,11 @@
+import os
+import shutil
 import sys
 
 import pytest
 
 from adfire.__main__ import main
+from tests.utils import dir_is_equal
 
 
 @pytest.mark.parametrize('option', [
@@ -16,14 +19,23 @@ def test_option_exists(option):
 
 
 class TestModes:
-    modes = ['init', 'lint', 'format']
-
-    @pytest.mark.parametrize('mode', modes)
-    def test_mode_exists(self, mode):
-        sys.argv = ['adfire', mode]
+    def test_init_on_empty_dir(self, tmp_path, sample_path):
+        sys.argv = ['adfire', 'init', str(tmp_path)]
         main()
+        assert dir_is_equal(sample_path, tmp_path)
 
-    def test_mode_not_exists(self):
-        sys.argv = ['adfire', 'idk']
-        with pytest.raises(SystemExit, match='2'):
+    def test_init_on_uninitialized_portfolio(self, tmp_path, sample_path):
+        shutil.copytree(sample_path, tmp_path, dirs_exist_ok=True)
+        os.remove(tmp_path / 'portfolio.json')
+
+        sys.argv = ['adfire', 'init', str(tmp_path)]
+        main()
+        assert dir_is_equal(sample_path, tmp_path)
+
+    def test_init_on_initialized_portfolio(self, tmp_path, sample_path):
+        shutil.copytree(sample_path, tmp_path, dirs_exist_ok=True)
+
+        sys.argv = ['adfire', 'init', str(tmp_path)]
+        with pytest.raises(FileExistsError, match='portfolio.json already exists'):
             main()
+
