@@ -84,6 +84,8 @@ class Portfolio:
                 dirs_exist_ok=True  # because we already know it's empty
             )
 
+        return cls(path, id_gen_func)
+
     def lint(self):
         """
         Validates entries in this portfolio. If there are invalid entries,
