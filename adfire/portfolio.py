@@ -39,8 +39,11 @@ def _read_entry_files_from_dir(path: Path) -> DataFrame[MergedInputEntrySchema]:
             df = read_record(item)
             records.append((item, df))
 
-    df = pd.concat([df for name, df in records], keys=[name for name, df in records], names=['path', 'entry_id'])
-    df = MergedInputEntrySchema.validate(df)
+    if records:
+        df = pd.concat([df for name, df in records], keys=[name for name, df in records], names=['path', 'entry_id'])
+        df = MergedInputEntrySchema.validate(df)
+    else:
+        df = None
 
     return df
 
