@@ -1,6 +1,0 @@
-{
-  "name": "Clean With Unpaired Transfers",
-  "description": "Clean with unpaired potential transfer entries more than 7 days apart",
-  "input": "input.csv",
-  "expected": "expected.csv"
-}

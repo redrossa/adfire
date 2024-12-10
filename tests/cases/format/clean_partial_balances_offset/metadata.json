@@ -1,6 +1,0 @@
-{
-  "name": "Clean with Offset Partial Balances",
-  "description": "Clean but balances are partially filled with offset",
-  "input": "input.csv",
-  "expected": "expected.csv"
-}

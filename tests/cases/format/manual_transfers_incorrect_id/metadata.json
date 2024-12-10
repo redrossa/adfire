@@ -1,6 +1,0 @@
-{
-  "name": "Manual Transfers Incorrect ID",
-  "description": "Manually filled transfer IDs incorrect",
-  "input": "input.csv",
-  "error": "AssertionError"
-}

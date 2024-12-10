@@ -1,6 +1,0 @@
-{
-  "name": "Clean With Auto Transfers",
-  "description": "Clean with no manually filled transfer IDs",
-  "input": "input.csv",
-  "expected": "expected.csv"
-}

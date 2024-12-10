@@ -1,5 +1,0 @@
-{
-  "name": "Remove Pending",
-  "description": "Clean input with balances partially filled, but a pending entry is removed",
-  "fails": false
-}

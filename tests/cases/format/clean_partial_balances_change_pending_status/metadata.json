@@ -1,6 +1,0 @@
-{
-  "name": "Clean Partial Balances Change Pending Status",
-  "description": "Clean partial balances but a pending entry is changed to posted",
-  "input": "input.csv",
-  "expected": "expected.csv"
-}

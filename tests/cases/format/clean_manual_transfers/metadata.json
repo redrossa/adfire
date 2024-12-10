@@ -1,6 +1,0 @@
-{
-  "name": "Clean With Manual Transfers",
-  "description": "Clean with manually filled transaction IDs to group transfers",
-  "input": "input.csv",
-  "expected": "expected.csv"
-}
