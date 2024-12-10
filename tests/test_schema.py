@@ -18,20 +18,20 @@ class TestInputEntrySchema:
     def test_on_minimum_user_input(self):
         expected = pd.DataFrame(
             {
-                'transaction_id': [None],
                 'date': [datetime.date(2024, 8, 24)],
-                'description': [None],
-                'entity': ['Fogo de Chao'],
-                'category': [None],
-                'amount': [70.0],
                 'status': ['posted'],
+                'amount': [70.0],
+                'balance_current': [np.nan],
+                'balance_available': [np.nan],
+                'balance_limit': [np.nan],
+                'entity': ['Fogo de Chao'],
                 'account_name': ['Amex Gold'],
                 'account_mask': ['00000'],
                 'account_type': ['credit'],
                 'account_subtype': ['credit card'],
-                'balance_current': [np.nan],
-                'balance_available': [np.nan],
-                'balance_limit': [np.nan],
+                'description': [None],
+                'category': [None],
+                'transaction_id': [None],
                 'hash': [None]
             }
         )
@@ -39,9 +39,9 @@ class TestInputEntrySchema:
         df = pd.DataFrame(
             {
                 'date': ['2024-08-24'],
-                'entity': ['Fogo de Chao'],
-                'amount': ['70'],
                 'status': ['posted'],
+                'amount': ['70'],
+                'entity': ['Fogo de Chao'],
                 'account_name': ['Amex Gold'],
                 'account_mask': ['00000'],
                 'account_type': ['credit'],
