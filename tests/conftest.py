@@ -11,3 +11,8 @@ def resources_path():
 @pytest.fixture
 def sample_path(resources_path):
     return resources_path / 'sample'
+
+
+@pytest.fixture
+def sample_formatted_path(resources_path):
+    return resources_path / 'sample_formatted'
