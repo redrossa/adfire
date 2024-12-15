@@ -1,5 +1,4 @@
 import uuid
-from typing import Callable
 
 import numpy as np
 import pandas as pd
@@ -101,10 +100,7 @@ def fill_available_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[
     return df
 
 
-def assign_transactions(
-        df: DataFrame[MergedInputEntrySchema],
-        id_gen_func: Callable = uuid.uuid4
-) -> DataFrame[MergedInputEntrySchema]:
+def assign_transactions(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
     # assign universal index to each entry regardless of path
     indexed_df = df.reset_index()
     indexed_df['_id'] = indexed_df.index
@@ -141,7 +137,7 @@ def assign_transactions(
     paired_df = paired_df.drop_duplicates(subset=['_id_close'])
 
     # create unique transaction IDs for each entry pair row
-    paired_df['transaction_id'] = [str(id_gen_func()) for _ in range(len(paired_df.index))]
+    paired_df['transaction_id'] = [str(uuid.uuid4()) for _ in range(len(paired_df.index))]
 
     # split entry pair row into separate rows for original helper index
     transaction_ids = pd.melt(
@@ -155,7 +151,7 @@ def assign_transactions(
     transaction_ids = indexed_df.join(transaction_ids, lsuffix='_manual', rsuffix='_autofill')
     mask_is_na = transaction_ids['transaction_id_autofill'].isna()
     transaction_ids['transaction_id_autofill'] = transaction_ids['transaction_id_autofill'].astype(str)
-    transaction_ids.loc[mask_is_na, 'transaction_id_autofill'] = [str(id_gen_func()) for _ in range(mask_is_na.sum())]
+    transaction_ids.loc[mask_is_na, 'transaction_id_autofill'] = [str(uuid.uuid4()) for _ in range(mask_is_na.sum())]
 
     # fill NaN IDs
     transaction_ids['id'] = transaction_ids.index
