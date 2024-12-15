@@ -1,0 +1,4 @@
+date,status,amount,balance_current,balance_available,balance_limit,entity,account_name,account_mask,account_type,account_subtype,description,category,transaction_id,hash
+2024-08-04,posted,10.74,10.74,689.26,700.0,85C Degrees,Chase Freedom Student,6946,credit,credit card,,FOOD_AND_DRINK_COFFEE,85dc300a-1fc4-4aec-87c7-673fdffcbaad,12431485690432799460
+2024-08-15,posted,25.4,36.14,663.86,700.0,Uniqlo,Chase Freedom Student,6946,credit,credit card,,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES,a9f4c306-7686-4792-bc4c-6bf06e5bcbdd,16969225411122791581
+2024-08-16,posted,-36.14,0.0,700.0,700.0,Wealthfront Individual,Chase Freedom Student,6946,credit,credit card,,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,10e92a1c-dffa-4e0a-9abc-55f9dad04993,375233406928389673

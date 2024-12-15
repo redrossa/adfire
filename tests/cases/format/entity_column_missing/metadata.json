@@ -1,6 +1,0 @@
-{
-  "name": "Entity Column Missing",
-  "description": "Entity column is missing",
-  "input": "input.csv",
-  "error": "SchemaError"
-}

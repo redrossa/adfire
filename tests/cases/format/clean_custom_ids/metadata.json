@@ -1,6 +1,0 @@
-{
-  "name": "Clean With Custom Transaction IDs",
-  "description": "Clean with manually filled custom transaction IDs",
-  "input": "input.csv",
-  "expected": "expected.csv"
-}

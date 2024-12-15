@@ -1,4 +1,0 @@
-id.transaction,date,description,entity,category,amount,status,account,mask,type,subtype,balances.current,balances.available,balances.limit
-2,2024-08-06,,In-N-Out,FOOD_AND_DRINK_FAST_FOOD,10.39,posted,Amex Green,1009,credit,credit card,10.39,,
-4,2024-08-10,,United Airlines,TRAVEL_FLIGHTS,202.44,posted,Amex Green,1009,credit,credit card,212.83,,
-5,2024-08-11,,Spirit Airlines,TRAVEL_FLIGHTS,188.09,posted,Amex Green,1009,credit,credit card,400.92,,

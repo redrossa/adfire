@@ -1,5 +1,0 @@
-{
-  "name": "Add Posted Entry",
-  "description": "Uses no change's checksum and adds posted entry to the record",
-  "fails": false
-}

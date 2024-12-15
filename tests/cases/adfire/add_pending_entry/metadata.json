@@ -1,5 +1,0 @@
-{
-  "name": "Add Pending Entry",
-  "description": "Uses no change's checksum and adds pending entry to the record",
-  "fails": false
-}

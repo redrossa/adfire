@@ -1,6 +1,0 @@
-{
-  "name": "Amount Type Incorrect",
-  "description": "Amount value is not float coercible",
-  "input": "input.csv",
-  "error": "SchemaError"
-}

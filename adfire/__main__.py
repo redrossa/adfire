@@ -1,5 +1,6 @@
 import argparse
 import importlib
+from pathlib import Path
 
 from adfire.portfolio import Portfolio
 
@@ -25,9 +26,7 @@ def main():
 
     args = parser.parse_args()
 
-    portfolio = Portfolio(args.path)
-    if args.mode == 'init':
-        portfolio.create()
+    portfolio = Portfolio.from_new(args.path) if args.mode == 'init' else Portfolio(args.path)
     if args.mode == 'lint':
         portfolio.lint()
     elif args.mode == 'format':

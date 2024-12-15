@@ -1,6 +1,0 @@
-{
-  "name": "Unsorted Amount",
-  "description": "Dates are sorted but amounts aren't sorted for date conflicts",
-  "input": "input.csv",
-  "expected": "expected.csv"
-}
