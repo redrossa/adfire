@@ -35,7 +35,7 @@ class MergedInputEntrySchema(InputEntrySchema):
     entry_id: Index[int]
 
 
-class HashableEntrySchema(InputEntrySchema):
+class HashableEntrySchema(MergedInputEntrySchema):
     status: str = pa.Field(eq='posted')
     balance_current: float = pa.Field(nullable=False)
     transaction_id: str = pa.Field(nullable=False)

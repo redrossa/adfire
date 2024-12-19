@@ -7,7 +7,7 @@ from types import SimpleNamespace
 import pandas as pd
 from pandera.typing import DataFrame
 
-from adfire.autofill import assign_transactions, hash_transactions, sort_entries, fill_current_balances, \
+from adfire.autofill import assign_transactions, hash_entries, sort_entries, fill_current_balances, \
     fill_available_balances
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
@@ -99,7 +99,10 @@ class Portfolio:
         df = assign_transactions(df)
 
         # assign hashes (depends on order of entries in the account)
-        df = hash_transactions(df)
+        df = hash_entries(df)
+
+        # round numbers to cents
+        df = df.round(2)
 
         # validate with final schema
         df = MergedInputEntrySchema.validate(df)

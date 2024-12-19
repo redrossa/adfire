@@ -10,7 +10,7 @@ from adfire.schema import MergedInputEntrySchema, HashableEntrySchema
 
 def sort_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
     """Sort entries by ascending date. TODO: add future sorting specifications here."""
-    return df.sort_values(by='date', ascending=True)
+    return df.sort_values(by=['date', 'entry_id'], ascending=[True, True])
 
 
 def fill_current_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
@@ -48,7 +48,7 @@ def fill_current_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Me
         assert_series_equal(filled_offset_computed_bal, filled_input_bal, check_names=False)
 
         # replace input current balance column with computed
-        _df.loc[group['_balance_current'].index, 'balance_current'] = group['_balance_current']
+        df.loc[group['_balance_current'].index, 'balance_current'] = group['_balance_current']
 
     # clean up
     df = MergedInputEntrySchema.validate(df)
@@ -176,21 +176,19 @@ def assign_transactions(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Merg
     return df
 
 
-def hash_transactions(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
+def hash_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
     # filter out columns not required for hashing
-    hashable_df = df.reset_index()
-    hashable_df = HashableEntrySchema.validate(hashable_df, lazy=True)
+    hashable_df = HashableEntrySchema.validate(df, lazy=True)
 
     # compute hashes
-    hashable_df['hash'] = pd.util.hash_pandas_object(hashable_df)
+    hashable_df['hash'] = pd.util.hash_pandas_object(hashable_df, index=False).astype(str)  # without astype it's uint
+
+    # verify input hashed entries have equal computed hashes
+    old_hashes_df = df[df['hash'].notna()].reset_index()
+    assert all(old_hashes_df['hash'].isin(hashable_df['hash']))
 
     # set hashes to original df
-    df = df.reset_index()
-    df = df.set_index('transaction_id')
-    hashable_df = hashable_df.set_index('transaction_id')
     df['hash'] = hashable_df['hash']
-    df = df.reset_index()
-    df = df.set_index(list(MergedInputEntrySchema.to_schema().index.columns))
 
     # clean up
     df = MergedInputEntrySchema.validate(df)
