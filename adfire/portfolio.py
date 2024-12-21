@@ -103,6 +103,7 @@ class Portfolio:
 
         # round numbers to cents
         df = df.round(2)
+        df = df.replace(-0.0, 0.0)
 
         # validate with final schema
         df = MergedInputEntrySchema.validate(df)
