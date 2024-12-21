@@ -81,7 +81,8 @@ def fill_available_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[
     df = df.join(offsets, on='account_name')
 
     # apply offsets to available balances
-    df['_balance_available'] = df['_balance_available'] - df['_balance_offset']
+    df.loc[mask_is_credit, '_balance_available'] = df['_balance_available'] - df['_balance_offset']
+    df.loc[mask_is_depository, '_balance_available'] = df['_balance_available'] + df['_balance_offset']
 
     # verify input available balance match computed
     input_bal = df['balance_available']
@@ -107,7 +108,7 @@ def assign_transactions(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Merg
 
     # fill transaction ID's for NaN entries
     mask_is_nan = indexed_df['transaction_id'].isna()
-    indexed_df.loc[mask_is_nan, 'transaction_id'] = [str(uuid.uuid4()) for _ in range(len(indexed_df.index))]
+    indexed_df.loc[mask_is_nan, 'transaction_id'] = [str(uuid.uuid4()) for _ in range(mask_is_nan.sum())]
 
     # add helper columns
     help_df = indexed_df[indexed_df['entity'].isin(indexed_df['account_name'])].copy()
@@ -140,8 +141,12 @@ def assign_transactions(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Merg
     paired_df = paired_df.drop_duplicates(subset=['_id_open'])
     paired_df = paired_df.drop_duplicates(subset=['_id_close'])
 
-    # assign equal transaction IDs for entry pairs (use open entry's ID)
-    paired_df['transaction_id'] = paired_df['transaction_id_open']
+    # assign equal transaction IDs for entry pairs (choose first if possible, else one already hashed)
+    paired_df['transaction_id'] = np.where(
+        paired_df['hash_open'].isna() & paired_df['hash_close'].notna(),
+        paired_df['transaction_id_close'],
+        paired_df['transaction_id_open']
+    )
 
     # split entry pair row into separate rows for original helper index
     transaction_ids = pd.melt(
@@ -154,7 +159,7 @@ def assign_transactions(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Merg
     transaction_ids = transaction_ids.set_index('index')
     transaction_ids = indexed_df.join(transaction_ids, lsuffix='_unpaired', rsuffix='_paired')
 
-    # aggregate all transaction IDs values to remove NaNs
+    # aggregate all transaction ID values to remove NaNs
     transaction_ids['transaction_id'] = transaction_ids[[
         'transaction_id_paired',
         'transaction_id_unpaired'
