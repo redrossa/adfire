@@ -1,6 +1,5 @@
 import argparse
 import importlib
-from pathlib import Path
 
 from adfire.portfolio import Portfolio
 
