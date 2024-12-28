@@ -1,0 +1,4 @@
+date,status,amount,balance_current,balance_available,balance_limit,entity,account_name,account_mask,account_type,account_subtype,description,category,transaction_id,hash
+2024-11-26,posted,19.99,466.65,33.35,500.0,UPS,Discover It,0152,credit,credit card,,,00000000-0000-0000-0000-000000000005,2370901223469745068
+2024-11-28,posted,8.0,474.65,25.35,500.0,Citiline Deli,Discover It,0152,credit,credit card,,,00000000-0000-0000-0000-000000000006,9360237372642686908
+2024-11-29,posted,3.99,478.64,21.36,500.0,Kroger,Discover It,0152,credit,credit card,,,00000000-0000-0000-0000-000000000007,14882226851148790691

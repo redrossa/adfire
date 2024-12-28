@@ -1,5 +1,4 @@
 import uuid
-from typing import Callable
 
 import numpy as np
 import pandas as pd
@@ -11,7 +10,7 @@ from adfire.schema import MergedInputEntrySchema, HashableEntrySchema
 
 def sort_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
     """Sort entries by ascending date. TODO: add future sorting specifications here."""
-    return df.sort_values(by='date', ascending=True)
+    return df.sort_values(by=['date', 'entry_id'], ascending=[True, True])
 
 
 def fill_current_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
@@ -49,7 +48,7 @@ def fill_current_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Me
         assert_series_equal(filled_offset_computed_bal, filled_input_bal, check_names=False)
 
         # replace input current balance column with computed
-        _df.loc[group['_balance_current'].index, 'balance_current'] = group['_balance_current']
+        df.loc[group['_balance_current'].index, 'balance_current'] = group['_balance_current']
 
     # clean up
     df = MergedInputEntrySchema.validate(df)
@@ -82,7 +81,8 @@ def fill_available_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[
     df = df.join(offsets, on='account_name')
 
     # apply offsets to available balances
-    df['_balance_available'] = df['_balance_available'] - df['_balance_offset']
+    df.loc[mask_is_credit, '_balance_available'] = df['_balance_available'] - df['_balance_offset']
+    df.loc[mask_is_depository, '_balance_available'] = df['_balance_available'] + df['_balance_offset']
 
     # verify input available balance match computed
     input_bal = df['balance_available']
@@ -101,13 +101,14 @@ def fill_available_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[
     return df
 
 
-def assign_transactions(
-        df: DataFrame[MergedInputEntrySchema],
-        id_gen_func: Callable = uuid.uuid4
-) -> DataFrame[MergedInputEntrySchema]:
+def assign_transactions(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
     # assign universal index to each entry regardless of path
     indexed_df = df.reset_index()
     indexed_df['_id'] = indexed_df.index
+
+    # fill transaction ID's for NaN entries
+    mask_is_nan = indexed_df['transaction_id'].isna()
+    indexed_df.loc[mask_is_nan, 'transaction_id'] = [str(uuid.uuid4()) for _ in range(mask_is_nan.sum())]
 
     # add helper columns
     help_df = indexed_df[indexed_df['entity'].isin(indexed_df['account_name'])].copy()
@@ -140,8 +141,12 @@ def assign_transactions(
     paired_df = paired_df.drop_duplicates(subset=['_id_open'])
     paired_df = paired_df.drop_duplicates(subset=['_id_close'])
 
-    # create unique transaction IDs for each entry pair row
-    paired_df['transaction_id'] = [str(id_gen_func()) for _ in range(len(paired_df.index))]
+    # assign equal transaction IDs for entry pairs (choose first if possible, else one already hashed)
+    paired_df['transaction_id'] = np.where(
+        paired_df['hash_open'].isna() & paired_df['hash_close'].notna(),
+        paired_df['transaction_id_close'],
+        paired_df['transaction_id_open']
+    )
 
     # split entry pair row into separate rows for original helper index
     transaction_ids = pd.melt(
@@ -152,40 +157,21 @@ def assign_transactions(
         value_name='index'
     )
     transaction_ids = transaction_ids.set_index('index')
-    transaction_ids = indexed_df.join(transaction_ids, lsuffix='_manual', rsuffix='_autofill')
-    mask_is_na = transaction_ids['transaction_id_autofill'].isna()
-    transaction_ids['transaction_id_autofill'] = transaction_ids['transaction_id_autofill'].astype(str)
-    transaction_ids.loc[mask_is_na, 'transaction_id_autofill'] = [str(id_gen_func()) for _ in range(mask_is_na.sum())]
+    transaction_ids = indexed_df.join(transaction_ids, lsuffix='_unpaired', rsuffix='_paired')
 
-    # fill NaN IDs
-    transaction_ids['id'] = transaction_ids.index
-    filled = transaction_ids.merge(transaction_ids, on='transaction_id_autofill', how='left')
-    filled_no_dupes = filled.drop_duplicates('id_x', keep=False)
-    filled_dupes_no_self = filled[filled['id_x'] != filled['id_y']]
-    filled = pd.concat([filled_no_dupes, filled_dupes_no_self])
-    filled = filled.sort_values('id_x', ignore_index=True)
-
-    # verify that manual IDs don't conflict computed pairs. TODO: not sure we still need this
-    # mask_x_notna = filled['transaction_id_manual_x'].notna()
-    # mask_y_notna = filled['transaction_id_manual_y'].notna()
-    # filled = filled[mask_x_notna & mask_y_notna]
-    # assert (filled['transaction_id_manual_x'] == filled['transaction_id_manual_y']).all(), \
-    #     "Manual ID's conflict with computed"
-
-    # aggregate all transaction IDs values to remove NaNs
-    filled['transaction_id'] = filled[[
-        'transaction_id_manual_x',
-        'transaction_id_manual_y',
-        'transaction_id_autofill'
+    # aggregate all transaction ID values to remove NaNs
+    transaction_ids['transaction_id'] = transaction_ids[[
+        'transaction_id_paired',
+        'transaction_id_unpaired'
     ]].bfill(axis=1).iloc[:, 0]
 
     # verify that the pattern of manual IDs match computed
-    unique_pairs = filled.groupby(['transaction_id', 'transaction_id_autofill']).size()
+    unique_pairs = transaction_ids.groupby(['transaction_id', 'transaction_id_paired']).size()
     counts = unique_pairs.groupby('transaction_id').size()
     assert (counts == 1).all(), "Manual ID pattern doesn't match computed"
 
     # finally, assign IDs
-    indexed_df['transaction_id'] = filled['transaction_id']
+    indexed_df['transaction_id'] = transaction_ids['transaction_id']
     indexed_df = indexed_df.set_index(df.index)
     df['transaction_id'] = indexed_df['transaction_id']
 
@@ -195,21 +181,19 @@ def assign_transactions(
     return df
 
 
-def hash_transactions(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
+def hash_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
     # filter out columns not required for hashing
-    hashable_df = df.reset_index()
-    hashable_df = HashableEntrySchema.validate(hashable_df, lazy=True)
+    hashable_df = HashableEntrySchema.validate(df, lazy=True)
 
     # compute hashes
-    hashable_df['hash'] = pd.util.hash_pandas_object(hashable_df)
+    hashable_df['hash'] = pd.util.hash_pandas_object(hashable_df, index=False).astype(str)  # without astype it's uint
+
+    # verify input hashed entries have equal computed hashes
+    old_hashes_df = df[df['hash'].notna()].reset_index()
+    assert all(old_hashes_df['hash'].isin(hashable_df['hash']))
 
     # set hashes to original df
-    df = df.reset_index()
-    df = df.set_index('transaction_id')
-    hashable_df = hashable_df.set_index('transaction_id')
     df['hash'] = hashable_df['hash']
-    df = df.reset_index()
-    df = df.set_index(list(MergedInputEntrySchema.to_schema().index.columns))
 
     # clean up
     df = MergedInputEntrySchema.validate(df)
