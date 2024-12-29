@@ -11,7 +11,10 @@ from adfire.autofill import assign_transactions, hash_entries, sort_entries, fil
     fill_available_balances
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
-from adfire.schema import MergedInputEntrySchema, EntrySchema
+from adfire.logger import get_logger
+from adfire.schema import MergedInputEntrySchema, EntrySchema, SortedDiffEntrySchema
+
+logger = get_logger(__name__)
 
 
 def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
@@ -51,6 +54,7 @@ class Portfolio:
         """Creates a portfolio object from a directory."""
         path = Path(path)
 
+        self._path = path.resolve()
         self._metadata = _read_metadata_from_dir(path)
         self._merged_entry_dfs = _read_entry_files_from_dir(path)
 
@@ -90,6 +94,30 @@ class Portfolio:
         """
         # following computations require df to be sorted already
         df = sort_entries(self._merged_entry_dfs)
+
+        # log sorted changes
+        old_grouped = self._merged_entry_dfs.groupby('path')
+        new_grouped = df.groupby('path')
+        for path, old_group_df in old_grouped:
+            new_group_df = new_grouped.get_group(path)
+            mask_sorted = new_group_df.index != old_group_df.index
+            if any(mask_sorted):
+                old_df = old_group_df[mask_sorted].reset_index()
+                old_df['change'] = '-'
+                new_df = new_group_df[mask_sorted].reset_index()
+                new_df['change'] = '+'
+
+                diff_df = pd.concat([old_df, new_df]).sort_index()
+                diff_df = SortedDiffEntrySchema.validate(diff_df)
+                diff_df = diff_df[SortedDiffEntrySchema.to_schema().columns.keys()]
+
+                diff_str = diff_df.to_string(index=False)
+                lines = diff_str.splitlines()
+
+                path = path.replace(str(self._path), str(self._path.name))
+                logger.info(f'Sorted entries in {path}')
+                for s in lines:
+                    logger.info(s)
 
         # autofill balances
         df = fill_current_balances(df)

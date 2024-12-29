@@ -47,3 +47,15 @@ class HashableEntrySchema(MergedInputEntrySchema):
 
     class Config:
         drop_invalid_rows = True
+
+
+class SortedDiffEntrySchema(pa.DataFrameModel):
+    change: str
+    entry_id: int
+    date: pa.Date
+    amount: float
+    entity: str
+    account_name: str
+
+    class Config:
+        strict = 'filter'
