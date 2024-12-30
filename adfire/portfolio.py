@@ -12,7 +12,7 @@ from adfire.autofill import assign_transactions, hash_entries, sort_entries, fil
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
 from adfire.logger import get_logger
-from adfire.schema import MergedInputEntrySchema, EntrySchema, SortedDiffEntrySchema
+from adfire.schema import MergedInputEntrySchema, EntrySchema, SortedDiffEntrySchema, BalancesDiffEntrySchema
 
 logger = get_logger(__name__)
 
@@ -120,8 +120,24 @@ class Portfolio:
                     logger.info(s)
 
         # autofill balances
+        pre_df = df.copy()
         df = fill_current_balances(df)
         df = fill_available_balances(df)
+
+        # log autofill balances
+        diff_df = pre_df.compare(df, result_names=('---', '+++'))
+        diff_df.columns = diff_df.columns.to_flat_index().str.join('_')
+        diff_df = diff_df.reset_index()
+        diff_df['path'] = diff_df['path'].str.replace(str(self._path), str(self._path.name))
+
+        if not diff_df.empty:
+            for path, group_df in diff_df.groupby('path'):
+                group_df = BalancesDiffEntrySchema.validate(group_df)
+                group_str = group_df.to_string(index=False)
+                lines = group_str.splitlines()
+                logger.info(f'Autofill balances in {path}')
+                for s in lines:
+                    logger.info(s)
 
         # assign ids (include pairing)
         df = assign_transactions(df)

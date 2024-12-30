@@ -59,3 +59,11 @@ class SortedDiffEntrySchema(pa.DataFrameModel):
 
     class Config:
         strict = 'filter'
+
+
+class BalancesDiffEntrySchema(pa.DataFrameModel):
+    entry_id: int
+
+    class Config:
+        strict = 'filter'
+
