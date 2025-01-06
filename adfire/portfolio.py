@@ -11,7 +11,7 @@ from adfire.autofill import assign_transactions, hash_entries, sort_entries, fil
     fill_available_balances
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
-from adfire.schema import MergedInputEntrySchema, EntrySchema
+from adfire.schema import MergedInputEntrySchema, EntrySchema, AccountBalancesSchema
 
 
 def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
@@ -122,3 +122,14 @@ class Portfolio:
             group_df = EntrySchema.validate(group_df)
             group_df = group_df[EntrySchema.to_schema().columns.keys()]
             write_record(group_df, path)
+
+    def view(self):
+        df = self.lint()
+        last_df = df.groupby('account_name').last()
+
+        mask_is_credit = last_df['account_type'] == 'credit'
+        net_worth = last_df[~mask_is_credit]['balance_current'].sum() - last_df[mask_is_credit]['balance_current'].sum()
+        last_df.loc['Net Worth'] = net_worth.round(2)
+
+        last_df = AccountBalancesSchema.validate(last_df)
+        write_record(last_df, '.reports/balances.csv', index=True)

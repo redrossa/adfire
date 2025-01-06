@@ -47,3 +47,11 @@ class HashableEntrySchema(MergedInputEntrySchema):
 
     class Config:
         drop_invalid_rows = True
+
+
+class AccountBalancesSchema(pa.DataFrameModel):
+    account_name: Index[str]
+    balance_current: float
+
+    class Config:
+        strict = 'filter'
