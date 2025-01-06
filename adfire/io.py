@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 
@@ -6,8 +8,11 @@ def read_record(path) -> pd.DataFrame:
     return df
 
 
-def write_record(df, path):
-    df.to_csv(path, index=False)
+def write_record(df, path, index: bool = False):
+    dirname = os.path.dirname(path)
+    if not os.path.exists(dirname):
+        os.mkdir(dirname)
+    df.to_csv(path, index=index)
 
 
 def read_checksum(path) -> pd.Series:

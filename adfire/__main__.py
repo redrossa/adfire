@@ -9,7 +9,7 @@ def main():
     parser.add_argument(
         'mode',
         help='command modes',
-        choices=['init', 'lint', 'format']
+        choices=['init', 'lint', 'format', 'view']
     )
     parser.add_argument(
         'path',
@@ -30,6 +30,8 @@ def main():
         portfolio.lint()
     elif args.mode == 'format':
         portfolio.format()
+    elif args.mode == 'view':
+        portfolio.view()
 
 
 if __name__ == '__main__':
