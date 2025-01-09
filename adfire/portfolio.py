@@ -53,6 +53,13 @@ class Portfolio:
 
         self._metadata = _read_metadata_from_dir(path)
         self._merged_entry_dfs = _read_entry_files_from_dir(path)
+        self._linted = None
+
+    @property
+    def linted(self) -> DataFrame[MergedInputEntrySchema]:
+        if self._linted is None:
+            self._linted = self.lint()
+        return self._linted
 
     @classmethod
     def from_new(cls, path: os.PathLike) -> 'Portfolio':
@@ -116,7 +123,7 @@ class Portfolio:
         Lints portfolio and modifies entry files with standard formatting and
         implied values.
         """
-        df = self.lint()
+        df = self.linted
         groups = df.groupby('path')
         for path, group_df in groups:
             group_df = EntrySchema.validate(group_df)
@@ -124,7 +131,7 @@ class Portfolio:
             write_record(group_df, path)
 
     def view(self):
-        df = self.lint()
+        df = self.linted
         last_df = df.groupby('account_name').last()
 
         mask_is_credit = last_df['account_type'] == 'credit'
