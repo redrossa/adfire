@@ -17,7 +17,7 @@ class EntrySchema(pa.DataFrameModel):
     description: str = pa.Field(nullable=True)
     category: str = pa.Field(nullable=True)
     transaction_id: str = pa.Field(nullable=True)
-    hash: str
+    hash: str = pa.Field(nullable=True)
 
 
 class InputEntrySchema(EntrySchema):
