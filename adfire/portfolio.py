@@ -8,7 +8,7 @@ import pandas as pd
 from pandera.typing import DataFrame
 
 from adfire.autofill import assign_transactions, hash_entries, sort_entries, fill_current_balances, \
-    fill_available_balances
+    fill_available_balances, fill_total_balances
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
 from adfire.schema import MergedInputEntrySchema, EntrySchema, AccountBalancesSchema
@@ -100,6 +100,7 @@ class Portfolio:
 
         # autofill balances
         df = fill_current_balances(df)
+        df = fill_total_balances(df)
         df = fill_available_balances(df)
 
         # assign ids (include pairing)

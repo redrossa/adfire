@@ -7,6 +7,7 @@ class EntrySchema(pa.DataFrameModel):
     status: str
     amount: float
     balance_current: float
+    balance_total: float
     balance_available: float = pa.Field(nullable=True)
     balance_limit: float = pa.Field(nullable=True)
     entity: str
@@ -22,6 +23,7 @@ class EntrySchema(pa.DataFrameModel):
 
 class InputEntrySchema(EntrySchema):
     balance_current: float = pa.Field(nullable=True)
+    balance_total: float = pa.Field(nullable=True)
     hash: str = pa.Field(nullable=True)
 
     class Config:
