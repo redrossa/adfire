@@ -181,7 +181,7 @@ def assign_transactions(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Merg
     return df
 
 
-def hash_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
+def hash_entries(df: DataFrame[MergedInputEntrySchema], forced_hash = False) -> DataFrame[MergedInputEntrySchema]:
     # filter out columns not required for hashing
     hashable_df = HashableEntrySchema.validate(df, lazy=True)
 
@@ -189,8 +189,9 @@ def hash_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInput
     hashable_df['hash'] = pd.util.hash_pandas_object(hashable_df, index=False).astype(str)  # without astype it's uint
 
     # verify input hashed entries have equal computed hashes
-    old_hashes_df = df[df['hash'].notna()].reset_index()
-    assert all(old_hashes_df['hash'].isin(hashable_df['hash']))
+    if not forced_hash:
+        old_hashes_df = df[df['hash'].notna()].reset_index()
+        assert all(old_hashes_df['hash'].isin(hashable_df['hash']))
 
     # set hashes to original df
     df['hash'] = hashable_df['hash']
