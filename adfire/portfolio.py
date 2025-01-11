@@ -8,7 +8,7 @@ import pandas as pd
 from pandera.typing import DataFrame
 
 from adfire.autofill import assign_transactions, hash_entries, sort_entries, fill_current_balances, \
-    fill_available_balances
+    fill_available_balances, fill_total_balances
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
 from adfire.schema import MergedInputEntrySchema, EntrySchema, AccountBalancesSchema
@@ -53,6 +53,13 @@ class Portfolio:
 
         self._metadata = _read_metadata_from_dir(path)
         self._merged_entry_dfs = _read_entry_files_from_dir(path)
+        self._linted = None
+
+    @property
+    def linted(self) -> DataFrame[MergedInputEntrySchema]:
+        if self._linted is None:
+            self._linted = self.lint()
+        return self._linted
 
     @property
     def forced_hash(self) -> bool:
@@ -102,6 +109,7 @@ class Portfolio:
 
         # autofill balances
         df = fill_current_balances(df)
+        df = fill_total_balances(df)
         df = fill_available_balances(df)
 
         # assign ids (include pairing)
@@ -125,7 +133,7 @@ class Portfolio:
         Lints portfolio and modifies entry files with standard formatting and
         implied values.
         """
-        df = self.lint()
+        df = self.linted
         groups = df.groupby('path')
         for path, group_df in groups:
             group_df = EntrySchema.validate(group_df)
@@ -133,7 +141,7 @@ class Portfolio:
             write_record(group_df, path)
 
     def view(self):
-        df = self.lint()
+        df = self.linted
         last_df = df.groupby('account_name').last()
 
         mask_is_credit = last_df['account_type'] == 'credit'
