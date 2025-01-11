@@ -143,9 +143,10 @@ class Portfolio:
     def view(self):
         df = self.linted
         last_df = df.groupby('account_name').last()
+        last_df['balance'] = last_df['balance_total']
 
         mask_is_credit = last_df['account_type'] == 'credit'
-        net_worth = last_df[~mask_is_credit]['balance_current'].sum() - last_df[mask_is_credit]['balance_current'].sum()
+        net_worth = last_df[~mask_is_credit]['balance_total'].sum() - last_df[mask_is_credit]['balance_total'].sum()
         last_df.loc['Net Worth'] = net_worth.round(2)
 
         last_df = AccountBalancesSchema.validate(last_df)

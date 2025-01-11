@@ -22,6 +22,7 @@ class TestInputEntrySchema:
                 'status': ['posted'],
                 'amount': [70.0],
                 'balance_current': [np.nan],
+                'balance_total': [np.nan],
                 'balance_available': [np.nan],
                 'balance_limit': [np.nan],
                 'entity': ['Fogo de Chao'],
