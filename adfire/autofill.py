@@ -58,7 +58,9 @@ def fill_current_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Me
 
 def fill_total_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
     grouped_by_account = df.groupby('account_name')
-    df['balance_total'] = grouped_by_account['amount'].cumsum()
+    first = grouped_by_account.first()
+    initial_balance = first['_balance_current'] - first['amount']
+    df['balance_total'] = grouped_by_account['amount'].cumsum() + df['account_name'].map(initial_balance)
     df = MergedInputEntrySchema.validate(df)
     return df
 
