@@ -18,6 +18,11 @@ def main():
         nargs='?'
     )
     parser.add_argument(
+        '-f', '--force',
+        help='force format of hashed entries',
+        action=argparse.BooleanOptionalAction
+    )
+    parser.add_argument(
         '-v', '--version',
         action='version',
         version=f'%(prog)s {importlib.metadata.version("adfire")}'
@@ -26,6 +31,7 @@ def main():
     args = parser.parse_args()
 
     portfolio = Portfolio.from_new(args.path) if args.mode == 'init' else Portfolio(args.path)
+    portfolio.forced_hash = args.force
     if args.mode == 'lint':
         portfolio.lint()
     elif args.mode == 'format':

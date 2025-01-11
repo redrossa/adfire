@@ -61,6 +61,15 @@ class Portfolio:
             self._linted = self.lint()
         return self._linted
 
+    @property
+    def forced_hash(self) -> bool:
+        return self._forced_hash
+
+    @forced_hash.setter
+    def forced_hash(self, value: bool):
+        self._forced_hash = value
+        self._linted = None
+
     @classmethod
     def from_new(cls, path: os.PathLike) -> 'Portfolio':
         """
@@ -107,7 +116,7 @@ class Portfolio:
         df = assign_transactions(df)
 
         # assign hashes (depends on order of entries in the account)
-        df = hash_entries(df)
+        df = hash_entries(df, forced_hash=self.forced_hash)
 
         # round numbers to cents
         df = df.round(2)
