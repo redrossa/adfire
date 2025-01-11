@@ -65,7 +65,6 @@ def fill_total_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Merg
     return df
 
 
-
 def fill_available_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
     grouped_by_account = df.groupby('account_name')
 
