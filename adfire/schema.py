@@ -54,6 +54,7 @@ class HashableEntrySchema(MergedInputEntrySchema):
 class AccountBalancesSchema(pa.DataFrameModel):
     account_name: Index[str]
     balance_current: float
+    balance_total: float
 
     class Config:
         strict = 'filter'
