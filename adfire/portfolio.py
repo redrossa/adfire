@@ -1,6 +1,8 @@
 import json
 import os
+import runpy
 import shutil
+import importlib.util
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -11,7 +13,7 @@ from adfire.autofill import assign_transactions, hash_entries, sort_entries, fil
     fill_available_balances, fill_total_balances
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
-from adfire.schema import MergedInputEntrySchema, EntrySchema, AccountBalancesSchema
+from adfire.schema import MergedInputEntrySchema, EntrySchema
 
 
 def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
@@ -24,6 +26,7 @@ def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
     with f:
         metadata = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
         return metadata
+
 
 def _read_entry_files_from_dir(path: Path) -> DataFrame[MergedInputEntrySchema]:
     """Reads all entry files in a directory and merge them into a dataframe"""
@@ -49,11 +52,12 @@ def _read_entry_files_from_dir(path: Path) -> DataFrame[MergedInputEntrySchema]:
 class Portfolio:
     def __init__(self, path: os.PathLike):
         """Creates a portfolio object from a directory."""
-        path = Path(path)
+        self.path = Path(path)
 
-        self._metadata = _read_metadata_from_dir(path)
-        self._merged_entry_dfs = _read_entry_files_from_dir(path)
+        self._metadata = _read_metadata_from_dir(self.path)
+        self._merged_entry_dfs = _read_entry_files_from_dir(self.path)
         self._linted = None
+        self._forced_hash = False
 
     @property
     def linted(self) -> DataFrame[MergedInputEntrySchema]:
@@ -140,14 +144,16 @@ class Portfolio:
             group_df = group_df[EntrySchema.to_schema().columns.keys()]
             write_record(group_df, path)
 
-    def view(self):
-        df = self.linted
-        last_df = df.groupby('account_name').last()
-        last_df['balance'] = last_df['balance_total']
+    def view(self, module: str):
+        report_path = f'.reports/{module}'
+        module_name = module if '.' in module else f'adfire.{module}'
 
-        mask_is_credit = last_df['account_type'] == 'credit'
-        net_worth = last_df[~mask_is_credit]['balance_total'].sum() - last_df[mask_is_credit]['balance_total'].sum()
-        last_df.loc['Net Worth'] = net_worth.round(2)
-
-        last_df = AccountBalancesSchema.validate(last_df)
-        write_record(last_df, '.reports/balances.csv', index=True)
+        spec = importlib.util.find_spec(module_name)
+        if spec:
+            os.makedirs(report_path, exist_ok=True)
+            os.chdir(report_path)
+        runpy.run_module(
+            module if '.' in module else f'adfire.{module}',
+            init_globals={'portfolio': self},
+            run_name="__main__")
+        os.chdir(self.path.resolve())

@@ -10,7 +10,7 @@ def read_record(path) -> pd.DataFrame:
 
 def write_record(df, path, index: bool = False):
     dirname = os.path.dirname(path)
-    if not os.path.exists(dirname):
+    if dirname and not os.path.exists(dirname):
         os.mkdir(dirname)
     df.to_csv(path, index=index)
 

@@ -1,23 +1,18 @@
-from pathlib import Path
-
 import numpy as np
 import pandas as pd
 import pytest
 
-
-@pytest.fixture
-def resources_path():
-    return Path(__file__).parent.parent / 'resources'
+from adfire.config import RESOURCES_PATH
 
 
 @pytest.fixture
-def sample_path(resources_path):
-    return resources_path / 'sample'
+def sample_path():
+    return RESOURCES_PATH / 'sample'
 
 
 @pytest.fixture
-def sample_formatted_path(resources_path):
-    return resources_path / 'sample_formatted'
+def sample_formatted_path():
+    return RESOURCES_PATH / 'sample_formatted'
 
 
 @pytest.fixture
