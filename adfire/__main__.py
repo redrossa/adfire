@@ -1,5 +1,6 @@
 import argparse
 import importlib
+import sys
 
 from adfire.portfolio import Portfolio
 
@@ -9,24 +10,24 @@ def main():
     parser.add_argument(
         'mode',
         help='command modes',
-        choices=['init', 'lint', 'format', 'view']
-    )
+        choices=['init', 'lint', 'format', 'view'])
+    if 'view' in sys.argv:
+        parser.add_argument(
+            'module',
+            help='view module')
     parser.add_argument(
-        'path',
+        '-p', '--path',
         help='portfolio path, default to current directory',
         default='.',
-        nargs='?'
-    )
+        nargs='?')
     parser.add_argument(
         '-f', '--force',
         help='force format of hashed entries',
-        action=argparse.BooleanOptionalAction
-    )
+        action=argparse.BooleanOptionalAction)
     parser.add_argument(
         '-v', '--version',
         action='version',
-        version=f'%(prog)s {importlib.metadata.version("adfire")}'
-    )
+        version=f'%(prog)s {importlib.metadata.version("adfire")}')
 
     args = parser.parse_args()
 
@@ -37,7 +38,7 @@ def main():
     elif args.mode == 'format':
         portfolio.format()
     elif args.mode == 'view':
-        portfolio.view()
+        portfolio.view(args.module)
 
 
 if __name__ == '__main__':

@@ -1,3 +1,3 @@
-from pathlib import Path
+import importlib.resources
 
-RESOURCES_PATH = Path(__file__).parent.parent / 'resources'
+RESOURCES_PATH = importlib.resources.files('adfire.resources')
