@@ -2,6 +2,7 @@ import json
 import os
 import runpy
 import shutil
+import importlib.util
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -144,4 +145,15 @@ class Portfolio:
             write_record(group_df, path)
 
     def view(self, module: str):
-        runpy.run_module(module if '.' in module else f'adfire.{module}', init_globals={'portfolio': self}, run_name="__main__")
+        report_path = f'.reports/{module}'
+        module_name = module if '.' in module else f'adfire.{module}'
+
+        spec = importlib.util.find_spec(module_name)
+        if spec:
+            os.makedirs(report_path, exist_ok=True)
+            os.chdir(report_path)
+        runpy.run_module(
+            module if '.' in module else f'adfire.{module}',
+            init_globals={'portfolio': self},
+            run_name="__main__")
+        os.chdir(self.path.resolve())
