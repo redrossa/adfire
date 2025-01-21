@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from adfire.io import write_record
@@ -11,6 +12,11 @@ def categorize_by_year_month(df: pd.DataFrame) -> pd.DataFrame:
     monthly_series = df.groupby(['month', 'year', 'category'])['amount'].sum()
     df = monthly_series.reset_index()
     df = df.pivot(index=['year', 'month'], columns='category', values='amount')
+
+    df = df.fillna(0)
+    df = df.sort_index()
+    df = abs(df)
+
     return df
 
 
@@ -25,11 +31,32 @@ def write_table(df: pd.DataFrame) -> None:
     all_df = all_df.set_index(['year', 'month'])
 
     df = pd.concat([df, yearly_df, all_df])
-    df = df.fillna(0)
     df = df.sort_index()
-    df = abs(df)
     df = df.round(2)
     write_record(df, 'categories.csv', index=True)
+
+
+def plot_trends(df: pd.DataFrame) -> None:
+    df = df.reset_index()
+    df['year_month'] = pd.to_datetime(df['year'].astype(str) + '-' + df['month'].astype(str))
+
+    plt.figure(figsize=(10, 6))
+
+    for category in df.columns:
+        if category not in ['year_month', 'year', 'month']:
+            plt.plot(df['year_month'], df[category], marker='o', label=category)
+
+    plt.title('Trends of Categories Over Time', fontsize=16)
+    plt.xlabel('Year-Month', fontsize=14)
+    plt.ylabel('Amount', fontsize=14)
+    plt.xticks(rotation=45)
+    plt.grid(visible=True)
+    plt.legend(title='Categories', fontsize=8)
+    plt.tight_layout()
+
+    output_file = 'trends.png'
+    plt.savefig(output_file)
+    plt.close()
 
 
 def main():
@@ -37,7 +64,8 @@ def main():
     df = categorize_by_year_month(df)
 
     write_table(df)
+    plot_trends(df)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

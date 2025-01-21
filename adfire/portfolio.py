@@ -145,7 +145,7 @@ class Portfolio:
             write_record(group_df, path)
 
     def view(self, module: str):
-        report_path = f'.reports/{module}'
+        report_path = f'.reports/{module.removeprefix("adfire.")}'
         spec = importlib.util.find_spec(module)
         if spec:
             os.makedirs(report_path, exist_ok=True)
