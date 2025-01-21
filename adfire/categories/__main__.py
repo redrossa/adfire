@@ -36,7 +36,7 @@ def write_table(df: pd.DataFrame) -> None:
     write_record(df, 'categories.csv', index=True)
 
 
-def plot_trends(df: pd.DataFrame) -> None:
+def plot_linear(df: pd.DataFrame, title: str, output_filemae: str) -> None:
     df = df.reset_index()
     df['year_month'] = pd.to_datetime(df['year'].astype(str) + '-' + df['month'].astype(str))
 
@@ -46,7 +46,7 @@ def plot_trends(df: pd.DataFrame) -> None:
         if category not in ['year_month', 'year', 'month']:
             plt.plot(df['year_month'], df[category], marker='o', label=category)
 
-    plt.title('Trends of Categories Over Time', fontsize=16)
+    plt.title(title, fontsize=16)
     plt.xlabel('Year-Month', fontsize=14)
     plt.ylabel('Amount', fontsize=14)
     plt.xticks(rotation=45)
@@ -54,8 +54,7 @@ def plot_trends(df: pd.DataFrame) -> None:
     plt.legend(title='Categories', fontsize=8)
     plt.tight_layout()
 
-    output_file = 'trends.png'
-    plt.savefig(output_file)
+    plt.savefig(output_filemae)
     plt.close()
 
 
@@ -64,7 +63,8 @@ def main():
     df = categorize_by_year_month(df)
 
     write_table(df)
-    plot_trends(df)
+    plot_linear(df, 'Trends of Categories Over Time', 'trends.png')
+    plot_linear(df.cumsum(), 'Cumulative Amount of Categories Over Time', 'cumsum.png')
 
 
 if __name__ == '__main__':
