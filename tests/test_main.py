@@ -129,7 +129,7 @@ class TestView:
 
         view_module = 'sample_view'
         sys.argv = ['adfire', 'view', view_module, '--path', str(tmp_path)]
-        with pytest.raises(ImportError, match=f"No module named adfire.{view_module}"):
+        with pytest.raises(ImportError, match=f"No module named {view_module}"):
             main()
 
     def test_on_initialized_portfolio(self, tmp_path, sample_path, sample_formatted_path):
