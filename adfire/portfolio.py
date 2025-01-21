@@ -146,14 +146,9 @@ class Portfolio:
 
     def view(self, module: str):
         report_path = f'.reports/{module}'
-        module_name = module if '.' in module else f'adfire.{module}'
-
-        spec = importlib.util.find_spec(module_name)
+        spec = importlib.util.find_spec(module)
         if spec:
             os.makedirs(report_path, exist_ok=True)
             os.chdir(report_path)
-        runpy.run_module(
-            module if '.' in module else f'adfire.{module}',
-            init_globals={'portfolio': self},
-            run_name="__main__")
+        runpy.run_module(module, init_globals={'portfolio': self}, run_name="__main__")
         os.chdir(self.path.resolve())

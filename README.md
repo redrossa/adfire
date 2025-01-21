@@ -57,3 +57,53 @@ their needs, or use and share other users' projections.
    ```shell
    pytest
    ```
+
+## Getting started with the CLI
+
+1. In an empty directory, initialize with a sample portfolio
+
+   ```shell
+   adfire init
+   ```
+
+3. Record entries in CSV files, any directory item (and its children) preceded with '.' is ignored
+
+3. Verify records to see errors
+
+   ```shell
+   adfire lint
+   ```
+   
+4. Clean up and format records
+
+   ```shell
+   adfire format
+   ```
+
+5. View reports using PIP installed module packages
+
+   ```shell
+   adfire view <MODULE_NAME>
+   ```
+
+## Writing custom view modules
+
+1. Create a Python package
+
+2. Add `__main__.py`
+
+   1. Define `global portfolio`, which is the `Portfolio` instance passed from Adfire CLI
+   2. Define entrypoint for `__name__ == '__main__'`
+   3. Analyze portfolio and output custom reports
+
+3. Install the package with PIP
+
+   ```shell
+   pip install -e /path/to/package
+   ```
+
+4. Try it out in a formatted portfolio
+
+   ```shell
+   adfire view <PACKAGE_NAME>
+   ```

@@ -38,7 +38,11 @@ def main():
     elif args.mode == 'format':
         portfolio.format()
     elif args.mode == 'view':
-        portfolio.view(args.module)
+        try:
+            module_name = f'adfire.{args.module}'  # try with default modules first
+            portfolio.view(module_name)
+        except ImportError:
+            portfolio.view(args.module)
 
 
 if __name__ == '__main__':
