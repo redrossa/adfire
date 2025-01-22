@@ -15,6 +15,7 @@ def main():
         parser.add_argument(
             'module',
             help='view module')
+        parser.add_argument('args', nargs='*')
     parser.add_argument(
         '-p', '--path',
         help='portfolio path, default to current directory',
@@ -40,9 +41,9 @@ def main():
     elif args.mode == 'view':
         try:
             module_name = f'adfire.{args.module}'  # try with default modules first
-            portfolio.view(module_name)
+            portfolio.view(module_name, *args.args)
         except ImportError:
-            portfolio.view(args.module)
+            portfolio.view(args.module, *args.args)
 
 
 if __name__ == '__main__':

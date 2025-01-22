@@ -3,6 +3,7 @@ import os
 import runpy
 import shutil
 import importlib.util
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -144,11 +145,14 @@ class Portfolio:
             group_df = group_df[EntrySchema.to_schema().columns.keys()]
             write_record(group_df, path)
 
-    def view(self, module: str):
+    def view(self, module: str, *args):
         report_path = f'.reports/{module.removeprefix("adfire.")}'
+        old_argv = sys.argv
         spec = importlib.util.find_spec(module)
         if spec:
             os.makedirs(report_path, exist_ok=True)
             os.chdir(report_path)
+            sys.argv = [module, *args]
         runpy.run_module(module, init_globals={'portfolio': self}, run_name="__main__")
+        sys.argv = old_argv
         os.chdir(self.path.resolve())
