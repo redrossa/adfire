@@ -5,6 +5,7 @@ from pandera.typing import Index
 class EntrySchema(pa.DataFrameModel):
     date: pa.Date
     status: str
+    repeat: str = pa.Field(nullable=True)
     amount: float
     balance_current: float
     balance_total: float
