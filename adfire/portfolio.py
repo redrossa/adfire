@@ -11,7 +11,7 @@ import pandas as pd
 from pandera.typing import DataFrame
 
 from adfire.autofill import assign_transactions, hash_entries, sort_entries, fill_current_balances, \
-    fill_available_balances, fill_total_balances
+    fill_available_balances, fill_total_balances, post_repeat_entries
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
 from adfire.schema import MergedInputEntrySchema, EntrySchema
@@ -111,6 +111,9 @@ class Portfolio:
         """
         # following computations require df to be sorted already
         df = sort_entries(self._merged_entry_dfs)
+
+        # post occurrences of recurring entries
+        df = post_repeat_entries(df)
 
         # autofill balances
         df = fill_current_balances(df)
