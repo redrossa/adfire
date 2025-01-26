@@ -102,12 +102,17 @@ class TestFormat:
         main()
         assert dir_is_equal(tmp_path, sample_formatted_path)
 
-    def test_default_path(self, tmp_path, sample_path):
+    @pytest.mark.freeze_uuids(
+        side_effect='auto_increment',
+        values=['00000000-0000-0000-0000-000000000000', ]
+    )
+    def test_default_path(self, tmp_path, sample_path, sample_formatted_path):
         shutil.copytree(sample_path, tmp_path, dirs_exist_ok=True)
         os.chdir(tmp_path)
 
         sys.argv = ['adfire', 'format']
         main()
+        assert dir_is_equal(tmp_path, sample_formatted_path)
 
 
 class TestView:

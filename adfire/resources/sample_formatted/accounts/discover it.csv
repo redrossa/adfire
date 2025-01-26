@@ -1,4 +1,4 @@
-date,status,amount,balance_current,balance_total,balance_available,balance_limit,entity,account_name,account_mask,account_type,account_subtype,description,category,transaction_id,hash
-2024-11-26,posted,19.99,466.65,466.65,33.35,500.0,UPS,Discover It,0152,credit,credit card,,,00000000-0000-0000-0000-000000000005,15148798625527594474
-2024-11-28,posted,8.0,474.65,474.65,25.35,500.0,Citiline Deli,Discover It,0152,credit,credit card,,,00000000-0000-0000-0000-000000000006,4584628723510969137
-2024-11-29,posted,3.99,478.64,478.64,21.36,500.0,Kroger,Discover It,0152,credit,credit card,,,00000000-0000-0000-0000-000000000007,607745981778284867
+date,status,repeat,amount,balance_current,balance_total,balance_available,balance_limit,entity,account_name,account_mask,account_type,account_subtype,description,category,transaction_id,hash
+2024-11-26,posted,,19.99,466.65,466.65,33.35,500.0,UPS,Discover It,0152,credit,credit card,,,00000000-0000-0000-0000-000000000008,17489757771109496830
+2024-11-28,posted,,8.0,474.65,474.65,25.35,500.0,Citiline Deli,Discover It,0152,credit,credit card,,,00000000-0000-0000-0000-000000000009,7951660800295144138
+2024-11-29,posted,,3.99,478.64,478.64,21.36,500.0,Kroger,Discover It,0152,credit,credit card,,,00000000-0000-0000-0000-00000000000a,9937539559573846678

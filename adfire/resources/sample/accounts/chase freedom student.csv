@@ -1,4 +1,6 @@
-date,status,amount,balance_current,balance_limit,entity,account_name,account_mask,account_type,account_subtype,description,category
-2024-08-04,posted,10.74,10.74,700.0,85C Degrees,Chase Freedom Student,6946,credit,credit card,,FOOD_AND_DRINK_COFFEE
-2024-08-15,posted,25.4,36.14,700.0,Uniqlo,Chase Freedom Student,6946,credit,credit card,,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES
-2024-08-16,posted,-36.14,0.0,700.0,Wealthfront Individual,Chase Freedom Student,6946,credit,credit card,,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT
+date,status,repeat,amount,balance_current,balance_limit,entity,account_name,account_mask,account_type,account_subtype,description,category
+2024-08-04,posted,,10.74,10.74,700.0,85C Degrees,Chase Freedom Student,6946,credit,credit card,,FOOD_AND_DRINK_COFFEE
+2024-08-15,posted,,25.4,36.14,700.0,Uniqlo,Chase Freedom Student,6946,credit,credit card,,GENERAL_MERCHANDISE_CLOTHING_AND_ACCESSORIES
+2024-08-16,posted,,-36.14,0.0,700.0,Wealthfront Individual,Chase Freedom Student,6946,credit,credit card,,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT
+2024-08-16,pending,RRULE:FREQ=MONTHLY,6.48,,700,Spotify,Chase Freedom Student,6946,credit,credit card,,
+2024-08-17,pending,RRULE:FREQ=MONTHLY,8.65,,700,Apple,Chase Freedom Student,6946,credit,credit card,,
