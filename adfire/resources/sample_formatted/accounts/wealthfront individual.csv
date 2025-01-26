@@ -1,3 +1,3 @@
-date,status,amount,balance_current,balance_total,balance_available,balance_limit,entity,account_name,account_mask,account_type,account_subtype,description,category,transaction_id,hash
-2024-08-18,posted,-36.14,-36.14,-36.14,-36.14,,Chase Freedom Student,Wealthfront Individual,73,depository,checking,,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,00000000-0000-0000-0000-000000000002,37074927889769623
-2024-08-21,posted,100.0,63.86,63.86,63.86,,Venmo Personal,Wealthfront Individual,73,depository,checking,,TRANSFER_IN_DEPOSIT,00000000-0000-0000-0000-000000000004,15548797093866340562
+date,status,repeat,amount,balance_current,balance_total,balance_available,balance_limit,entity,account_name,account_mask,account_type,account_subtype,description,category,transaction_id,hash
+2024-08-18,posted,,-36.14,-36.14,-36.14,-36.14,,Chase Freedom Student,Wealthfront Individual,73,depository,checking,,LOAN_PAYMENTS_CREDIT_CARD_PAYMENT,00000000-0000-0000-0000-000000000002,4108577720240061148
+2024-08-21,posted,,100.0,63.86,63.86,63.86,,Venmo Personal,Wealthfront Individual,73,depository,checking,,TRANSFER_IN_DEPOSIT,00000000-0000-0000-0000-000000000006,497942650417687973

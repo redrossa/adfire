@@ -20,6 +20,7 @@ class TestInputEntrySchema:
             {
                 'date': [datetime.date(2024, 8, 24)],
                 'status': ['posted'],
+                'repeat': [None],
                 'amount': [70.0],
                 'balance_current': [np.nan],
                 'balance_total': [np.nan],

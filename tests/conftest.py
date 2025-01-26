@@ -63,3 +63,28 @@ def unfilled_current_balances():
     })
     df = df.set_index(['path', 'entry_id'])
     return df
+
+
+@pytest.fixture
+def posted_repeat_entry():
+    return pd.Series({
+        'path': 'a',
+        'entry_id': 0,
+        'date': pd.to_datetime('2024-08-16').date(),
+        'status': 'posted',
+        'repeat': 'RRULE:FREQ=MONTHLY',
+        'amount': 8.65,
+        'balance_current': np.nan,
+        'balance_total': np.nan,
+        'balance_available': np.nan,
+        'balance_limit': 700.0,
+        'entity': 'Spotify',
+        'account_name': 'Chase Freedom Unlimited',
+        'account_mask': 'xxxx',
+        'account_type': 'credit',
+        'account_subtype': 'credit card',
+        'description': np.nan,
+        'category': np.nan,
+        'transaction_id': np.nan,
+        'hash': np.nan,
+    })

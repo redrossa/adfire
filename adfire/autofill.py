@@ -2,6 +2,7 @@ import uuid
 
 import numpy as np
 import pandas as pd
+from dateutil.rrule import rrulestr
 from pandas.testing import assert_series_equal
 from pandera.typing import DataFrame
 
@@ -9,8 +10,52 @@ from adfire.schema import MergedInputEntrySchema, HashableEntrySchema
 
 
 def sort_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
-    """Sort entries by ascending date. TODO: add future sorting specifications here."""
     return df.sort_values(by=['date', 'entry_id'], ascending=[True, True])
+
+
+def post_repeat_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
+    df['date'] = pd.to_datetime(df['date'])
+
+    def get_occurrence_dates(repeat, dtstart, dtend):
+        rruleo = rrulestr(repeat, dtstart=dtstart)
+        dates = [dtstart]
+        dates += rruleo.between(dtstart, dtend)
+        dates.append(rruleo.after(dtend))
+        dates = [pd.to_datetime(x) for x in dates]
+        return dates
+
+    for account, group_df in df.groupby('account_name'):
+        # mask entries for non-null repeat rules
+        mask_repeat = df['repeat'].notna()
+        repeat_df = group_df[mask_repeat].reset_index()
+
+        # mask entries for posted
+        mask_posted = group_df['status'] == 'posted'
+        posted_df = group_df[mask_posted]
+
+        # mask repeat entries for within latest posted dates
+        latest_posted_date = posted_df.iloc[-1]['date'] if len(posted_df) else pd.Timestamp.min
+        mask_posted_date = repeat_df['date'] <= latest_posted_date
+        repeat_df = repeat_df[mask_posted_date]
+
+        # transform repeat entries columns into list for pandas.DataFrame.explode
+        repeat_df['date'] = [get_occurrence_dates(repeat, date, latest_posted_date) for repeat, date in zip(repeat_df['repeat'], repeat_df['date'])]
+        repeat_df['status'] = [['pending' if i == len(date) - 1 else 'posted' for i, d in enumerate(date)] for date in repeat_df['date']]
+        repeat_df['repeat'] = [[repeat if i == len(date) - 1 else np.nan for i, d in enumerate(date)] for date, repeat in zip(repeat_df['date'], repeat_df['repeat'])]
+        repeat_df['entry_id'] = [[entry_id if i == 0 else len(group_df) + i - 1 for i, d in enumerate(date)] for date, entry_id in zip(repeat_df['date'], repeat_df['entry_id'])]
+
+        # explode list-like repeat entries to individual rows
+        occurrences_df = repeat_df.explode(['entry_id', 'date', 'status', 'repeat'], ignore_index=True)
+        occurrences_df = occurrences_df.set_index(['path', 'entry_id'])
+
+        # add occurrences into original df
+        df = pd.concat([df.drop(index=occurrences_df.index, errors='ignore'), occurrences_df])
+
+    # clean up
+    df = sort_entries(df)
+    df = MergedInputEntrySchema.validate(df)
+
+    return df
 
 
 def fill_current_balances(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[MergedInputEntrySchema]:
