@@ -26,7 +26,7 @@ def post_repeat_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Merg
 
     for account, group_df in df.groupby('account_name'):
         # mask entries for non-null repeat rules
-        mask_repeat = df['repeat'].notna()
+        mask_repeat = group_df['repeat'].notna()
         repeat_df = group_df[mask_repeat].reset_index()
 
         # mask entries for posted
@@ -48,8 +48,10 @@ def post_repeat_entries(df: DataFrame[MergedInputEntrySchema]) -> DataFrame[Merg
         occurrences_df = repeat_df.explode(['entry_id', 'date', 'status', 'repeat'], ignore_index=True)
         occurrences_df = occurrences_df.set_index(['path', 'entry_id'])
 
-        # add occurrences into original df
-        df = pd.concat([df.drop(index=occurrences_df.index, errors='ignore'), occurrences_df])
+        # add occurrences into original df; need to add this if-else to suppress FutureWarning
+        occurrences_df = occurrences_df.astype(df.dtypes) if occurrences_df.empty else occurrences_df
+        df = df.loc[~df.index.isin(occurrences_df.index)]
+        df = pd.concat([df, occurrences_df])
 
     # clean up
     df = sort_entries(df)
