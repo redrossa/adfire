@@ -242,6 +242,7 @@ def hash_entries(df: DataFrame[MergedInputEntrySchema], forced_hash = False) -> 
     hashable_df = HashableEntrySchema.validate(df, lazy=True)
 
     # compute hashes
+    hashable_df = hashable_df.copy()
     hashable_df['hash'] = pd.util.hash_pandas_object(hashable_df, index=False).astype(str)  # without astype it's uint
 
     # verify input hashed entries have equal computed hashes
