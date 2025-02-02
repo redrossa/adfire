@@ -38,7 +38,8 @@ class TestInitMode:
         shutil.copytree(sample_path, tmp_path, dirs_exist_ok=True)
 
         sys.argv = ['adfire', 'init', '--path', str(tmp_path)]
-        with pytest.raises(FileExistsError, match=f"'{tmp_path}/portfolio.json' already exists"):
+        path = str(tmp_path / 'portfolio.json').replace('\\', '\\\\')
+        with pytest.raises(FileExistsError, match=fr"'{path}' already exists"):
             main()
 
     def test_default_path(self, tmp_path, sample_path):
@@ -52,7 +53,8 @@ class TestInitMode:
 class TestLintMode:
     def test_on_empty_dir(self, tmp_path):
         sys.argv = ['adfire', 'lint', '--path', str(tmp_path)]
-        with pytest.raises(FileNotFoundError, match=f"'{tmp_path}/portfolio.json' does not exist"):
+        path = str(tmp_path / 'portfolio.json').replace('\\', '\\\\')
+        with pytest.raises(FileNotFoundError, match=f"'{path}' does not exist"):
             main()
 
     def test_on_uninitialized_portfolio(self, tmp_path, sample_path):
@@ -60,7 +62,8 @@ class TestLintMode:
         os.remove(tmp_path / 'portfolio.json')
 
         sys.argv = ['adfire', 'lint', '--path', str(tmp_path)]
-        with pytest.raises(FileNotFoundError, match=f"'{tmp_path}/portfolio.json' does not exist"):
+        path = str(tmp_path / 'portfolio.json').replace('\\', '\\\\')
+        with pytest.raises(FileNotFoundError, match=f"'{path}' does not exist"):
             main()
 
     def test_on_initialized_portfolio(self, tmp_path, sample_path):
@@ -80,7 +83,8 @@ class TestLintMode:
 class TestFormat:
     def test_on_empty_dir(self, tmp_path):
         sys.argv = ['adfire', 'format', '--path', str(tmp_path)]
-        with pytest.raises(FileNotFoundError, match=f"'{tmp_path}/portfolio.json' does not exist"):
+        path = str(tmp_path / 'portfolio.json').replace('\\', '\\\\')
+        with pytest.raises(FileNotFoundError, match=f"'{path}' does not exist"):
             main()
 
     def test_on_uninitialized_portfolio(self, tmp_path, sample_path):
@@ -88,7 +92,8 @@ class TestFormat:
         os.remove(tmp_path / 'portfolio.json')
 
         sys.argv = ['adfire', 'format', '--path', str(tmp_path)]
-        with pytest.raises(FileNotFoundError, match=f"'{tmp_path}/portfolio.json' does not exist"):
+        path = str(tmp_path / 'portfolio.json').replace('\\', '\\\\')
+        with pytest.raises(FileNotFoundError, match=f"'{path}' does not exist"):
             main()
 
     @pytest.mark.freeze_uuids(
@@ -118,7 +123,8 @@ class TestFormat:
 class TestView:
     def test_on_empty_dir(self, tmp_path):
         sys.argv = ['adfire', 'view', 'tests.sample_view', '--path', str(tmp_path)]
-        with pytest.raises(FileNotFoundError, match=f"'{tmp_path}/portfolio.json' does not exist"):
+        path = str(tmp_path / 'portfolio.json').replace('\\', '\\\\')
+        with pytest.raises(FileNotFoundError, match=f"'{path}' does not exist"):
             main()
 
     def test_on_uninitialized_portfolio(self, tmp_path, sample_path):
@@ -126,13 +132,14 @@ class TestView:
         os.remove(tmp_path / 'portfolio.json')
 
         sys.argv = ['adfire', 'view', 'tests.sample_view', '--path', str(tmp_path)]
-        with pytest.raises(FileNotFoundError, match=f"'{tmp_path}/portfolio.json' does not exist"):
+        path = str(tmp_path / 'portfolio.json').replace('\\', '\\\\')
+        with pytest.raises(FileNotFoundError, match=f"'{path}' does not exist"):
             main()
 
     def test_with_uninstalled_view_module(self, tmp_path, sample_path):
         shutil.copytree(sample_path, tmp_path, dirs_exist_ok=True)
 
-        view_module = 'sample_view'
+        view_module = 'uninstalled_module'
         sys.argv = ['adfire', 'view', view_module, '--path', str(tmp_path)]
         with pytest.raises(ImportError, match=f"No module named {view_module}"):
             main()
