@@ -58,3 +58,19 @@ class AccountBalancesSchema(pa.DataFrameModel):
 
     class Config:
         strict = 'filter'
+
+
+class BaseInputSchema(pa.DataFrameModel):
+    path: Index[str]
+    entry_id: Index[int]
+
+    class Config:
+        strict = False
+        coerce = True
+
+
+class CoreSchema(BaseInputSchema):
+    date: pa.DateTime
+    amount: float
+    account: str
+    name: str

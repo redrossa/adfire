@@ -1,8 +1,8 @@
+import importlib.util
 import json
 import os
 import runpy
 import shutil
-import importlib.util
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -10,11 +10,9 @@ from types import SimpleNamespace
 import pandas as pd
 from pandera.typing import DataFrame
 
-from adfire.autofill import assign_transactions, hash_entries, sort_entries, fill_current_balances, \
-    fill_available_balances, fill_total_balances, post_repeat_entries
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
-from adfire.schema import MergedInputEntrySchema, EntrySchema
+from adfire.schema import EntrySchema, BaseInputSchema, CoreSchema
 
 
 def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
@@ -29,7 +27,7 @@ def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
         return metadata
 
 
-def _read_entry_files_from_dir(path: Path) -> DataFrame[MergedInputEntrySchema]:
+def _read_entry_files_from_dir(path: Path) -> DataFrame[BaseInputSchema]:
     """Reads all entry files in a directory and merge them into a dataframe"""
     records = []
     for item in path.rglob('*.csv'):
@@ -43,7 +41,7 @@ def _read_entry_files_from_dir(path: Path) -> DataFrame[MergedInputEntrySchema]:
 
     if records:
         df = pd.concat([df for name, df in records], keys=[name for name, df in records], names=['path', 'entry_id'])
-        df = MergedInputEntrySchema.validate(df)
+        df = BaseInputSchema.validate(df)
     else:
         df = None
 
@@ -61,7 +59,7 @@ class Portfolio:
         self._forced_hash = False
 
     @property
-    def linted(self) -> DataFrame[MergedInputEntrySchema]:
+    def linted(self) -> DataFrame[BaseInputSchema]:
         if self._linted is None:
             self._linted = self.lint()
         return self._linted
@@ -104,35 +102,12 @@ class Portfolio:
 
         return cls(path)
 
-    def lint(self) -> DataFrame[MergedInputEntrySchema]:
+    def lint(self) -> DataFrame[CoreSchema]:
         """
         Validates entries in this portfolio. If there are invalid entries,
         raises an error.
         """
-        # following computations require df to be sorted already
-        df = sort_entries(self._merged_entry_dfs)
-
-        # post occurrences of recurring entries
-        df = post_repeat_entries(df)
-
-        # autofill balances
-        df = fill_current_balances(df)
-        df = fill_total_balances(df)
-        df = fill_available_balances(df)
-
-        # assign ids (include pairing)
-        df = assign_transactions(df)
-
-        # assign hashes (depends on order of entries in the account)
-        df = hash_entries(df, forced_hash=self.forced_hash)
-
-        # round numbers to cents
-        df = df.round(2)
-        df = df.replace(-0.0, 0.0)
-
-        # validate with final schema
-        df = MergedInputEntrySchema.validate(df)
-        df = df[MergedInputEntrySchema.to_schema().columns.keys()]
+        df = CoreSchema.validate(self._merged_entry_dfs)
 
         return df
 
