@@ -5,6 +5,7 @@ on:
 
 jobs:
   run-unit-tests:
+    name: Unit Tests
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
