@@ -13,4 +13,5 @@ class CoreSchema(BaseInputSchema):
 
 class CoreLinter(BaseLinter):
     def lint(self, df: pd.DataFrame) -> pd.DataFrame:
+        raise Exception("Not implemented")
         return CoreSchema(df)
