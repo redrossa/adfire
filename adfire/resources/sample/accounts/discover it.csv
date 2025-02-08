@@ -1,4 +1,0 @@
-date,status,amount,balance_current,balance_limit,entity,account_name,account_mask,account_type,account_subtype
-2024-11-26,posted,19.99,,500.0,UPS,Discover It,0152,credit,credit card
-2024-11-28,posted,8.0,,500.0,Citiline Deli,Discover It,0152,credit,credit card
-2024-11-29,posted,3.99,478.64,500.0,Kroger,Discover It,0152,credit,credit card
