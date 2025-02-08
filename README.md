@@ -1,6 +1,6 @@
 # Adfire: Accounting platform for achieving FIRE
 
-![Unit Tests](https://github.com/redrossa/adfire/actions/workflows/unit-tests.yaml/badge.svg)
+![Unit Tests](https://github.com/redrossa/adfire/actions/workflows/unit-tests.yaml/badge.svg?branch=master)
 
 Adfire is a tool to assist personal finance enthusiasts in implementing the FIRE strategy in their lifestyle. This tool
 provides a platform for users to record income, expenses and savings, and quickly build custom analyses tailored to 
