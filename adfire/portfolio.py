@@ -12,7 +12,8 @@ from pandera.typing import DataFrame
 
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
-from adfire.schema import EntrySchema, BaseInputSchema, CoreSchema
+from adfire.lint.base import BaseInputSchema
+from adfire.lint.core import CoreLinter
 
 
 def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
@@ -59,7 +60,7 @@ class Portfolio:
         self._forced_hash = False
 
     @property
-    def linted(self) -> DataFrame[BaseInputSchema]:
+    def linted(self) -> pd.DataFrame:
         if self._linted is None:
             self._linted = self.lint()
         return self._linted
@@ -102,12 +103,18 @@ class Portfolio:
 
         return cls(path)
 
-    def lint(self) -> DataFrame[CoreSchema]:
+    def lint(self) -> pd.DataFrame:
         """
         Validates entries in this portfolio. If there are invalid entries,
         raises an error.
         """
-        df = CoreSchema.validate(self._merged_entry_dfs)
+        linters = [
+            CoreLinter(),
+        ]
+
+        df = self._merged_entry_dfs
+        for linter in linters:
+            df = linter.lint(df)
 
         return df
 
@@ -119,8 +126,6 @@ class Portfolio:
         df = self.linted
         groups = df.groupby('path')
         for path, group_df in groups:
-            group_df = EntrySchema.validate(group_df)
-            group_df = group_df[EntrySchema.to_schema().columns.keys()]
             write_record(group_df, path)
 
     def view(self, module: str, *args):
