@@ -12,9 +12,8 @@ from pandera.typing import DataFrame
 
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
+from adfire.lint import Linter
 from adfire.lint.base import BaseInputSchema
-from adfire.lint.currencies import CurrencyLinter
-from adfire.lint.transactions import TransactionLinter
 
 
 def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
@@ -109,16 +108,7 @@ class Portfolio:
         Validates entries in this portfolio. If there are invalid entries,
         raises an error.
         """
-        linters = [
-            CurrencyLinter(),
-            TransactionLinter(),
-        ]
-
-        df = self._merged_entry_dfs
-        for linter in linters:
-            df = linter.lint(df)
-
-        return df
+        return Linter(config=self._metadata).lint(self._merged_entry_dfs)
 
     def format(self):
         """

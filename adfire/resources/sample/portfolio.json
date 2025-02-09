@@ -1,3 +1,74 @@
 {
-  "name": "My Portfolio"
+  "name": "My Portfolio",
+  "accounts": [
+    {
+      "names": [
+        "Amex Gold"
+      ],
+      "users": [
+        {
+          "masks": [
+            "51001"
+          ],
+          "name": "Muhammad A Raksi"
+        },
+        {
+          "masks": [
+            "51019",
+            "51012"
+          ],
+          "name": "Nadya A Raksi"
+        }
+      ]
+    },
+    {
+      "names": [
+        "Robinhood Individual"
+      ],
+      "users": [
+        {
+          "masks": [
+            "3674"
+          ],
+          "name": "Muhammad A Raksi"
+        }
+      ]
+    },
+    {
+      "names": [
+        "Wealthfront Individual"
+      ],
+      "users": [
+        {
+          "masks": [
+            "6373"
+          ],
+          "name": "Muhammad A Raksi"
+        }
+      ]
+    },
+    {
+      "names": [
+        "Alight HSA"
+      ],
+      "users": [
+        {
+          "masks": [
+            "1293"
+          ],
+          "name": "Muhammad A Raksi"
+        }
+      ]
+    },
+    {
+      "names": [
+        "Alight 401k"
+      ],
+      "users": [
+        {
+          "name": "Muhammad A Raksi"
+        }
+      ]
+    }
+  ]
 }
