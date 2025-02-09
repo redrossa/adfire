@@ -1,20 +1,18 @@
 import numpy as np
 import pandas as pd
 
-from adfire.lint.base import BaseLinter
-from adfire.lint.core import CoreSchema
+from adfire.lint.base import BaseLinter, BaseInputSchema
 from adfire.lint.exceptions import LintError
 
 
-class TransactionSchema(CoreSchema):
+class TransactionSchema(BaseInputSchema):
     worth: float
-    account: str
     name: str
 
 
 class TransactionLinter(BaseLinter):
     def lint(self, df: pd.DataFrame) -> pd.DataFrame:
-        df = TransactionSchema(df)
+        df: pd.DataFrame = TransactionSchema(df)
         sum_by_transaction = df.groupby('name')['worth'].sum()
         non_zero_sums = ~np.isclose(sum_by_transaction, 0)
         if any(non_zero_sums):
