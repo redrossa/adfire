@@ -1,0 +1,5 @@
+date,account,name,amount,symbol,rate
+2025-03-03,Robinhood Individual,NVDA purchase A,-55.0,USD,1
+2025-03-03,Robinhood Individual,NVDA purchase A,1.0,AMD,55
+2025-04-03,Robinhood Individual,NVDA purchase B,-105.0,USD,1
+2025-04-03,Robinhood Individual,NVDA purchase B,1.0,NVDA,105

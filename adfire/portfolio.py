@@ -13,7 +13,7 @@ from pandera.typing import DataFrame
 from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
 from adfire.lint.base import BaseInputSchema
-from adfire.lint.core import CoreLinter
+from adfire.lint.currencies import CurrencyLinter
 from adfire.lint.transactions import TransactionLinter
 
 
@@ -110,7 +110,7 @@ class Portfolio:
         raises an error.
         """
         linters = [
-            CoreLinter(),
+            CurrencyLinter(),
             TransactionLinter(),
         ]
 
