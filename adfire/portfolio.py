@@ -14,6 +14,7 @@ from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
 from adfire.lint.base import BaseInputSchema
 from adfire.lint.core import CoreLinter
+from adfire.lint.transactions import TransactionLinter
 
 
 def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
@@ -110,6 +111,7 @@ class Portfolio:
         """
         linters = [
             CoreLinter(),
+            TransactionLinter(),
         ]
 
         df = self._merged_entry_dfs

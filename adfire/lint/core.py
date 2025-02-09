@@ -6,7 +6,7 @@ from adfire.lint.base import BaseInputSchema, BaseLinter
 
 class CoreSchema(BaseInputSchema):
     date: pa.DateTime
-    amount: float
+    worth: float
     account: str
     name: str
 
