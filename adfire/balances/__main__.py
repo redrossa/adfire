@@ -13,7 +13,7 @@ def main():
     balances_df['worth'] = mapped_df.groupby('account_id')['worth'].sum()
     reverse_mapping = accounts_mapping.reset_index().groupby('account_id').last()
     balances_df.index = reverse_mapping.loc[balances_df.index.astype(int), 'account_name']
-    write_record(balances_df, 'balances.csv', index=True)
+    write_record(balances_df, 'index.csv', index=True)
 
 
 if __name__ == "__main__":

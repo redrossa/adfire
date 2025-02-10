@@ -1,10 +1,10 @@
-date,account_name,account_mask,name,amount,symbol,rate
-2025-01-10,SLB Base Salary,,Salary statement,-3757.5,USD,1
-2025-01-10,SLB Salaried-Vacation,,Salary statement,-417.5,USD,1
-2025-01-08,Wealthfront Individual,6373,Salary statement,3092.56,USD,1
-2025-01-10,Alight 401k,,Salary statement,417.5,USD,1
-2025-01-10,Alight HSA,1293,Salary statement,142.3,USD,1
-2025-01-10,Vision Insurance,,Salary statement,4.62,USD,1
-2025-01-10,Dental Insurance,,Salary statement,4.62,USD,1
-2025-01-10,Medical Insurance,,Salary statement,42.46,USD,1
-2025-01-10,Federal Withholding Tax,,Salary statement,470.94,USD,1
+date,account_name,account_mask,name,amount,symbol,rate,category
+2025-01-10,SLB Base Salary,,Salary statement,-3757.5,USD,1,income.salary.gross
+2025-01-10,SLB Salaried-Vacation,,Salary statement,-417.5,USD,1,income.salary.gross
+2025-01-08,Wealthfront Individual,6373,Salary statement,3092.56,USD,1,income.salary.takehome
+2025-01-10,Alight 401k,,Salary statement,417.5,USD,1,savings.investments
+2025-01-10,Alight HSA,1293,Salary statement,142.3,USD,1,savings.investments
+2025-01-10,Vision Insurance,,Salary statement,4.62,USD,1,expenses.medical
+2025-01-10,Dental Insurance,,Salary statement,4.62,USD,1,expenses.medical
+2025-01-10,Medical Insurance,,Salary statement,42.46,USD,1,expenses.medical
+2025-01-10,Federal Withholding Tax,,Salary statement,470.94,USD,1,expenses.taxes
