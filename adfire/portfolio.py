@@ -3,18 +3,17 @@ import os
 import runpy
 import shutil
 import sys
-from pip._vendor import tomli as tomllib
 from pathlib import Path
 from types import SimpleNamespace
 
 import pandas as pd
 from pandera.typing import DataFrame
+from pip._vendor import tomli as tomllib
 
-from adfire.config import RESOURCES_PATH
-from adfire.io import read_record, write_record
-from adfire.lint import Linter
-from adfire.lint.base import BaseInputSchema
-from adfire.utils import dict_to_namespace
+import adfire.config as config
+import adfire.io as io
+import adfire.lint as lint
+import adfire.utils as utils
 
 
 def _read_config_from_dir(path: Path) -> SimpleNamespace:
@@ -26,11 +25,11 @@ def _read_config_from_dir(path: Path) -> SimpleNamespace:
         raise FileNotFoundError(f"'{metadata_path}' does not exist") from e
     with f:
         config_dict = tomllib.load(f)
-        config = dict_to_namespace(config_dict)
+        config = utils.dict_to_namespace(config_dict)
         return config
 
 
-def _read_entry_files_from_dir(path: Path) -> DataFrame[BaseInputSchema]:
+def _read_entry_files_from_dir(path: Path) -> DataFrame[lint.BaseInputSchema]:
     """Reads all entry files in a directory and merge them into a dataframe"""
     records = []
     for item in path.rglob('*.csv'):
@@ -39,12 +38,12 @@ def _read_entry_files_from_dir(path: Path) -> DataFrame[BaseInputSchema]:
             continue
         item = item.resolve()
         if item.is_file():
-            df = read_record(item)
+            df = io.read_record(item)
             records.append((item, df))
 
     if records:
         df = pd.concat([df for name, df in records], keys=[name for name, df in records], names=['path', 'entry_id'])
-        df = BaseInputSchema.validate(df)
+        df = lint.BaseInputSchema.validate(df)
     else:
         df = None
 
@@ -60,6 +59,10 @@ class Portfolio:
         self._merged_entry_dfs = _read_entry_files_from_dir(self.path)
         self._linted = None
         self._forced_hash = False
+
+    @property
+    def config(self) -> SimpleNamespace:
+        return self._config
 
     @property
     def linted(self) -> pd.DataFrame:
@@ -93,10 +96,10 @@ class Portfolio:
         dir_is_empty = path.exists() and path.is_dir() and not any(path.iterdir())
 
         if not dir_is_empty:
-            sample_file_path = RESOURCES_PATH / 'sample/portfolio.toml'
+            sample_file_path = config.RESOURCES_PATH / 'sample/portfolio.toml'
             shutil.copyfile(sample_file_path, metadata_path)
         else:
-            sample_path = RESOURCES_PATH / 'sample'
+            sample_path = config.RESOURCES_PATH / 'sample'
             shutil.copytree(
                 sample_path,
                 path,
@@ -110,7 +113,7 @@ class Portfolio:
         Validates entries in this portfolio. If there are invalid entries,
         raises an error.
         """
-        return Linter(config=self._config).lint(self._merged_entry_dfs)
+        return lint.lint(self._merged_entry_dfs, config=self.config)
 
     def format(self):
         """
@@ -120,7 +123,7 @@ class Portfolio:
         df = self.linted
         groups = df.groupby('path')
         for path, group_df in groups:
-            write_record(group_df, path)
+            io.write_record(group_df, path)
 
     def view(self, module: str, *args):
         report_path = f'.reports/{module.removeprefix("adfire.")}'

@@ -1,9 +1,6 @@
-from abc import ABC, abstractmethod
-
 import pandas as pd
 import pandera as pa
 from pandera.typing import Index
-
 
 class BaseInputSchema(pa.DataFrameModel):
     path: Index[str]
@@ -14,10 +11,6 @@ class BaseInputSchema(pa.DataFrameModel):
         coerce = True
 
 
-class BaseLinter(ABC):
-    @abstractmethod
-    def lint(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Processes the DataFrame and returns a modified DataFrame.
-        """
-        pass
+def lint(df: pd.DataFrame, **kwargs) -> pd.DataFrame:
+    import adfire.lint.accounts as accounts
+    return accounts.lint(df, **kwargs)

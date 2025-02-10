@@ -96,10 +96,6 @@ class TestFormat:
         with pytest.raises(FileNotFoundError, match=f"'{path}' does not exist"):
             main()
 
-    @pytest.mark.freeze_uuids(
-        side_effect='auto_increment',
-        values=['00000000-0000-0000-0000-000000000000', ]
-    )
     def test_on_initialized_portfolio(self, tmp_path, sample_path, sample_formatted_path):
         shutil.copytree(sample_path, tmp_path, dirs_exist_ok=True)
 
@@ -107,10 +103,6 @@ class TestFormat:
         main()
         assert dir_is_equal(tmp_path, sample_formatted_path)
 
-    @pytest.mark.freeze_uuids(
-        side_effect='auto_increment',
-        values=['00000000-0000-0000-0000-000000000000', ]
-    )
     def test_default_path(self, tmp_path, sample_path, sample_formatted_path):
         shutil.copytree(sample_path, tmp_path, dirs_exist_ok=True)
         os.chdir(tmp_path)

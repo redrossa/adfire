@@ -1,6 +1,6 @@
 import pandas as pd
 
-from adfire.lint.base import BaseLinter, BaseInputSchema
+from adfire.lint.base import BaseInputSchema
 
 
 class CurrencySchema(BaseInputSchema):
@@ -9,9 +9,7 @@ class CurrencySchema(BaseInputSchema):
     rate: float
 
 
-class CurrencyLinter(BaseLinter):
-    def lint(self, df: pd.DataFrame) -> pd.DataFrame:
-        df: pd.DataFrame = CurrencySchema(df)
-        df['worth'] = df['amount'] * df['rate']
-        return df
-
+def lint(df: pd.DataFrame, **kwargs) -> pd.DataFrame:
+    df: pd.DataFrame = CurrencySchema(df)
+    df['worth'] = df['amount'] * df['rate']
+    return df
