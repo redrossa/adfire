@@ -10,7 +10,18 @@ readme = 'README.md'
 requires-python = '>=3.8'
 keywords = ['finance', 'accounting', 'personal finance']
 authors = [
-  {name = 'Redrossa' }
+  { name = 'Redrossa' }
+]
+dependencies = [
+  'pandas~=2.2.3',
+  'numpy~=2.0.2',
+  'pandera~=0.20.4',
+  'matplotlib~=3.9.4',
+]
+
+[project.optional-dependencies]
+tests = [
+  'pytest~=8.3.3',
 ]
 
 [project.urls]
