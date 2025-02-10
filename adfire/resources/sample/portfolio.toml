@@ -1,32 +1,24 @@
-name = 'My Portfolio'
+names = 'My Portfolio'
 
 [[accounts]]
 names = ['Amex Gold']
-users = [
-    { name = 'Muhammad A Raksi', masks = ['51001'] },
-    { name = 'Nadya A Raksi', masks = ['51019', '51012'] },
-]
+masks = ['51001', '51019', '51012']
 
 [[accounts]]
 names = ['Robinhood Individual']
-users = [
-    { name = 'Muhammad A Raksi', masks = ['3674'] },
-]
+masks = ['3674']
 
 [[accounts]]
 names = ['Wealthfront Individual']
-users = [
-    { name = 'Muhammad A Raksi', masks = ['6373'] },
-]
+masks = ['6373']
 
 [[accounts]]
 names = ['Alight HSA']
-users = [
-    { name = 'Muhammad A Raksi', masks = ['1293'] },
-]
+masks = ['1293']
 
 [[accounts]]
 names = ['Alight 401k']
-users = [
-    { name = 'Muhammad A Raksi' },
-]
+
+[[accounts]]
+names = ['Chase Freedom Student', 'Chase Freedom Unlimited']
+masks = ['6946']

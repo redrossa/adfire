@@ -79,12 +79,12 @@ class Portfolio:
     @classmethod
     def from_new(cls, path: os.PathLike) -> 'Portfolio':
         """
-        Defines directory as a portfolio. If 'portfolio.json' exists, raises an error.
+        Defines directory as a portfolio. If 'portfolio.toml' exists, raises an error.
         Otherwise, if directory is empty, populate with sample portfolio; if not empty,
-        create 'portfolio.json' from sample.
+        create 'portfolio.toml' from sample.
         """
         path = Path(path)
-        metadata_path = path / 'portfolio.json'
+        metadata_path = path / 'portfolio.toml'
         metadata_file_exists = metadata_path.is_file()
 
         if metadata_file_exists:
@@ -93,7 +93,7 @@ class Portfolio:
         dir_is_empty = path.exists() and path.is_dir() and not any(path.iterdir())
 
         if not dir_is_empty:
-            sample_file_path = RESOURCES_PATH / 'sample/portfolio.json'
+            sample_file_path = RESOURCES_PATH / 'sample/portfolio.toml'
             shutil.copyfile(sample_file_path, metadata_path)
         else:
             sample_path = RESOURCES_PATH / 'sample'
