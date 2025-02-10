@@ -1,9 +1,9 @@
 import importlib.util
-import json
 import os
 import runpy
 import shutil
 import sys
+from pip._vendor import tomli as tomllib
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -14,18 +14,20 @@ from adfire.config import RESOURCES_PATH
 from adfire.io import read_record, write_record
 from adfire.lint import Linter
 from adfire.lint.base import BaseInputSchema
+from adfire.utils import dict_to_namespace
 
 
-def _read_metadata_from_dir(path: Path) -> SimpleNamespace:
-    """Reads 'portfolio.json' in a directory"""
-    metadata_path = path / 'portfolio.json'
+def _read_config_from_dir(path: Path) -> SimpleNamespace:
+    """Reads 'portfolio.toml' in a directory"""
+    metadata_path = path / 'portfolio.toml'
     try:
-        f = open(metadata_path, 'r')
+        f = open(metadata_path, 'rb')
     except FileNotFoundError as e:
         raise FileNotFoundError(f"'{metadata_path}' does not exist") from e
     with f:
-        metadata = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
-        return metadata
+        config_dict = tomllib.load(f)
+        config = dict_to_namespace(config_dict)
+        return config
 
 
 def _read_entry_files_from_dir(path: Path) -> DataFrame[BaseInputSchema]:
@@ -54,7 +56,7 @@ class Portfolio:
         """Creates a portfolio object from a directory."""
         self.path = Path(path)
 
-        self._metadata = _read_metadata_from_dir(self.path)
+        self._config = _read_config_from_dir(self.path)
         self._merged_entry_dfs = _read_entry_files_from_dir(self.path)
         self._linted = None
         self._forced_hash = False
@@ -77,12 +79,12 @@ class Portfolio:
     @classmethod
     def from_new(cls, path: os.PathLike) -> 'Portfolio':
         """
-        Defines directory as a portfolio. If 'portfolio.json' exists, raises an error.
+        Defines directory as a portfolio. If 'portfolio.toml' exists, raises an error.
         Otherwise, if directory is empty, populate with sample portfolio; if not empty,
-        create 'portfolio.json' from sample.
+        create 'portfolio.toml' from sample.
         """
         path = Path(path)
-        metadata_path = path / 'portfolio.json'
+        metadata_path = path / 'portfolio.toml'
         metadata_file_exists = metadata_path.is_file()
 
         if metadata_file_exists:
@@ -91,7 +93,7 @@ class Portfolio:
         dir_is_empty = path.exists() and path.is_dir() and not any(path.iterdir())
 
         if not dir_is_empty:
-            sample_file_path = RESOURCES_PATH / 'sample/portfolio.json'
+            sample_file_path = RESOURCES_PATH / 'sample/portfolio.toml'
             shutil.copyfile(sample_file_path, metadata_path)
         else:
             sample_path = RESOURCES_PATH / 'sample'
@@ -108,7 +110,7 @@ class Portfolio:
         Validates entries in this portfolio. If there are invalid entries,
         raises an error.
         """
-        return Linter(config=self._metadata).lint(self._merged_entry_dfs)
+        return Linter(config=self._config).lint(self._merged_entry_dfs)
 
     def format(self):
         """

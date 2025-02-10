@@ -1,0 +1,24 @@
+names = 'My Portfolio'
+
+[[accounts]]
+names = ['Amex Gold']
+masks = ['51001', '51019', '51012']
+
+[[accounts]]
+names = ['Robinhood Individual']
+masks = ['3674']
+
+[[accounts]]
+names = ['Wealthfront Individual']
+masks = ['6373']
+
+[[accounts]]
+names = ['Alight HSA']
+masks = ['1293']
+
+[[accounts]]
+names = ['Alight 401k']
+
+[[accounts]]
+names = ['Chase Freedom Student', 'Chase Freedom Unlimited']
+masks = ['6946']
