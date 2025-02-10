@@ -40,7 +40,8 @@ their needs, or use and share other users' projections.
 5. Install dependencies
 
    ```shell
-   pip install -r requirements.txt
+   pip install .
+   pip install .[tests]
    ```
 
 6. Install Adfire as a package
