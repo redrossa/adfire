@@ -3,7 +3,7 @@ import os
 import runpy
 import shutil
 import sys
-import tomllib
+from pip._vendor import tomli as tomllib
 from pathlib import Path
 from types import SimpleNamespace
 
