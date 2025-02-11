@@ -2,8 +2,8 @@ date,account_name,account_mask,name,amount,symbol,rate,category
 2025-03-03,Wealthfront Individual,6373,Transfer A,-55,USD,1,
 2025-03-03,Robinhood Individual,3674,Transfer A,55,USD,1,
 2025-03-03,Robinhood Individual,3674,NVDA purchase A,-55.0,USD,1,
-2025-03-03,Robinhood Individual,3674,NVDA purchase A,1.0,AMD,55,savings.investments
+2025-03-03,Robinhood Individual,3674,NVDA purchase A,1.0,AMD,55,savings.aftertax.investments
 2025-04-03,Wealthfront Individual,6373,Transfer B,-105,USD,1,
 2025-04-03,Robinhood Individual,3674,Transfer B,105,USD,1,
 2025-04-03,Robinhood Individual,3674,NVDA purchase B,-105.0,USD,1,
-2025-04-03,Robinhood Individual,3674,NVDA purchase B,1.0,NVDA,105,savings.investments
+2025-04-03,Robinhood Individual,3674,NVDA purchase B,1.0,NVDA,105,savings.aftertax.investments
