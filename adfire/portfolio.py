@@ -13,6 +13,7 @@ from pip._vendor import tomli as tomllib
 import adfire.config as config
 import adfire.io as io
 import adfire.lint as lint
+import adfire.overview as ov
 import adfire.utils as utils
 
 
@@ -126,6 +127,7 @@ class Portfolio:
             io.write_record(group_df, path)
 
     def view(self, module: str, *args):
+        ov.report(self.linted)
         report_path = f'.reports/{module.removeprefix("adfire.")}'
         old_argv = sys.argv
         spec = importlib.util.find_spec(module)

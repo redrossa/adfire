@@ -1,3 +1,4 @@
+import json
 import os
 
 import pandas as pd
@@ -13,6 +14,14 @@ def write_record(df, path, index: bool = False):
     if dirname and not os.path.exists(dirname):
         os.mkdir(dirname)
     df.to_csv(path, index=index)
+
+
+def write_json(obj, path):
+    dirname = os.path.dirname(path)
+    if dirname and not os.path.exists(dirname):
+        os.mkdir(dirname)
+    with open(path, 'w') as file:
+        json.dump(obj, file, indent=4)
 
 
 def read_checksum(path) -> pd.Series:
