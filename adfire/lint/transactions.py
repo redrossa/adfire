@@ -18,7 +18,7 @@ def lint(df: pd.DataFrame, **kwargs) -> pd.DataFrame:
 
     # find transactions whose input and output difference is not zero
     sum_by_transaction = df.groupby('name')['worth'].sum()
-    non_zero_sums = ~np.isclose(sum_by_transaction, 0)
+    non_zero_sums = ~np.isclose(sum_by_transaction, 0, atol=0.01)
 
     if any(non_zero_sums):
         non_zero_txs = sum_by_transaction.index[non_zero_sums]

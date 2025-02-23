@@ -126,8 +126,11 @@ class Portfolio:
         for path, group_df in groups:
             io.write_record(group_df, path)
 
-    def view(self, module: str, *args):
-        ov.report(self.linted)
+    def view(self, module: str = None, *args):
+        ov.report(self.linted, self.config)
+        if not module:
+            return
+
         report_path = f'.reports/{module.removeprefix("adfire.")}'
         old_argv = sys.argv
         spec = importlib.util.find_spec(module)

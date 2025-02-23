@@ -11,5 +11,5 @@ class CurrencySchema(BaseInputSchema):
 
 def lint(df: pd.DataFrame, **kwargs) -> pd.DataFrame:
     df: pd.DataFrame = CurrencySchema(df)
-    df['worth'] = df['amount'] * df['rate']
+    df['worth'] = (df['amount'] * df['rate']).round(2)
     return df

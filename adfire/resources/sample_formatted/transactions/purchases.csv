@@ -1,0 +1,5 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-30,Amex Gold,51001,Purchase with Credit Card,4.93,USD,-1.0,,-4.93
+2025-01-30,Dutch Bros,,Purchase with Credit Card,4.93,USD,1.0,expenses.aftertax.coffee,4.93
+2025-01-30,Chase Total Checking,3185,Purchase with Debit Card,-4.93,USD,1.0,,-4.93
+2025-01-30,Dutch Bros,,Purchase with Debit Card,4.93,USD,1.0,expenses.aftertax.coffee,4.93
