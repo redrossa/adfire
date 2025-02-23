@@ -14,7 +14,8 @@ def main():
     if 'view' in sys.argv:
         parser.add_argument(
             'module',
-            help='view module')
+            help='view module',
+            nargs='?')
         parser.add_argument('args', nargs='*')
     parser.add_argument(
         '-p', '--path',
@@ -39,11 +40,14 @@ def main():
     elif args.mode == 'format':
         portfolio.format()
     elif args.mode == 'view':
-        try:
-            module_name = f'adfire.{args.module}'  # try with default modules first
-            portfolio.view(module_name, *args.args)
-        except ImportError:
-            portfolio.view(args.module, *args.args)
+        if not args.module:
+            portfolio.view()
+        else:
+            try:
+                module_name = f'adfire.{args.module}'  # try with default modules first
+                portfolio.view(module_name, *args.args)
+            except ImportError:
+                portfolio.view(args.module, *args.args)
 
 
 if __name__ == '__main__':
