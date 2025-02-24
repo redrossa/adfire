@@ -4,6 +4,7 @@ import pandera as pa
 from adfire.io import write_json
 from adfire.lint import BaseInputSchema
 from adfire.lint.accounts import parse_config
+from adfire.utils import namespace_to_dict
 
 
 class OverviewTransactionSchema(BaseInputSchema):
@@ -150,7 +151,7 @@ def map_accounts(df: pd.DataFrame, config) -> pd.DataFrame:
     return mapped_df
 
 
-def report(df: pd.DataFrame, config):
+def report_highlights(df: pd.DataFrame, config):
     df: pd.DataFrame = OverviewTransactionSchema(df)
     df = map_accounts(df, config)
     grouped = df.groupby('name')
@@ -166,3 +167,13 @@ def report(df: pd.DataFrame, config):
             txs += incomes
     txs = sorted(txs, key=lambda x: x['date'], reverse=True)
     write_json(txs, '.reports/index.json')
+
+
+def report_config(config):
+    obj = namespace_to_dict(config)
+    write_json(obj, '.reports/config.json')
+
+
+def report(df: pd.DataFrame, config):
+    report_highlights(df, config)
+    report_config(config)
