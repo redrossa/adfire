@@ -7,3 +7,5 @@ date,account,mask,name,amount,symbol,rate,category
 2025-01-21,Fidelity Individual,2752,Open Position,-990.18,USD,1.0,
 2025-01-21,Fidelity Individual,2752,Open Position,23.0,SLB,43.05,
 2025-01-21,Fidelity Fees,,Open Position,0.03,USD,1.0,
+2025-01-21,Robinhood Individual,3674,Open Short Position,-1,NVDA 160 USD Call,768,
+2025-01-21,Robinhood Individual,3674,Open Short Position,768,USD,1,
