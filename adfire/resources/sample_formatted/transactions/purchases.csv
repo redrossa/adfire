@@ -3,3 +3,11 @@ date,account,mask,name,amount,symbol,rate,category,worth
 2025-01-30,Dutch Bros,,Purchase with Credit Card,4.93,USD,1.0,expenses.aftertax.coffee,4.93
 2025-01-30,Chase Total Checking,3185,Purchase with Debit Card,-4.93,USD,1.0,,-4.93
 2025-01-30,Dutch Bros,,Purchase with Debit Card,4.93,USD,1.0,expenses.aftertax.coffee,4.93
+2025-01-30,Chase Total Checking,3185,Full Refund,-30.0,USD,1.0,,-30.0
+2025-01-30,Amazon,,Full Refund,30.0,USD,1.0,expenses.merchandise,30.0
+2025-02-15,Amazon,,Full Refund,-30.0,USD,1.0,expenses.merchandise,-30.0
+2025-02-15,Chase Total Checking,3185,Full Refund,30.0,USD,1.0,,30.0
+2025-01-30,Chase Total Checking,3185,Partial Refund,-100.0,USD,1.0,,-100.0
+2025-01-30,Amazon,,Partial Refund,100.0,USD,1.0,expenses.merchandise,100.0
+2025-02-15,Amazon,,Partial Refund,-30.0,USD,1.0,expenses.merchandise,-30.0
+2025-02-15,Chase Total Checking,3185,Partial Refund,30.0,USD,1.0,,30.0
