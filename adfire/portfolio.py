@@ -15,6 +15,7 @@ import adfire.io as io
 import adfire.lint as lint
 import adfire.overview as ov
 import adfire.utils as utils
+from adfire.lint.base import OutputSchema
 
 
 def _read_config_from_dir(path: Path) -> SimpleNamespace:
@@ -124,6 +125,7 @@ class Portfolio:
         df = self.linted
         groups = df.groupby('path')
         for path, group_df in groups:
+            group_df: pd.DataFrame = OutputSchema.validate(group_df)
             io.write_record(group_df, path)
 
     def view(self, module: str = None, *args):

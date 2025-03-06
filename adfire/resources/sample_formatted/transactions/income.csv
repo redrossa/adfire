@@ -1,15 +1,15 @@
-date,account,mask,name,amount,symbol,rate,category,worth
-2025-01-01,Wealthfront,,Interest Income,-16.08,USD,1.0,,-16.08
-2025-01-01,Wealthfront Individual,6373,Interest Income,16.08,USD,1.0,income.interests,16.08
-2025-01-10,SLB Base Salary,,Salary,-3757.5,USD,1.0,income.pretax.salary,-3757.5
-2025-01-10,SLB Salaried-Vacation,,Salary,-417.5,USD,1.0,income.pretax.salary,-417.5
-2025-01-08,Wealthfront Individual,6373,Salary,3092.56,USD,1.0,income.salary,3092.56
-2025-01-10,Alight 401k,,Salary,417.5,USD,1.0,savings.pretax.investments,417.5
-2025-01-10,Alight HSA,1293,Salary,142.3,USD,1.0,savings.pretax.investments,142.3
-2025-01-10,Vision Insurance,,Salary,4.62,USD,1.0,expenses.pretax.medical,4.62
-2025-01-10,Dental Insurance,,Salary,4.62,USD,1.0,expenses.pretax.medical,4.62
-2025-01-10,Medical Insurance,,Salary,42.46,USD,1.0,expenses.pretax.medical,42.46
-2025-01-10,Federal Withholding Tax,,Salary,470.94,USD,1.0,taxes.income,470.94
-2025-01-18,SLB RSU,,RSU Vesting,-30.0,SLB,43.05,income.pretax.rsu,-1291.5
-2025-01-18,Federal Withholding Tax,,RSU Vesting,301.35,USD,1.0,taxes.income,301.35
-2025-01-17,Fidelity Individual,2752,RSU Vesting,23.0,SLB,43.05,income.rsu,990.15
+date,account,mask,name,amount,symbol,rate,category
+2025-01-01,Wealthfront,,Interest Income,-16.08,USD,1.0,
+2025-01-01,Wealthfront Individual,6373,Interest Income,16.08,USD,1.0,income.interests
+2025-01-10,SLB Base Salary,,Salary,-3757.5,USD,1.0,income.pretax.salary
+2025-01-10,SLB Salaried-Vacation,,Salary,-417.5,USD,1.0,income.pretax.salary
+2025-01-08,Wealthfront Individual,6373,Salary,3092.56,USD,1.0,income.salary
+2025-01-10,Alight 401k,,Salary,417.5,USD,1.0,savings.pretax.investments
+2025-01-10,Alight HSA,1293,Salary,142.3,USD,1.0,savings.pretax.investments
+2025-01-10,Vision Insurance,,Salary,4.62,USD,1.0,expenses.pretax.medical
+2025-01-10,Dental Insurance,,Salary,4.62,USD,1.0,expenses.pretax.medical
+2025-01-10,Medical Insurance,,Salary,42.46,USD,1.0,expenses.pretax.medical
+2025-01-10,Federal Withholding Tax,,Salary,470.94,USD,1.0,taxes.income
+2025-01-18,SLB RSU,,RSU Vesting,-30.0,SLB,43.05,income.pretax.rsu
+2025-01-18,Federal Withholding Tax,,RSU Vesting,301.35,USD,1.0,taxes.income
+2025-01-17,Fidelity Individual,2752,RSU Vesting,23.0,SLB,43.05,income.rsu
