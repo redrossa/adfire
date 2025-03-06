@@ -1,11 +1,11 @@
-date,account,mask,name,amount,symbol,rate,category,worth
-2025-01-21,Fidelity Individual,2752,Close Position,-23.0,SLB,43.05,,-990.15
-2025-01-21,Fidelity Individual,2752,Close Position,995.06,USD,1.0,,995.06
-2025-01-21,Fidelity Commissions,,Close Position,5.18,USD,1.0,expenses.fees,5.18
-2025-01-21,Fidelity Fees,,Close Position,0.03,USD,1.0,expenses.fees,0.03
-2025-01-21,P/L,,Close Position,-10.12,USD,1.0,,-10.12
-2025-01-21,Fidelity Individual,2752,Open Position,-990.18,USD,1.0,,-990.18
-2025-01-21,Fidelity Individual,2752,Open Position,23.0,SLB,43.05,,990.15
-2025-01-21,Fidelity Fees,,Open Position,0.03,USD,1.0,,0.03
-2025-01-21,Robinhood Individual,3674,Open Short Position,-1.0,NVDA 160 USD Call,768.0,,-768.0
-2025-01-21,Robinhood Individual,3674,Open Short Position,768.0,USD,1.0,,768.0
+date,account,mask,name,amount,symbol,rate,category
+2025-01-21,Fidelity Individual,2752,Close Position,-23.0,SLB,43.05,
+2025-01-21,Fidelity Individual,2752,Close Position,995.06,USD,1.0,
+2025-01-21,Fidelity Commissions,,Close Position,5.18,USD,1.0,expenses.fees
+2025-01-21,Fidelity Fees,,Close Position,0.03,USD,1.0,expenses.fees
+2025-01-21,P/L,,Close Position,-10.12,USD,1.0,
+2025-01-21,Fidelity Individual,2752,Open Position,-990.18,USD,1.0,
+2025-01-21,Fidelity Individual,2752,Open Position,23.0,SLB,43.05,
+2025-01-21,Fidelity Fees,,Open Position,0.03,USD,1.0,
+2025-01-21,Robinhood Individual,3674,Open Short Position,-1.0,NVDA 160 USD Call,768.0,
+2025-01-21,Robinhood Individual,3674,Open Short Position,768.0,USD,1.0,
