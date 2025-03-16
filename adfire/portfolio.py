@@ -5,20 +5,21 @@ import shutil
 import sys
 from pathlib import Path
 from types import SimpleNamespace
+from typing import Dict, Any
 
 import pandas as pd
 from pandera.typing import DataFrame
 from pip._vendor import tomli as tomllib
 
-import adfire.config as config
 import adfire.io as io
 import adfire.lint as lint
 import adfire.overview as ov
-import adfire.utils as utils
+from adfire import utils
+from adfire.constants import RESOURCES_PATH
 from adfire.lint.base import OutputSchema
 
 
-def _read_config_from_dir(path: Path) -> SimpleNamespace:
+def _read_config_from_dir(path: Path) -> dict[str, Any]:
     """Reads 'portfolio.toml' in a directory"""
     metadata_path = path / 'portfolio.toml'
     try:
@@ -26,8 +27,7 @@ def _read_config_from_dir(path: Path) -> SimpleNamespace:
     except FileNotFoundError as e:
         raise FileNotFoundError(f"'{metadata_path}' does not exist") from e
     with f:
-        config_dict = tomllib.load(f)
-        config = utils.dict_to_namespace(config_dict)
+        config = tomllib.load(f)
         return config
 
 
@@ -64,7 +64,7 @@ class Portfolio:
 
     @property
     def config(self) -> SimpleNamespace:
-        return self._config
+        return utils.dict_to_namespace(self._config)
 
     @property
     def linted(self) -> pd.DataFrame:
@@ -98,10 +98,10 @@ class Portfolio:
         dir_is_empty = path.exists() and path.is_dir() and not any(path.iterdir())
 
         if not dir_is_empty:
-            sample_file_path = config.RESOURCES_PATH / 'sample/portfolio.toml'
+            sample_file_path = RESOURCES_PATH / 'sample/portfolio.toml'
             shutil.copyfile(sample_file_path, metadata_path)
         else:
-            sample_path = config.RESOURCES_PATH / 'sample'
+            sample_path = RESOURCES_PATH / 'sample'
             shutil.copytree(
                 sample_path,
                 path,
