@@ -1,8 +1,6 @@
-import numpy as np
-import pandas as pd
 import pytest
 
-from adfire.config import RESOURCES_PATH
+from adfire.constants import RESOURCES_PATH
 
 
 @pytest.fixture
