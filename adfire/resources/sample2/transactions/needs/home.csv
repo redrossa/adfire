@@ -1,0 +1,9 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-02,Amex Gold,51001,Home 87,156.13,USD,-1.0,,-156.13
+2025-01-02,Chariot Energy,,Home 87,156.13,USD,1.0,expenses.home,156.13
+2025-01-20,Chase Freedom Unlimited,6946,Home 88,144.11,USD,-1.0,,-144.11
+2025-01-20,City of Sugar Land,,Home 88,144.11,USD,1.0,expenses.home,144.11
+2025-01-20,Chase Freedom Unlimited,6946,Home 89,40.22,USD,-1.0,,-40.22
+2025-01-20,Comcast,,Home 89,40.22,USD,1.0,expenses.home,40.22
+2025-01-24,Chase Freedom Unlimited,6946,Home 90,73.71,USD,-1.0,,-73.71
+2025-01-24,Xfinity Mobile,,Home 90,73.71,USD,1.0,expenses.home,73.71

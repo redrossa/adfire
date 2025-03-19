@@ -1,0 +1,14 @@
+date,account,mask,change,symbol,rate,category,name
+2025-01-21,Fidelity Individual,2752,-23.0,SLB,43.49,,Close RSU Position
+2025-01-21,Fidelity Individual,2752,995.06,USD,,,Close RSU Position
+2025-01-21,Fidelity Commissions,,5.18,USD,,expenses.fees,Close RSU Position
+2025-01-21,Fidelity Fees,,0.03,USD,,expenses.fees,Close RSU Position
+2025-01-21,P/L,,0,USD,,,Close RSU Position
+2025-01-21,Fidelity Individual,2752,-990.18,USD,,,Open Position
+2025-01-21,Fidelity Individual,2752,23.0,SLB,43.05,,Open Position
+2025-01-21,Fidelity Fees,,0.03,USD,,,Open Position
+2025-01-21,Robinhood Individual,3674,-1,NVDA 160 USD Call,768,,Open Short Position
+2025-01-21,Robinhood Individual,3674,768,USD,,,Open Short Position
+2025-01-21,Fidelity Individual,2752,-23,SLB,43.05,,Close Position
+2025-01-21,Fidelity Individual,2752,1000,USD,,,Close Position
+2025-01-21,P/L,,-9.85,USD,,,Close Position

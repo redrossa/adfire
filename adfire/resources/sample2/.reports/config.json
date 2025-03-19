@@ -1,0 +1,154 @@
+{
+    "name": "Sample 2 Portfolio",
+    "accounts": [
+        {
+            "names": [
+                "Amex Gold"
+            ],
+            "masks": [
+                "51001",
+                "51019",
+                "51012"
+            ]
+        },
+        {
+            "names": [
+                "Amex Green"
+            ],
+            "masks": [
+                "01009"
+            ]
+        },
+        {
+            "names": [
+                "Amex BCE Sade Auth"
+            ],
+            "masks": [
+                "91013"
+            ]
+        },
+        {
+            "names": [
+                "Chase Freedom Student",
+                "Chase Freedom Unlimited"
+            ],
+            "masks": [
+                "6946"
+            ]
+        },
+        {
+            "names": [
+                "Prime Visa"
+            ],
+            "masks": [
+                "8104"
+            ]
+        },
+        {
+            "names": [
+                "Discover It"
+            ],
+            "masks": [
+                "0152"
+            ]
+        },
+        {
+            "names": [
+                "SECU Visa"
+            ],
+            "masks": [
+                "25-71"
+            ]
+        },
+        {
+            "names": [
+                "SECU Checking"
+            ],
+            "masks": [
+                "25-90"
+            ]
+        },
+        {
+            "names": [
+                "SECU Savings"
+            ],
+            "masks": [
+                "25-00"
+            ]
+        },
+        {
+            "names": [
+                "Wealthfront Individual"
+            ],
+            "masks": [
+                "6373"
+            ]
+        },
+        {
+            "names": [
+                "Chase Total Checking"
+            ],
+            "masks": [
+                "3185"
+            ]
+        },
+        {
+            "names": [
+                "Robinhood Spending"
+            ],
+            "masks": [
+                "5016"
+            ]
+        },
+        {
+            "names": [
+                "Robinhood Individual"
+            ],
+            "masks": [
+                "3674"
+            ]
+        },
+        {
+            "names": [
+                "Robinhood Roth IRA"
+            ],
+            "masks": [
+                "6583"
+            ]
+        },
+        {
+            "names": [
+                "Fidelity Individual"
+            ],
+            "masks": [
+                "2752"
+            ]
+        },
+        {
+            "names": [
+                "Fidelity Roth IRA"
+            ],
+            "masks": [
+                "8969"
+            ]
+        },
+        {
+            "names": [
+                "Alight HSA"
+            ],
+            "masks": [
+                "1293"
+            ]
+        },
+        {
+            "names": [
+                "Alight 401k"
+            ]
+        },
+        {
+            "names": [
+                "Trezor Passphrased Wallet"
+            ]
+        }
+    ]
+}

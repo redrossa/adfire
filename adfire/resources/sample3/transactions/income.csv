@@ -1,0 +1,15 @@
+date,account,mask,change,symbol,rate,category,name
+2025-01-01,Wealthfront,,-16.08,USD,,,Interest Income
+2025-01-01,Wealthfront Individual,6373,16.08,USD,,income.interests,Interest Income
+2025-01-10,SLB Base Salary,,-3757.5,USD,,income.pretax.salary,Salary
+2025-01-10,SLB Salaried-Vacation,,-417.5,USD,,income.pretax.salary,Salary
+2025-01-08,Wealthfront Individual,6373,3092.56,USD,,income.salary,Salary
+2025-01-10,Alight 401k,,417.5,USD,,savings.pretax.investments,Salary
+2025-01-10,Alight HSA,1293,142.3,USD,,savings.pretax.investments,Salary
+2025-01-10,Vision Insurance,,4.62,USD,,expenses.pretax.medical,Salary
+2025-01-10,Dental Insurance,,4.62,USD,,expenses.pretax.medical,Salary
+2025-01-10,Medical Insurance,,42.46,USD,,expenses.pretax.medical,Salary
+2025-01-10,Federal Withholding Tax,,470.94,USD,,taxes.income,Salary
+2025-01-18,SLB RSU,,-30.0,SLB,43.05,income.pretax.rsu,RSU Vesting
+2025-01-18,Federal Withholding Tax,,301.35,USD,,taxes.income,RSU Vesting
+2025-01-17,Fidelity Individual,2752,23.0,SLB,43.05,income.rsu,RSU Vesting

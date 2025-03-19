@@ -1,0 +1,665 @@
+[
+    {
+        "date": "2025-02-03",
+        "title": "Wealthfront Interests for January 2025",
+        "amount": 11.14,
+        "category": "income.interests",
+        "account": "Wealthfront Individual",
+        "type": "income"
+    },
+    {
+        "date": "2025-02-02",
+        "title": "HEB",
+        "amount": -25.56,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-02-02",
+        "title": "Welfresh",
+        "amount": -13.49,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-02-02",
+        "title": "Amazon",
+        "amount": -21.64,
+        "category": "expenses.merchandise",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-02-01",
+        "title": "Dutch Bros",
+        "amount": -4.93,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-31",
+        "title": "Dutch Bros",
+        "amount": -4.93,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-30",
+        "title": "Dutch Bros",
+        "amount": -4.93,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-30",
+        "title": "Amazon",
+        "amount": -36.04,
+        "category": "expenses.merchandise",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-30",
+        "title": "Robinhood Gold",
+        "amount": -5.0,
+        "category": "expenses.fees",
+        "account": "Robinhood Individual",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-28",
+        "title": "Dutch Bros",
+        "amount": -5.36,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-28",
+        "title": "Venmo Personal",
+        "amount": -15.0,
+        "category": "expenses.dining",
+        "account": "Amex Green",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-26",
+        "title": "Houston Badminton Center",
+        "amount": -8.66,
+        "category": "expenses.personal_care",
+        "account": "Chase Freedom Unlimited",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-25",
+        "title": "Costco Gas",
+        "amount": -42.33,
+        "category": "expenses.auto",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-25",
+        "title": "HEB",
+        "amount": -72.0,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-25",
+        "title": "Apple",
+        "amount": -6.48,
+        "category": "expenses.services",
+        "account": "Discover It",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-24",
+        "title": "Xfinity Mobile",
+        "amount": -73.71,
+        "category": "expenses.home",
+        "account": "Chase Freedom Unlimited",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-23",
+        "title": "Uber Eats",
+        "amount": -9.48,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-23",
+        "title": "Kroger",
+        "amount": -35.04,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-23",
+        "title": "Frontier Airlines",
+        "amount": -166.96,
+        "category": "expenses.travel",
+        "account": "Amex Green",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-22",
+        "title": "O's Campus Cafe",
+        "amount": -6.44,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-22",
+        "title": "SLB Salary 2025 #2",
+        "amount": 3092.56,
+        "category": "income.salary",
+        "account": "Wealthfront Individual",
+        "type": "income"
+    },
+    {
+        "date": "2025-01-22",
+        "title": "Open 9.13119 QQQM",
+        "amount": -2000.0,
+        "account": "Robinhood Individual",
+        "type": "open"
+    },
+    {
+        "date": "2025-01-22",
+        "title": "Open 0.01014959 BTC",
+        "amount": -1004.75,
+        "account": "Robinhood Individual",
+        "type": "open"
+    },
+    {
+        "date": "2025-01-22",
+        "title": "Open 10 PLTR",
+        "amount": -769.8,
+        "account": "Robinhood Roth IRA",
+        "type": "open"
+    },
+    {
+        "date": "2025-01-22",
+        "title": "Open 0.01020408 BTC",
+        "amount": -999.99,
+        "account": "Robinhood Individual",
+        "type": "open"
+    },
+    {
+        "date": "2025-01-21",
+        "title": "Close 23 SLB",
+        "amount": 10.12,
+        "account": "Fidelity Individual",
+        "type": "close"
+    },
+    {
+        "date": "2025-01-20",
+        "title": "Kroger",
+        "amount": -16.62,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-20",
+        "title": "City of Sugar Land",
+        "amount": -144.11,
+        "category": "expenses.home",
+        "account": "Chase Freedom Unlimited",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-20",
+        "title": "Comcast",
+        "amount": -40.22,
+        "category": "expenses.home",
+        "account": "Chase Freedom Unlimited",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-19",
+        "title": "Costco Gas",
+        "amount": -25.16,
+        "category": "expenses.auto",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-19",
+        "title": "Dutch Bros",
+        "amount": -5.36,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-19",
+        "title": "Welfresh",
+        "amount": -23.31,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-19",
+        "title": "HEB",
+        "amount": -58.66,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-18",
+        "title": "Dutch Bros",
+        "amount": -5.36,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-18",
+        "title": "Open 1.08911 SOL",
+        "amount": -295.19,
+        "account": "Robinhood Individual",
+        "type": "open"
+    },
+    {
+        "date": "2025-01-17",
+        "title": "In-N-Out",
+        "amount": -6.6,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-17",
+        "title": "Dutch Bros",
+        "amount": -5.36,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-17",
+        "title": "IAMC",
+        "amount": -10.0,
+        "category": "expenses.donation",
+        "account": "Chase Freedom Unlimited",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-17",
+        "title": "Open 12.03585 QQQM",
+        "amount": -2591.8,
+        "account": "Robinhood Individual",
+        "type": "open"
+    },
+    {
+        "date": "2025-01-17",
+        "title": "RSU 2025 #1 Vesting",
+        "amount": 990.15,
+        "category": "income.rsu",
+        "account": "Fidelity Individual",
+        "type": "income"
+    },
+    {
+        "date": "2025-01-16",
+        "title": "Pluckers",
+        "amount": -20.32,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-16",
+        "title": "OMG Squee",
+        "amount": -6.41,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-16",
+        "title": "Kroger",
+        "amount": -61.8,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-16",
+        "title": "CVS",
+        "amount": -4.99,
+        "category": "expenses.medical",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-15",
+        "title": "Dutch Bros",
+        "amount": -5.36,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-15",
+        "title": "Kroger",
+        "amount": -30.97,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-15",
+        "title": "CitizensOne iPhone Loan",
+        "amount": -39.54,
+        "category": "expenses.merchandise",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-15",
+        "title": "Apple",
+        "amount": -9.99,
+        "category": "expenses.services",
+        "account": "Chase Freedom Unlimited",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-15",
+        "title": "OpenAI",
+        "amount": -21.28,
+        "category": "expenses.services",
+        "account": "Chase Freedom Unlimited",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-14",
+        "title": "Dutch Bros",
+        "amount": -6.77,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-13",
+        "title": "Dutch Bros",
+        "amount": -7.52,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-13",
+        "title": "Moge Tee",
+        "amount": -7.09,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-13",
+        "title": "Kroger",
+        "amount": -27.38,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-13",
+        "title": "Kroger",
+        "amount": -14.27,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-13",
+        "title": "Amazon",
+        "amount": -10.81,
+        "category": "expenses.merchandise",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-12",
+        "title": "Welfresh",
+        "amount": -9.05,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-12",
+        "title": "Robinhood Margin",
+        "amount": -47.79,
+        "category": "expenses.fees",
+        "account": "Robinhood Individual",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-10",
+        "title": "IAMC",
+        "amount": -25.0,
+        "category": "expenses.donation",
+        "account": "Chase Freedom Unlimited",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-10",
+        "title": "Texas DPS",
+        "amount": -33.0,
+        "category": "expenses.fees",
+        "account": "Wealthfront Individual",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-10",
+        "title": "Kroger",
+        "amount": -37.16,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-10",
+        "title": "Kroger",
+        "amount": -62.63,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-09",
+        "title": "Open 7.58e-06 BTC",
+        "amount": -0.71,
+        "account": "Robinhood Individual",
+        "type": "open"
+    },
+    {
+        "date": "2025-01-09",
+        "title": "HEB",
+        "amount": -18.72,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-08",
+        "title": "Costco Gas",
+        "amount": -40.62,
+        "category": "expenses.auto",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-08",
+        "title": "Open 0.02127659 BTC",
+        "amount": -1999.29,
+        "account": "Robinhood Individual",
+        "type": "open"
+    },
+    {
+        "date": "2025-01-08",
+        "title": "Teso Life",
+        "amount": -1.79,
+        "category": "expenses.dining",
+        "account": "Discover It",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-08",
+        "title": "SLB Salary 2025 #1",
+        "amount": 3092.56,
+        "category": "income.salary",
+        "account": "Wealthfront Individual",
+        "type": "income"
+    },
+    {
+        "date": "2025-01-07",
+        "title": "Kroger",
+        "amount": -4.99,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-07",
+        "title": "Kroger",
+        "amount": -12.44,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-07",
+        "title": "Comedy Defensive Driving",
+        "amount": -35.95,
+        "category": "expenses.services",
+        "account": "Chase Freedom Unlimited",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-05",
+        "title": "Kroger",
+        "amount": -5.39,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-04",
+        "title": "Sate Khas Senayan",
+        "amount": -9.81,
+        "category": "expenses.dining",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-04",
+        "title": "Roti O",
+        "amount": -2.78,
+        "category": "expenses.dining",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-04",
+        "title": "Gojek",
+        "amount": -24.6,
+        "category": "expenses.dining",
+        "account": "Amex Green",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-04",
+        "title": "HEB",
+        "amount": -31.77,
+        "category": "expenses.groceries",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-04",
+        "title": "Bags City",
+        "amount": -23.65,
+        "category": "expenses.merchandise",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-04",
+        "title": "Captain Barbershop",
+        "amount": -9.87,
+        "category": "expenses.merchandise",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-03",
+        "title": "Captain Barbershop",
+        "amount": -4.32,
+        "category": "expenses.personal_care",
+        "account": "Prime Visa",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-02",
+        "title": "Amex Send",
+        "amount": -82.35,
+        "category": "expenses.dining",
+        "account": "Amex Green",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-02",
+        "title": "Chariot Energy",
+        "amount": -156.13,
+        "category": "expenses.home",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-02",
+        "title": "Robinhood Gold",
+        "amount": -5.0,
+        "category": "expenses.fees",
+        "account": "Robinhood Individual",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-02",
+        "title": "Gojek",
+        "amount": -4.95,
+        "category": "expenses.travel",
+        "account": "Amex Green",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-01",
+        "title": "Uniqlo",
+        "amount": -12.37,
+        "category": "expenses.merchandise",
+        "account": "Amex Gold",
+        "type": "purchase"
+    },
+    {
+        "date": "2025-01-01",
+        "title": "Wealthfront Interests for December 2024",
+        "amount": 16.08,
+        "category": "income.interests",
+        "account": "Wealthfront Individual",
+        "type": "income"
+    }
+]

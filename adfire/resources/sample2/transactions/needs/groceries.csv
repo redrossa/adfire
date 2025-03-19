@@ -1,0 +1,39 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-04,Amex Gold,51019,Groceries 215,31.77,USD,-1.0,,-31.77
+2025-01-04,HEB,,Groceries 215,31.77,USD,1.0,expenses.groceries,31.77
+2025-01-05,Amex Gold,51019,Groceries 216,5.39,USD,-1.0,,-5.39
+2025-01-05,Kroger,,Groceries 216,5.39,USD,1.0,expenses.groceries,5.39
+2025-01-07,Amex Gold,51001,Groceries 217,4.99,USD,-1.0,,-4.99
+2025-01-07,Kroger,,Groceries 217,4.99,USD,1.0,expenses.groceries,4.99
+2025-01-07,Amex Gold,51001,Groceries 218,12.44,USD,-1.0,,-12.44
+2025-01-07,Kroger,,Groceries 218,12.44,USD,1.0,expenses.groceries,12.44
+2025-01-09,Amex Gold,51019,Groceries 219,18.72,USD,-1.0,,-18.72
+2025-01-09,HEB,,Groceries 219,18.72,USD,1.0,expenses.groceries,18.72
+2025-01-10,Amex Gold,51019,Groceries 220,37.16,USD,-1.0,,-37.16
+2025-01-10,Kroger,,Groceries 220,37.16,USD,1.0,expenses.groceries,37.16
+2025-01-10,Amex Gold,51001,Groceries 221,62.63,USD,-1.0,,-62.63
+2025-01-10,Kroger,,Groceries 221,62.63,USD,1.0,expenses.groceries,62.63
+2025-01-12,Amex Gold,51001,Groceries 222,9.05,USD,-1.0,,-9.05
+2025-01-12,Welfresh,,Groceries 222,9.05,USD,1.0,expenses.groceries,9.05
+2025-01-13,Amex Gold,51001,Groceries 223,27.38,USD,-1.0,,-27.38
+2025-01-13,Kroger,,Groceries 223,27.38,USD,1.0,expenses.groceries,27.38
+2025-01-13,Amex Gold,51001,Groceries 224,14.27,USD,-1.0,,-14.27
+2025-01-13,Kroger,,Groceries 224,14.27,USD,1.0,expenses.groceries,14.27
+2025-01-15,Amex Gold,51001,Groceries 225,30.97,USD,-1.0,,-30.97
+2025-01-15,Kroger,,Groceries 225,30.97,USD,1.0,expenses.groceries,30.97
+2025-01-16,Amex Gold,51001,Groceries 226,61.8,USD,-1.0,,-61.8
+2025-01-16,Kroger,,Groceries 226,61.8,USD,1.0,expenses.groceries,61.8
+2025-01-19,Amex Gold,51001,Groceries 227,23.31,USD,-1.0,,-23.31
+2025-01-19,Welfresh,,Groceries 227,23.31,USD,1.0,expenses.groceries,23.31
+2025-01-19,Amex Gold,51019,Groceries 228,58.66,USD,-1.0,,-58.66
+2025-01-19,HEB,,Groceries 228,58.66,USD,1.0,expenses.groceries,58.66
+2025-01-20,Amex Gold,51001,Groceries 229,16.62,USD,-1.0,,-16.62
+2025-01-20,Kroger,,Groceries 229,16.62,USD,1.0,expenses.groceries,16.62
+2025-01-23,Amex Gold,51001,Groceries 230,35.04,USD,-1.0,,-35.04
+2025-01-23,Kroger,,Groceries 230,35.04,USD,1.0,expenses.groceries,35.04
+2025-01-25,Amex Gold,51001,Groceries 231,72.0,USD,-1.0,,-72.0
+2025-01-25,HEB,,Groceries 231,72.0,USD,1.0,expenses.groceries,72.0
+2025-02-02,Amex Gold,51001,Groceries 232,25.56,USD,-1.0,,-25.56
+2025-02-02,HEB,,Groceries 232,25.56,USD,1.0,expenses.groceries,25.56
+2025-02-02,Amex Gold,51001,Groceries 233,13.49,USD,-1.0,,-13.49
+2025-02-02,Welfresh,,Groceries 233,13.49,USD,1.0,expenses.groceries,13.49

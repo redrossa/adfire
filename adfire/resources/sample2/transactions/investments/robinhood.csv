@@ -1,0 +1,48 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-02,Robinhood Individual,3674,Robinhood Gold Bill 2025 #1,-5.0,USD,1.0,,-5.0
+2025-01-02,Robinhood Gold,,Robinhood Gold Bill 2025 #1,5.0,USD,1.0,expenses.fees,5.0
+2025-01-03,Wealthfront Individual,6373,Robinhood Gold Bill 2025 #1 Payment,-5.0,USD,1.0,,-5.0
+2025-01-03,Robinhood Individual,3674,Robinhood Gold Bill 2025 #1 Payment,5.0,USD,1.0,,5.0
+2025-01-09,Wealthfront Individual,6373,BTC Buy 2025-01-09 Deposit,-2000.0,USD,1.0,,-2000.0
+2025-01-08,Robinhood Individual,3674,BTC Buy 2025-01-09 Deposit,2000.0,USD,1.0,,2000.0
+2025-01-08,Robinhood Individual,3674,BTC Buy 2025-01-09 #1,-1999.29,USD,1.0,,-1999.29
+2025-01-08,Robinhood Individual,3674,BTC Buy 2025-01-09 #1,0.02127659,BTC,93966.43,savings.investments,1999.29
+2025-01-09,Robinhood Individual,3674,BTC Buy 2025-01-09 #2,-0.71,USD,1.0,,-0.71
+2025-01-09,Robinhood Individual,3674,BTC Buy 2025-01-09 #2,7.58e-06,BTC,93564.72,savings.investments,0.71
+2025-01-09,Robinhood Individual,3674,BTC Buy 2025-01-09 Transfer,-0.02127659,BTC,93966.43,,-1999.29
+2025-01-09,Robinhood Individual,3674,BTC Buy 2025-01-09 Transfer,-7.58e-06,BTC,93564.72,,-0.71
+2025-01-09,Trezor Passphrased Wallet,,BTC Buy 2025-01-09 Transfer,0.0212802,BTC,93668.1,,1993.28
+2025-01-09,Bitcoin Network Fee,,BTC Buy 2025-01-09 Transfer,3.97e-06,BTC,93668.1,expenses.fees,0.37
+2025-01-09,Unrealized P/L,,BTC Buy 2025-01-09 Transfer,6.35,USD,1.0,,6.35
+2025-01-12,Robinhood Individual,3674,Robinhood Margin Interest Bill 2025 #1,-47.79,USD,1.0,,-47.79
+2025-01-12,Robinhood Margin,,Robinhood Margin Interest Bill 2025 #1,47.79,USD,1.0,expenses.fees,47.79
+2025-01-16,Wealthfront Individual,6373,QQM Buy 2025-01-16 Deposit,-2000.0,USD,1.0,,-2000.0
+2025-01-17,Robinhood Individual,3674,QQM Buy 2025-01-16 Deposit,2000.0,USD,1.0,,2000.0
+2025-01-17,Robinhood Individual,3674,QQM Buy 2025-01-16,-2591.8,USD,1.0,,-2591.8
+2025-01-17,Robinhood Individual,3674,QQM Buy 2025-01-16,12.03585,QQQM,215.34,savings.investments,2591.8
+2025-01-18,Wealthfront Individual,6373,SOL Buy 2025-01-18 Deposit,-300.0,USD,1.0,,-300.0
+2025-01-18,Robinhood Individual,3674,SOL Buy 2025-01-18 Deposit,300.0,USD,1.0,,300.0
+2025-01-18,Robinhood Individual,3674,SOL Buy 2025-01-18,-295.19,USD,1.0,,-295.19
+2025-01-18,Robinhood Individual,3674,SOL Buy 2025-01-18,1.08911,SOL,271.04,savings.trading,295.19
+2025-01-18,Robinhood Individual,3674,SOL Buy 2025-01-18 Transfer,-1.00596853,SOL,271.04,,-272.66
+2025-01-18,Phantom Account 1,,SOL Buy 2025-01-18 Transfer,1.0,SOL,268.7,,268.7
+2025-01-18,Solana Network Fee,,SOL Buy 2025-01-18 Transfer,0.00596853,SOL,268.7,expenses.fees,1.6
+2025-01-18,Unrealized P/L,,SOL Buy 2025-01-18 Transfer,2.36,USD,1.0,,2.36
+2025-01-22,Wealthfront Individual,6373,Various Buys 2025-01-22 Deposit,-3000.0,USD,1.0,,-3000.0
+2025-01-22,Robinhood Individual,3674,Various Buys 2025-01-22 Deposit,3000.0,USD,1.0,,3000.0
+2025-01-22,Robinhood Individual,3674,Various Buys 2025-01-22 Roth IRA Transfer,-1000.0,USD,1.0,,-1000.0
+2025-01-22,Robinhood Roth IRA Match,,Various Buys 2025-01-22 Roth IRA Transfer,-30.0,USD,1.0,,-30.0
+2025-01-22,Robinhood Roth IRA,6583,Various Buys 2025-01-22 Roth IRA Transfer,1000.0,USD,1.0,,1000.0
+2025-01-22,Robinhood Roth IRA,6583,Various Buys 2025-01-22 Roth IRA Transfer,30.0,USD,1.0,,30.0
+2025-01-22,Robinhood Individual,3674,Various Buys 2025-01-22 #1,-2000.0,USD,1.0,,-2000.0
+2025-01-22,Robinhood Individual,3674,Various Buys 2025-01-22 #1,9.13119,QQQM,219.03,savings.investments,2000.0
+2025-01-22,Robinhood Individual,3674,Various Buys 2025-01-22 #2,-1004.75,USD,1.0,,-1004.75
+2025-01-22,Robinhood Individual,3674,Various Buys 2025-01-22 #2,0.01014959,BTC,98993.87,savings.investments,1004.75
+2025-01-22,Robinhood Roth IRA,6583,Various Buys 2025-01-22 #3,-769.8,USD,1.0,,-769.8
+2025-01-22,Robinhood Roth IRA,6583,Various Buys 2025-01-22 #3,10.0,PLTR,76.98,savings.investments,769.8
+2025-01-22,Robinhood Individual,3674,Various Buys 2025-01-22 #4,-999.99,USD,1.0,,-999.99
+2025-01-22,Robinhood Individual,3674,Various Buys 2025-01-22 #4,0.01020408,BTC,97998.69,savings.investments,999.99
+2025-01-30,Robinhood Individual,3674,Robinhood Gold Bill 2025 #2,-5.0,USD,1.0,,-5.0
+2025-01-30,Robinhood Gold,,Robinhood Gold Bill 2025 #2,5.0,USD,1.0,expenses.fees,5.0
+2025-01-31,Wealthfront Individual,6373,Robinhood Gold Bill 2025 #2 Payment,-4.94,USD,1.0,,-4.94
+2025-01-31,Robinhood Individual,3674,Robinhood Gold Bill 2025 #2 Payment,4.94,USD,1.0,,4.94

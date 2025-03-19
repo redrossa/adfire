@@ -1,0 +1,5 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-01,Wealthfront,,Wealthfront Interests for December 2024,-16.08,USD,1.0,,-16.08
+2025-01-01,Wealthfront Individual,6373,Wealthfront Interests for December 2024,16.08,USD,1.0,income.interests,16.08
+2025-02-03,Wealthfront,,Wealthfront Interests for January 2025,-11.14,USD,1.0,,-11.14
+2025-02-03,Wealthfront Individual,6373,Wealthfront Interests for January 2025,11.14,USD,1.0,income.interests,11.14

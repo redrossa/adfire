@@ -1,0 +1,13 @@
+date,account,mask,change,symbol,category,name
+2025-01-30,Amex Gold,51001,-4.93,USD,,Purchase with Credit Card
+2025-01-30,Dutch Bros,,4.93,USD,expenses.aftertax.coffee,Purchase with Credit Card
+2025-01-30,Chase Total Checking,3185,-4.93,USD,,Purchase with Debit Card
+2025-01-30,Dutch Bros,,4.93,USD,expenses.aftertax.coffee,Purchase with Debit Card
+2025-01-30,Chase Total Checking,3185,-30.0,USD,,Full Refund
+2025-01-30,Amazon,,30.0,USD,expenses.merchandise,Full Refund
+2025-02-15,Amazon,,-30.0,USD,expenses.merchandise,Full Refund
+2025-02-15,Chase Total Checking,3185,30.0,USD,,Full Refund
+2025-01-30,Chase Total Checking,3185,-100.0,USD,,Partial Refund
+2025-01-30,Amazon,,100.0,USD,expenses.merchandise,Partial Refund
+2025-02-15,Amazon,,-30.0,USD,expenses.merchandise,Partial Refund
+2025-02-15,Chase Total Checking,3185,30.0,USD,,Partial Refund

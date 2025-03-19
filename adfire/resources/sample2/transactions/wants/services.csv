@@ -1,0 +1,19 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-03,Prime Visa,8104,Personalcare 18,4.32,USD,-1.0,,-4.32
+2025-01-03,Captain Barbershop,,Personalcare 18,4.32,USD,1.0,expenses.personal_care,4.32
+2025-01-07,Chase Freedom Unlimited,6946,Services 139,35.95,USD,-1.0,,-35.95
+2025-01-07,Comedy Defensive Driving,,Services 139,35.95,USD,1.0,expenses.services,35.95
+2025-01-10,Wealthfront Individual,6373,Fees 43,-33.0,USD,1.0,,-33.0
+2025-01-10,Texas DPS,,Fees 43,33.0,USD,1.0,expenses.fees,33.0
+2025-01-15,Chase Freedom Unlimited,6946,Services 140,9.99,USD,-1.0,,-9.99
+2025-01-15,Apple,,Services 140,9.99,USD,1.0,expenses.services,9.99
+2025-01-15,Chase Freedom Unlimited,6946,Services 141,21.28,USD,-1.0,,-21.28
+2025-01-15,OpenAI,,Services 141,21.28,USD,1.0,expenses.services,21.28
+2025-01-25,Discover It,0152,Services 142,6.48,USD,-1.0,,-6.48
+2025-01-25,Apple,,Services 142,6.48,USD,1.0,expenses.services,6.48
+2025-01-26,Chase Freedom Unlimited,6946,Personalcare 20,8.66,USD,-1.0,,-8.66
+2025-01-26,Houston Badminton Center,,Personalcare 20,8.66,USD,1.0,expenses.personal_care,8.66
+2025-01-31,Wealthfront Individual,6373,Personalcare 21,-3.5,USD,1.0,,-3.5
+2025-01-31,Chase Total Checking,3185,Personalcare 21,3.5,USD,1.0,,3.5
+2025-01-31,Chase Total Checking,3185,Personalcare 21,-3.5,USD,1.0,,-3.5
+2025-01-31,Zelle,,Personalcare 21,3.5,USD,1.0,expenses.personal_care,3.5

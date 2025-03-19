@@ -1,0 +1,17 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-06,Wealthfront Individual,6373,Transfers 160,-446.05,USD,1.0,,-446.05
+2025-01-03,Prime Visa,8104,Transfers 160,-446.05,USD,-1.0,,446.05
+2025-01-06,Wealthfront Individual,6373,Transfers 161,-2839.24,USD,1.0,,-2839.24
+2025-01-05,Amex Gold,51001,Transfers 161,-2839.24,USD,-1.0,,2839.24
+2025-01-13,Wealthfront Individual,6373,Transfers 162,-477.89,USD,1.0,,-477.89
+2025-01-12,Amex Green,01009,Transfers 162,-477.89,USD,-1.0,,477.89
+2025-01-21,Wealthfront Individual,6373,Expenses 30,-28.51,USD,1.0,,-28.51
+2025-01-21,Amex BCE Sade Auth,91013,Expenses 30,-28.51,USD,-1.0,,28.51
+2025-01-30,Wealthfront Individual,6373,Transfers 163,-144.31,USD,1.0,,-144.31
+2025-01-28,Chase Freedom Student,6946,Transfers 163,-144.31,USD,-1.0,,144.31
+2025-01-31,Chase,,Transfers 164,-0.43,USD,1.0,,-0.43
+2025-01-31,Wealthfront Individual,6373,Transfers 164,0.43,USD,1.0,,0.43
+2025-01-31,Chase,,Transfers 164,-0.29,USD,1.0,,-0.29
+2025-01-31,Wealthfront Individual,6373,Transfers 164,0.29,USD,1.0,,0.29
+2025-01-31,Wealthfront Individual,6373,Transfers 164,-0.72,USD,1.0,,-0.72
+2025-01-31,Chase,,Transfers 164,0.72,USD,1.0,,0.72

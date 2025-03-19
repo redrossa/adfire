@@ -1,0 +1,17 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-01,Amex Gold,51001,Merchandise 166,12.37,USD,-1.0,,-12.37
+2025-01-01,Uniqlo,,Merchandise 166,12.37,USD,1.0,expenses.merchandise,12.37
+2025-01-04,Prime Visa,8104,Merchandise 167,23.65,USD,-1.0,,-23.65
+2025-01-04,Bags City,,Merchandise 167,23.65,USD,1.0,expenses.merchandise,23.65
+2025-01-04,Prime Visa,8104,Personalcare 19,9.87,USD,-1.0,,-9.87
+2025-01-04,Captain Barbershop,,Personalcare 19,9.87,USD,1.0,expenses.merchandise,9.87
+2025-01-10,Amazon,,Merchandise 168,-53.54,USD,1.0,expenses.merchandise,-53.54
+2025-01-10,Prime Visa,8104,Merchandise 168,-53.54,USD,-1.0,,53.54
+2025-01-13,Prime Visa,8104,Merchandise 169,10.81,USD,-1.0,,-10.81
+2025-01-13,Amazon,,Merchandise 169,10.81,USD,1.0,expenses.merchandise,10.81
+2025-01-15,Amex Gold,51001,Merchandise 170,39.54,USD,-1.0,,-39.54
+2025-01-15,CitizensOne iPhone Loan,,Merchandise 170,39.54,USD,1.0,expenses.merchandise,39.54
+2025-01-30,Prime Visa,8104,Merchandise 171,36.04,USD,-1.0,,-36.04
+2025-01-30,Amazon,,Merchandise 171,36.04,USD,1.0,expenses.merchandise,36.04
+2025-02-02,Prime Visa,8104,Merchandise 172,21.64,USD,-1.0,,-21.64
+2025-02-02,Amazon,,Merchandise 172,21.64,USD,1.0,expenses.merchandise,21.64

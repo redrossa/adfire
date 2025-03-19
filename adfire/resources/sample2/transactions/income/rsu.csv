@@ -1,0 +1,11 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-18,SLB RSU,,RSU 2025 #1 Vesting,-30.0,SLB,43.05,income.pretax.rsu,-1291.5
+2025-01-18,Federal Withholding Tax,,RSU 2025 #1 Vesting,301.35,USD,1.0,taxes.income,301.35
+2025-01-17,Fidelity Individual,2752,RSU 2025 #1 Vesting,23.0,SLB,43.05,income.rsu,990.15
+2025-01-21,Fidelity Individual,2752,RSU 2025 #1 Sell,-23.0,SLB,43.05,,-990.15
+2025-01-21,Fidelity Individual,2752,RSU 2025 #1 Sell,995.06,USD,1.0,,995.06
+2025-01-21,Fidelity Commissions,,RSU 2025 #1 Sell,5.18,USD,1.0,expenses.fees,5.18
+2025-01-21,Fidelity Fees,,RSU 2025 #1 Sell,0.03,USD,1.0,expenses.fees,0.03
+2025-01-21,P/L,,RSU 2025 #1 Sell,-10.12,USD,1.0,,-10.12
+2025-01-22,Fidelity Individual,2752,RSU 2025 #1 Cashout,-995.06,USD,1.0,,-995.06
+2025-01-22,Wealthfront Individual,6373,RSU 2025 #1 Cashout,995.06,USD,1.0,,995.06

@@ -1,0 +1,8 @@
+date,account,mask,change,symbol,rate,category,name
+2025-01-22,Fidelity Individual,2752,-995.06,USD,,,Cash Transfer
+2025-01-22,Wealthfront Individual,6373,995.06,USD,,,Cash Transfer
+2025-01-06,Wealthfront Individual,6373,-446.05,USD,,,Credit Card Payments
+2025-01-03,Prime Visa,8104,446.05,USD,,,Credit Card Payments
+2025-01-18,Robinhood Individual,3674,-1.00596853,SOL,295.19,,Non-Cash Asset Transfer
+2025-01-18,Phantom Account 1,,1.0,SOL,295.19,,Non-Cash Asset Transfer
+2025-01-18,Solana Network Fee,,0.00596853,SOL,295.19,expenses.fees,Non-Cash Asset Transfer

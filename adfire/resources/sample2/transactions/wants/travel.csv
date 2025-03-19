@@ -1,0 +1,7 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-02,Amex Green,01009,Travel 151,4.95,USD,-1.0,,-4.95
+2025-01-02,Gojek,,Travel 151,4.95,USD,1.0,expenses.travel,4.95
+2025-01-08,Venmo Personal,,Travel 152,49.37,USD,-1.0,expenses.travel,-49.37
+2025-01-08,Wealthfront Individual,6373,Travel 152,49.37,USD,1.0,,49.37
+2025-01-23,Amex Green,01009,Travel 153,166.96,USD,-1.0,,-166.96
+2025-01-23,Frontier Airlines,,Travel 153,166.96,USD,1.0,expenses.travel,166.96

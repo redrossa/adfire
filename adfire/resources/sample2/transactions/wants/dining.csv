@@ -1,0 +1,45 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-02,Amex Green,01009,Dining 405,82.35,USD,-1.0,,-82.35
+2025-01-02,Amex Send,,Dining 405,82.35,USD,1.0,expenses.dining,82.35
+2025-01-04,Amex Gold,51001,Dining 406,9.81,USD,-1.0,,-9.81
+2025-01-04,Sate Khas Senayan,,Dining 406,9.81,USD,1.0,expenses.dining,9.81
+2025-01-04,Prime Visa,8104,Dining 407,2.78,USD,-1.0,,-2.78
+2025-01-04,Roti O,,Dining 407,2.78,USD,1.0,expenses.dining,2.78
+2025-01-04,Amex Green,01009,Dining 408,24.6,USD,-1.0,,-24.6
+2025-01-04,Gojek,,Dining 408,24.6,USD,1.0,expenses.dining,24.6
+2025-01-08,Discover It,0152,Dining 409,1.79,USD,-1.0,,-1.79
+2025-01-08,Teso Life,,Dining 409,1.79,USD,1.0,expenses.dining,1.79
+2025-01-13,Amex Gold,51001,Dining 410,7.52,USD,-1.0,,-7.52
+2025-01-13,Dutch Bros,,Dining 410,7.52,USD,1.0,expenses.dining,7.52
+2025-01-13,Amex Gold,51019,Dining 411,7.09,USD,-1.0,,-7.09
+2025-01-13,Moge Tee,,Dining 411,7.09,USD,1.0,expenses.dining,7.09
+2025-01-14,Amex Gold,51001,Dining 412,6.77,USD,-1.0,,-6.77
+2025-01-14,Dutch Bros,,Dining 412,6.77,USD,1.0,expenses.dining,6.77
+2025-01-15,Amex Gold,51001,Dining 413,5.36,USD,-1.0,,-5.36
+2025-01-15,Dutch Bros,,Dining 413,5.36,USD,1.0,expenses.dining,5.36
+2025-01-16,Amex Gold,51019,Dining 414,20.32,USD,-1.0,,-20.32
+2025-01-16,Pluckers,,Dining 414,20.32,USD,1.0,expenses.dining,20.32
+2025-01-16,Amex Gold,51019,Dining 415,6.41,USD,-1.0,,-6.41
+2025-01-16,OMG Squee,,Dining 415,6.41,USD,1.0,expenses.dining,6.41
+2025-01-17,Amex Gold,51019,Dining 416,6.6,USD,-1.0,,-6.6
+2025-01-17,In-N-Out,,Dining 416,6.6,USD,1.0,expenses.dining,6.6
+2025-01-17,Amex Gold,51001,Dining 417,5.36,USD,-1.0,,-5.36
+2025-01-17,Dutch Bros,,Dining 417,5.36,USD,1.0,expenses.dining,5.36
+2025-01-18,Amex Gold,51001,Dining 418,5.36,USD,-1.0,,-5.36
+2025-01-18,Dutch Bros,,Dining 418,5.36,USD,1.0,expenses.dining,5.36
+2025-01-19,Amex Gold,51001,Dining 419,5.36,USD,-1.0,,-5.36
+2025-01-19,Dutch Bros,,Dining 419,5.36,USD,1.0,expenses.dining,5.36
+2025-01-22,Amex Gold,51019,Dining 420,6.44,USD,-1.0,,-6.44
+2025-01-22,O's Campus Cafe,,Dining 420,6.44,USD,1.0,expenses.dining,6.44
+2025-01-23,Amex Gold,51001,Dining 421,9.48,USD,-1.0,,-9.48
+2025-01-23,Uber Eats,,Dining 421,9.48,USD,1.0,expenses.dining,9.48
+2025-01-28,Amex Gold,51001,Dining 422,5.36,USD,-1.0,,-5.36
+2025-01-28,Dutch Bros,,Dining 422,5.36,USD,1.0,expenses.dining,5.36
+2025-01-28,Amex Green,01009,Dining 423,15.0,USD,-1.0,,-15.0
+2025-01-28,Venmo Personal,,Dining 423,15.0,USD,1.0,expenses.dining,15.0
+2025-01-30,Amex Gold,51001,Dining 424,4.93,USD,-1.0,,-4.93
+2025-01-30,Dutch Bros,,Dining 424,4.93,USD,1.0,expenses.dining,4.93
+2025-01-31,Amex Gold,51001,Dining 425,4.93,USD,-1.0,,-4.93
+2025-01-31,Dutch Bros,,Dining 425,4.93,USD,1.0,expenses.dining,4.93
+2025-02-01,Amex Gold,51001,Dining 426,4.93,USD,-1.0,,-4.93
+2025-02-01,Dutch Bros,,Dining 426,4.93,USD,1.0,expenses.dining,4.93

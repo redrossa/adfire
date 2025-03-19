@@ -1,0 +1,18 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-10,SLB Base Salary,,SLB Salary 2025 #1,-3757.5,USD,1.0,income.pretax.salary,-3757.5
+2025-01-10,SLB Salaried-Vacation,,SLB Salary 2025 #1,-417.5,USD,1.0,income.pretax.salary,-417.5
+2025-01-08,Wealthfront Individual,6373,SLB Salary 2025 #1,3092.56,USD,1.0,income.salary,3092.56
+2025-01-10,Alight 401k,,SLB Salary 2025 #1,417.5,USD,1.0,savings.pretax.investments,417.5
+2025-01-10,Alight HSA,1293,SLB Salary 2025 #1,142.3,USD,1.0,savings.pretax.investments,142.3
+2025-01-10,Vision Insurance,,SLB Salary 2025 #1,4.62,USD,1.0,expenses.pretax.medical,4.62
+2025-01-10,Dental Insurance,,SLB Salary 2025 #1,4.62,USD,1.0,expenses.pretax.medical,4.62
+2025-01-10,Medical Insurance,,SLB Salary 2025 #1,42.46,USD,1.0,expenses.pretax.medical,42.46
+2025-01-10,Federal Withholding Tax,,SLB Salary 2025 #1,470.94,USD,1.0,taxes.income,470.94
+2025-01-24,SLB Base Salary,,SLB Salary 2025 #2,-4175.0,USD,1.0,income.pretax.salary,-4175.0
+2025-01-22,Wealthfront Individual,6373,SLB Salary 2025 #2,3092.56,USD,1.0,income.salary,3092.56
+2025-01-24,Alight 401k,,SLB Salary 2025 #2,417.5,USD,1.0,savings.pretax.investments,417.5
+2025-01-24,Alight HSA,1293,SLB Salary 2025 #2,142.3,USD,1.0,savings.pretax.investments,142.3
+2025-01-24,Vision Insurance,,SLB Salary 2025 #2,4.62,USD,1.0,expenses.pretax.medical,4.62
+2025-01-24,Dental Insurance,,SLB Salary 2025 #2,4.62,USD,1.0,expenses.pretax.medical,4.62
+2025-01-24,Medical Insurance,,SLB Salary 2025 #2,42.46,USD,1.0,expenses.pretax.medical,42.46
+2025-01-24,Federal Withholding Tax,,SLB Salary 2025 #2,470.94,USD,1.0,taxes.income,470.94

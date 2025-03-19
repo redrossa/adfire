@@ -1,0 +1,7 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-08,Prime Visa,8104,Auto 72,40.62,USD,-1.0,,-40.62
+2025-01-08,Costco Gas,,Auto 72,40.62,USD,1.0,expenses.auto,40.62
+2025-01-19,Prime Visa,8104,Auto 73,25.16,USD,-1.0,,-25.16
+2025-01-19,Costco Gas,,Auto 73,25.16,USD,1.0,expenses.auto,25.16
+2025-01-25,Prime Visa,8104,Auto 74,42.33,USD,-1.0,,-42.33
+2025-01-25,Costco Gas,,Auto 74,42.33,USD,1.0,expenses.auto,42.33

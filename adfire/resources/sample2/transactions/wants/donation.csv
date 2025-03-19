@@ -1,0 +1,5 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-10,Chase Freedom Unlimited,6946,Donation 3,25.0,USD,-1.0,,-25.0
+2025-01-10,IAMC,,Donation 3,25.0,USD,1.0,expenses.donation,25.0
+2025-01-17,Chase Freedom Unlimited,6946,Donation 4,10.0,USD,-1.0,,-10.0
+2025-01-17,IAMC,,Donation 4,10.0,USD,1.0,expenses.donation,10.0

@@ -1,0 +1,3 @@
+date,account,mask,name,amount,symbol,rate,category,worth
+2025-01-16,Amex Gold,51019,Medical 37,4.99,USD,-1.0,,-4.99
+2025-01-16,CVS,,Medical 37,4.99,USD,1.0,expenses.medical,4.99

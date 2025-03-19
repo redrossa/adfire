@@ -1,0 +1,81 @@
+name = 'Sample 2 Portfolio'
+
+############## CREDIT CARDS ##############
+
+[[accounts]]
+names = ['Amex Gold']
+masks = ['51001', '51019', '51012']
+
+[[accounts]]
+names = ['Amex Green']
+masks = ['01009']
+
+[[accounts]]
+names = ['Amex BCE Sade Auth']
+masks = ['91013']
+
+[[accounts]]
+names = ['Chase Freedom Student', 'Chase Freedom Unlimited']
+masks = ['6946']
+
+[[accounts]]
+names = ['Prime Visa']
+masks = ['8104']
+
+[[accounts]]
+names = ['Discover It']
+masks = ['0152']
+
+[[accounts]]
+names = ['SECU Visa']
+masks = ['25-71']
+
+############## CASH ##############
+
+[[accounts]]
+names = ['SECU Checking']
+masks = ['25-90']
+
+[[accounts]]
+names = ['SECU Savings']
+masks = ['25-00']
+
+[[accounts]]
+names = ['Wealthfront Individual']
+masks = ['6373']
+
+[[accounts]]
+names = ['Chase Total Checking']
+masks = ['3185']
+
+[[accounts]]
+names = ['Robinhood Spending']
+masks = ['5016']
+
+############## INVESTMENTS ##############
+
+[[accounts]]
+names = ['Robinhood Individual']
+masks = ['3674']
+
+[[accounts]]
+names = ['Robinhood Roth IRA']
+masks = ['6583']
+
+[[accounts]]
+names = ['Fidelity Individual']
+masks = ['2752']
+
+[[accounts]]
+names = ['Fidelity Roth IRA']
+masks = ['8969']
+
+[[accounts]]
+names = ['Alight HSA']
+masks = ['1293']
+
+[[accounts]]
+names = ['Alight 401k']
+
+[[accounts]]
+names = ['Trezor Passphrased Wallet']
